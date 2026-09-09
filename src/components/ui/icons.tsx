@@ -1,0 +1,26 @@
+/* Icon set: Remix Icon, Fill variant, via @remixicon/react.
+   Components are re-exported under semantic names so call sites stay stable
+   if an icon is swapped later. Size via className (e.g. "size-5"). */
+export {
+  RiCheckFill as Check,
+  RiSubtractFill as Minus,
+  RiArrowRightFill as ArrowRight,
+  RiArrowRightUpFill as ArrowUpRight,
+  RiShieldCheckFill as ShieldCheck,
+  RiPaletteFill as Palette,
+  RiPencilFill as PenLine,
+  RiSpeedUpFill as Gauge,
+  RiSearchFill as Search,
+  RiLifebuoyFill as LifeBuoy,
+  RiChat3Fill as MessageCircle,
+  RiEyeFill as Eye,
+  RiFlashlightFill as Zap,
+  RiPriceTag3Fill as Tag,
+  RiInstagramFill as Instagram,
+  RiLinkedinFill as Linkedin,
+  RiLayout4Fill as LayoutTemplate,
+  RiShoppingBag3Fill as ShoppingBag,
+  RiBuilding2Fill as Building,
+  RiWindowFill as AppWindow,
+  RiWhatsappLine as Whatsapp,
+} from "@remixicon/react";
