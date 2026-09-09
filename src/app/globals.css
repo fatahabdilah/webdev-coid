@@ -17,6 +17,15 @@
   --color-error: #dc2626;
 
   --font-sans: var(--font-dm-sans), system-ui, sans-serif;
+
+  /* Blinking caret in the "Cara Kerja" showcase (ProcessShowcase.tsx). */
+  --animate-caret: caret 1s steps(1, end) infinite;
+
+  @keyframes caret {
+    50% {
+      opacity: 0;
+    }
+  }
 }
 
 @utility bg-brand-gradient {
