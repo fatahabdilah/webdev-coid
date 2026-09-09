@@ -1,27 +1,27 @@
 import { Container, Section, SectionHeader } from "@/components/ui";
-import { Eye, Tag, Zap } from "@/components/ui/icons";
+import { Eye, ShieldCheck, Zap } from "@/components/ui/icons";
 
 const items = [
   {
-    icon: Tag,
-    title: "Harga jelas di depan",
-    desc: "Biaya pembuatan dan perpanjangan disebut sejak awal. Tidak ada biaya tersembunyi.",
+    icon: Eye,
+    title: "Progres bisa kamu pantau",
+    desc: "Kamu lihat perkembangannya di setiap tahap dan bisa memberi masukan sebelum lanjut.",
   },
   {
-    icon: Eye,
-    title: "Progres yang transparan",
-    desc: "Kamu bisa lihat perkembangan website dan memberi masukan di setiap tahap.",
+    icon: ShieldCheck,
+    title: "Website-nya milik kamu",
+    desc: "Domain, hosting, dan akses website atas nama kamu. Tidak ada yang dikunci di kami.",
   },
   {
     icon: Zap,
-    title: "Cepat dan siap online",
-    desc: "Website ringan, nyaman diakses dari HP, dan tayang sesuai jadwal yang disepakati.",
+    title: "Tayang sesuai jadwal",
+    desc: "Timeline disepakati sejak awal, dan kami kabari lebih dulu kalau ada yang perlu digeser.",
   },
 ];
 
 export default function Commitments() {
   return (
-    <Section>
+    <Section id="komitmen">
       <Container>
         <SectionHeader
           eyebrow="Komitmen Kami"

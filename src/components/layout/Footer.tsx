@@ -7,29 +7,29 @@ const columns: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: "Layanan",
     links: [
-      { label: "Landing Page", href: "#layanan" },
-      { label: "Company Profile", href: "#layanan" },
-      { label: "Toko Online", href: "#layanan" },
-      { label: "Web App / Sistem", href: "#layanan" },
+      { label: "Landing Page", href: "#harga" },
+      { label: "Company Profile", href: "#harga" },
+      { label: "Toko Online", href: "#harga" },
+      { label: "Web App / Sistem", href: "#harga" },
       { label: "Redesign Website", href: "#konsultasi" },
     ],
   },
   {
-    title: "Perusahaan",
+    title: "Jelajahi",
     links: [
-      { label: "Tentang Kami", href: "#" },
       { label: "Portfolio", href: "#portfolio" },
       { label: "Cara Kerja", href: "#cara-kerja" },
+      { label: "Komitmen Kami", href: "#komitmen" },
       { label: "Harga", href: "#harga" },
     ],
   },
   {
-    title: "Bantuan",
+    title: "Hubungi",
     links: [
       { label: "Konsultasi Gratis", href: "#konsultasi" },
-      { label: "Pertanyaan Umum", href: "#" },
-      { label: "Kebijakan Privasi", href: "#" },
-      { label: "Syarat Layanan", href: "#" },
+      { label: "WhatsApp", href: "#konsultasi" },
+      { label: "Instagram", href: "#" },
+      { label: "LinkedIn", href: "#" },
     ],
   },
 ];

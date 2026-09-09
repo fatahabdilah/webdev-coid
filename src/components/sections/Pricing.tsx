@@ -138,21 +138,15 @@ function TierCard({ tier }: { tier: Tier }) {
   );
 }
 
-const assurances = ["Harga jelas di depan", "Biaya perpanjangan transparan", "Konsultasi gratis"];
-
 export default function Pricing() {
   return (
     <Section id="harga" className="bg-offwhite">
       <Container>
-        <SectionHeader eyebrow="Harga" title="Website untuk segala bisnis" />
-        <ul className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[14px] text-body">
-          {assurances.map((a) => (
-            <li key={a} className="inline-flex items-center gap-2">
-              <Check className="size-4 text-primary" />
-              {a}
-            </li>
-          ))}
-        </ul>
+        <SectionHeader
+          eyebrow="Harga"
+          title="Website untuk segala bisnis"
+          description="Pilih yang paling dekat dengan kebutuhanmu. Semua harga sudah termasuk domain dan hosting tahun pertama."
+        />
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {tiers.map((tier) => (
             <TierCard key={tier.name} tier={tier} />

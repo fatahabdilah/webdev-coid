@@ -23,11 +23,14 @@ export default function GetStarted() {
   return (
     <Section id="mulai" className="relative overflow-hidden bg-offwhite">
       {/* Thin blue ambient glows, top-left and bottom-right */}
-      <div className="pointer-events-none absolute -left-52 -top-32 h-72 w-220 -rotate-30 rounded-full bg-primary/25 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-32 -right-52 h-72 w-220 -rotate-30 rounded-full bg-primary/25 blur-3xl" />
+      <div className="pointer-events-none absolute -left-52 -top-32 h-72 w-220 -rotate-30 rounded-full bg-primary/15 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-32 -right-52 h-72 w-220 -rotate-30 rounded-full bg-primary/15 blur-3xl" />
       {/* Stronger blue core at the very corners */}
-      <div className="pointer-events-none absolute -left-32 -top-32 size-96 rounded-full bg-primary/40 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-32 -right-32 size-96 rounded-full bg-primary/40 blur-3xl" />
+      <div className="pointer-events-none absolute -left-40 -top-40 size-[30rem] rounded-full bg-primary/20 blur-[80px]" />
+      <div className="pointer-events-none absolute -bottom-40 -right-40 size-[30rem] rounded-full bg-primary/20 blur-[80px]" />
+      {/* Deepest blue right at the very tips */}
+      <div className="pointer-events-none absolute -left-28 -top-28 size-56 rounded-full bg-primary/50 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-28 -right-28 size-56 rounded-full bg-primary/50 blur-3xl" />
 
       <Container className="relative flex flex-col items-center">
         <SectionHeader
