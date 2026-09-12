@@ -55,7 +55,7 @@ export default function Footer() {
       <Container className="py-16">
         <div className="grid gap-10 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
           <div className="max-w-[320px]">
-            <Link href="/" aria-label="webdev.co.id" className="relative block h-8 w-35.5">
+            <Link href="/" aria-label="webdev.co.id" className="relative block h-8 w-38.25">
               <Image src="/brand/logo-white.svg" alt="webdev.co.id" fill className="object-contain object-left" />
             </Link>
             <p className="mt-5 text-[16px] leading-[1.6] font-medium">Agency lokal, standar global.</p>
