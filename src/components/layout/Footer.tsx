@@ -70,7 +70,7 @@ export default function Footer() {
 
           {columns.map((col) => (
             <div key={col.title}>
-              <p className="text-[14px] font-semibold">{col.title}</p>
+              <p className="text-[14px] font-medium">{col.title}</p>
               <ul className="mt-4 flex flex-col gap-3">
                 {col.links.map((link) => (
                   <li key={link.label}>

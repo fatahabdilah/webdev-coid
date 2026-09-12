@@ -1,0 +1,73 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { PenLine, ShieldCheck } from "@/components/ui/icons";
+
+/* The two secondary cards. Exactly one preview is up at a time: the first card's
+   preview rests up by default, and hovering the other card hands it over.
+
+   The data lives here rather than in the parent because icons are components,
+   and components cannot cross the server/client boundary as props. */
+
+const extras = [
+  {
+    href: "#konsultasi",
+    icon: PenLine,
+    title: "Sudah punya website?",
+    desc: "Kami bantu perbarui tampilan atau perbaiki yang bermasalah.",
+    preview: "/images/types/preview-redesign.webp",
+  },
+  {
+    href: "#konsultasi",
+    icon: ShieldCheck,
+    title: "Perlu dirawat rutin?",
+    desc: "Pembaruan konten, backup, dan pemantauan tiap bulan.",
+    preview: "/images/types/preview-maintenance.webp",
+  },
+];
+
+export default function ExtraCards() {
+  /* Which card currently shows its preview. The first card is the resting state:
+     hovering another hands the preview over, leaving hands it straight back. */
+  const [shown, setShown] = useState(0);
+
+  return (
+    <div className="mt-6 grid gap-4 md:grid-cols-2">
+      {extras.map(({ href, icon: Icon, title, desc, preview }, i) => (
+        <Link
+          key={title}
+          href={href}
+          onMouseEnter={() => setShown(i)}
+          onMouseLeave={() => setShown(0)}
+          onFocus={() => setShown(i)}
+          onBlur={() => setShown(0)}
+          className="group relative flex min-h-37.5 flex-col justify-between rounded-2xl bg-offwhite p-6 transition-colors duration-300 hover:bg-primary/8"
+        >
+          {/* Clipping frame: the screen never leaves the card, it just rises inside it */}
+          <span aria-hidden className="pointer-events-none absolute inset-0 hidden overflow-hidden rounded-2xl sm:block">
+            {/* Parked below the card, sliding up when this card is the one shown */}
+            <span
+              className={`absolute -right-6 top-full block w-60 rotate-[-8deg] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
+                shown === i ? "-translate-y-[calc(100%-0.5rem)]" : "translate-y-6"
+              }`}
+            >
+              <span className="block overflow-hidden rounded-lg shadow-[0_18px_40px_-18px_rgba(0,52,102,0.45)]">
+                <Image src={preview} alt="" width={520} height={325} className="block h-auto w-full object-cover" />
+              </span>
+            </span>
+          </span>
+
+          <span className="relative flex items-start">
+            <Icon className="size-6 text-primary" />
+          </span>
+          <span className="relative mt-6 block max-w-[62%]">
+            <span className="block text-[17px] font-medium text-ink md:text-[18px]">{title}</span>
+            <span className="mt-1 block text-[14px] leading-[1.6] text-body">{desc}</span>
+          </span>
+        </Link>
+      ))}
+    </div>
+  );
+}

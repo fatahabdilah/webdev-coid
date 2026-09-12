@@ -26,10 +26,50 @@
       opacity: 0;
     }
   }
+
+  /* Endless portfolio marquee (WorkRow.tsx). The track holds two equal groups, each a
+     full pass of the list, with the same gap between the groups as inside them. Half the
+     track is then exactly one group plus one gap, so travelling -50% lands the second
+     group precisely where the first began.
+
+     Duplicating the cards directly into one flex row instead would make -50% land half a
+     gap short, and the strip would nudge sideways on every cycle. */
+  --animate-marquee: marquee 48s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      /* -50% is half the track, which splits the gap between the two groups down the
+         middle and lands 8px (half a gap) short. Half a gap more puts the second group
+         exactly where the first started. Keep this in step with the track's gap-4. */
+      transform: translateX(calc(-50% - 0.5rem));
+    }
+  }
 }
 
 @utility bg-brand-gradient {
   background-image: linear-gradient(180deg, #003466 0%, #0066cb 100%);
+}
+
+/* Brand gradient as a border only; the inside stays transparent.
+   Used on the incoming-message box in the Cara Kerja showcase. */
+@utility border-gradient-brand {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: linear-gradient(135deg, #003466 0%, #0066cb 100%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
 }
 
 /* Placeholder images from the design file lean purple; shift them toward brand blue. */
@@ -41,6 +81,11 @@ html {
   scroll-behavior: smooth;
   /* Keep anchored sections clear of the fixed 72px navbar */
   scroll-padding-top: 72px;
+  /* No rubber-banding past the ends of the page: pulling down at the top exposed the
+     document ground above the hero. And that ground is navy rather than white, so on
+     browsers that still show a sliver during overscroll it reads as part of the hero. */
+  overscroll-behavior-y: none;
+  background: var(--color-navy);
 }
 
 body {

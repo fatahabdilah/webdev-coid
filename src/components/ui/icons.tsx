@@ -4,6 +4,8 @@
 export {
   RiCheckFill as Check,
   RiSubtractFill as Minus,
+  RiArrowLeftFill as ArrowLeft,
+  RiStarFill as Star,
   RiArrowRightFill as ArrowRight,
   RiArrowRightUpFill as ArrowUpRight,
   RiShieldCheckFill as ShieldCheck,
@@ -23,4 +25,5 @@ export {
   RiBuilding2Fill as Building,
   RiWindowFill as AppWindow,
   RiWhatsappLine as Whatsapp,
+  RiArrowRightSLine as ChevronRight,
 } from "@remixicon/react";

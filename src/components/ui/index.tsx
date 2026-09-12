@@ -53,7 +53,7 @@ export function SectionHeader({
     <div className={`flex flex-col ${center ? "items-center text-center" : "items-start text-left"}`}>
       {eyebrow && <Eyebrow tone={tone}>{eyebrow}</Eyebrow>}
       <h2
-        className={`mt-4 max-w-[680px] text-[26px] font-semibold leading-[1.25] tracking-[-0.02em] md:text-[30px] ${
+        className={`mt-4 max-w-[680px] text-[26px] font-medium leading-[1.25] tracking-[-0.03em] md:text-[30px] ${
           tone === "dark" ? "text-white" : "text-ink"
         }`}
       >
@@ -84,13 +84,13 @@ export function Button({
   const variants: Record<ButtonVariant, string> = {
     primary: "bg-primary text-white hover:bg-primary-dark",
     secondary: "border border-primary text-primary hover:bg-primary/5",
-    white: "bg-white text-ink font-semibold hover:bg-offwhite",
+    white: "bg-white text-ink hover:bg-offwhite",
     "outline-white": "border border-white/40 text-white hover:bg-white/10",
   };
   return (
     <Link
       href={href}
-      className={`inline-flex h-12 items-center justify-center gap-2 rounded-lg px-6 text-[15px] font-medium transition-colors ${variants[variant]} ${className}`}
+      className={`inline-flex h-12 items-center justify-center gap-2 rounded-lg px-6 text-[15px] font-semibold transition-colors ${variants[variant]} ${className}`}
     >
       {children}
     </Link>

@@ -1,15 +1,18 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { Container, Section } from "@/components/ui";
-import { ArrowRight, Eye, LayoutTemplate, LifeBuoy } from "@/components/ui/icons";
+import { Container, Section, SectionHeader } from "@/components/ui";
+import { ArrowRight } from "@/components/ui/icons";
 import ProcessShowcase, { type Handoff, type Site } from "./ProcessShowcase";
 
 /* One finished website per client brief, cycling in the showcase. */
 const sites: Site[] = [
   {
-    prompt: "Halo, saya mau bikin website company profile klinik gigi, ada booking online.",
+    prompt: "Mau bikin website klinik gigi, ada booking online.",
+    avatar: "/images/showcase/avatar-klinik.webp",
+    sender: "Rina",
     kind: "Company Profile",
     name: "Klinik Senyum",
     nav: ["Layanan", "Dokter", "Kontak"],
@@ -21,7 +24,9 @@ const sites: Site[] = [
     button: "bg-white text-[#062A4F]",
   },
   {
-    prompt: "Mau buat toko online kopi lokal, bisa langganan bulanan dan bayar QRIS.",
+    prompt: "Butuh toko online kopi, bisa langganan bulanan.",
+    avatar: "/images/showcase/avatar-kopi.webp",
+    sender: "Bagas",
     kind: "Toko Online",
     name: "Kopi Sudut",
     nav: ["Biji kopi", "Langganan", "Cerita"],
@@ -33,7 +38,9 @@ const sites: Site[] = [
     button: "bg-[#E8B048] text-[#2A1810]",
   },
   {
-    prompt: "Butuh landing page kelas yoga pemula dengan pendaftaran trial gratis.",
+    prompt: "Bikin landing page kelas yoga buat pemula, ya.",
+    avatar: "/images/showcase/avatar-yoga.webp",
+    sender: "Damar",
     kind: "Landing Page",
     name: "Ruang Asana",
     nav: ["Kelas", "Jadwal", "Harga"],
@@ -46,28 +53,15 @@ const sites: Site[] = [
   },
 ];
 
-/* Three facts that answer what the showcase shows. Not a sequence, so no numbering. */
-const facts = [
-  {
-    icon: LayoutTemplate,
-    title: "Semua jenis website, satu tim",
-    desc: "Company profile, toko online, landing page, sampai web app.",
-  },
-  {
-    icon: Eye,
-    title: "Kamu review sebelum tayang",
-    desc: "Revisi sudah termasuk di tiap paket, jadi hasilnya sesuai maumu.",
-  },
-  {
-    icon: LifeBuoy,
-    title: "Tidak ditinggal setelah online",
-    desc: "Bantuan pembaruan konten dan perbaikan kecil setelah website tayang.",
-  },
-];
+/* TODO: placeholder — replace with the real number of live client sites before launch.
+   Shown as social proof next to the client avatars. */
+const CLIENT_COUNT = "40+";
 
-/* Timing of the showcase loop: the card rises, then the brief types, then a rest. */
+/* Timing of the showcase loop: the card rises, the message types, the send button
+   lights up and is pressed, then the next website takes its place. */
 const TYPE_MS = 26; // per character
-const HOLD_MS = 2400; // rest after the brief is fully typed
+const READ_MS = 1300; // message complete, send button lit, before it is pressed
+const PRESS_MS = 520; // button pressed and the message lifting away, before the card changes
 const RECEDE_MS = 420; // head start for the receding card; the next one rises as it settles
 const SNAP_MS = 40; // one paint with the incoming card parked below, before it rises
 
@@ -84,6 +78,7 @@ export default function Process() {
   const [progress, setProgress] = useState({ step: 0, chars: 0 });
   const [visible, setVisible] = useState(false);
   const [paused, setPaused] = useState(false);
+  const [sending, setSending] = useState(false);
   const showcaseRef = useRef<HTMLDivElement>(null);
 
   const reduced = useSyncExternalStore(
@@ -118,69 +113,111 @@ export default function Process() {
     return () => clearTimeout(t);
   }, [handoff]);
 
-  /* Typewriter, then auto-advance. Pauses while the pointer rests on the showcase so it
-     doesn't compete with reading the copy next to it. */
+  /* Type the message, hold while the send button is lit, press it, then swap the card.
+     Pauses while the pointer rests on the showcase so it doesn't compete with reading. */
   useEffect(() => {
     if (!visible || paused || handoff || reduced) return;
     if (chars < full) {
       const t = setTimeout(() => setProgress({ step: active, chars: chars + 1 }), TYPE_MS);
       return () => clearTimeout(t);
     }
+    if (!sending) {
+      const t = setTimeout(() => setSending(true), READ_MS);
+      return () => clearTimeout(t);
+    }
     const t = setTimeout(() => {
       const target = (active + 1) % sites.length;
+      setSending(false);
       setHandoff({ from: active, target, phase: "recede" });
       setActive(target);
-    }, HOLD_MS);
+    }, PRESS_MS);
     return () => clearTimeout(t);
-  }, [visible, paused, handoff, reduced, chars, full, active]);
+  }, [visible, paused, handoff, reduced, chars, full, active, sending]);
 
   return (
     <Section id="cara-kerja">
-      {/* Mobile: heading, then the showcase, then the facts. Desktop: showcase left, copy right. */}
-      <Container className="grid gap-10 lg:grid-cols-2 lg:grid-rows-[auto_auto] lg:items-center lg:gap-x-16 lg:gap-y-8">
-        <div>
-          <h2 className="text-[26px] font-semibold leading-tight tracking-[-0.02em] text-ink md:text-[30px]">
+      <Container className="flex flex-col items-center">
+        <SectionHeader
+          title="Website untuk setiap kebutuhan bisnis"
+          description="Kamu yang tahu bisnismu. Kami yang mengurus desain, teknis, dan isinya."
+        />
+      </Container>
+
+      {/* Mobile: heading, showcase, then the call to action. Desktop: showcase left, copy right,
+          the copy centred as one block against the height of the visual. */}
+      <Container className="mt-14 grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-x-16">
+        {/* Heading sits in the right column but is pulled out of the flex flow on desktop,
+            so the copy below it can sit directly underneath rather than a stretched row apart. */}
+        <div className="lg:order-2 lg:col-start-2">
+          <h2 className="text-[26px] font-medium leading-tight tracking-[-0.03em] text-ink md:text-[30px]">
             Kamu arahkan, kami yang bangun.
           </h2>
           <p className="mt-4 text-base leading-[1.6] text-body">
             Cukup ceritakan bisnismu lewat WhatsApp. Struktur, desain, dan kontennya kami yang susun.
           </p>
+
+          <div className="max-lg:hidden lg:mt-8">
+            <CallToAction sites={sites} />
+          </div>
         </div>
 
         <div
           ref={showcaseRef}
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
-          className="lg:col-start-1 lg:row-span-2 lg:row-start-1"
+          className="lg:order-1 lg:col-start-1"
         >
-          <ProcessShowcase sites={sites} active={active} handoff={handoff} typed={typed} />
+          <ProcessShowcase
+            sites={sites}
+            active={active}
+            handoff={handoff}
+            typed={typed}
+            sending={sending}
+          />
         </div>
 
-        <div className="lg:col-start-2">
-          <ul className="divide-y divide-line border-y border-line">
-            {facts.map(({ icon: Icon, title, desc }) => (
-              <li key={title} className="flex gap-4 py-4">
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                  <Icon className="size-4" />
-                </span>
-                <div>
-                  <p className="text-[15px] font-medium text-ink">{title}</p>
-                  <p className="mt-1 text-[14px] leading-[1.6] text-body">{desc}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-
-          {/* The same action the visual shows: start with a WhatsApp chat */}
-          <Link
-            href="#konsultasi"
-            className="mt-8 inline-flex items-center gap-2 text-[15px] font-medium text-primary transition-colors hover:text-primary-dark"
-          >
-            Yuk, konsultasi gratis lewat WhatsApp
-            <ArrowRight className="size-4" />
-          </Link>
+        {/* Same block again for mobile, where it belongs after the visual */}
+        <div className="lg:hidden">
+          <CallToAction sites={sites} />
         </div>
       </Container>
     </Section>
+  );
+}
+
+/* The one action plus the proof line. Rendered twice so it can sit under the copy on
+   desktop and after the visual on mobile; only one copy is ever visible. */
+function CallToAction({ sites }: { sites: Site[] }) {
+  return (
+    <>
+      {/* One action, on its own rule: the same WhatsApp chat the visual depicts */}
+      <Link
+        href="#konsultasi"
+        className="group flex items-center justify-between gap-6 border-y border-line py-4 text-[16px] font-medium text-ink transition-colors hover:text-primary"
+      >
+        Konsultasi gratis lewat WhatsApp
+        <ArrowRight className="size-4 shrink-0 text-primary transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1" />
+      </Link>
+
+      {/* Faces of clients whose sites are in the stack, then the proof line */}
+      <div className="mt-6 flex items-center gap-3">
+        <div className="flex">
+          {sites.map((s) => (
+            <span key={s.sender} className="relative -mr-2.5 size-9 overflow-hidden rounded-full ring-2 ring-white">
+              <Image src={s.avatar} alt="" fill sizes="36px" className="object-cover" />
+            </span>
+          ))}
+          {/* Sits on top of the avatars, so its number is never clipped */}
+          <span className="relative z-10 flex size-9 items-center justify-center rounded-full bg-primary text-[11px] font-medium text-white ring-2 ring-white">
+            {CLIENT_COUNT}
+          </span>
+        </div>
+        <p className="text-[14px] leading-[1.45] text-body">
+          bisnis sudah tayang
+          <br />
+          bersama webdev.co.id
+        </p>
+      </div>
+    </>
   );
 }

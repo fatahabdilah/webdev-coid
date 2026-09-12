@@ -232,7 +232,7 @@ Skala usulan, sesuaikan bila perlu:
 | Body | 14–16px | DM Sans Regular |
 | Caption/Muted | 12–13px | DM Sans Regular |
 
-Aturan: SATU keluarga font saja, DM Sans, dibedakan lewat weight (Semi Bold judul, Medium UI, Regular body). Line-height longgar (±1.6) untuk body agar nyaman dibaca di HP. Judul memakai tracking rapat karena DM Sans dirancang untuk ukuran kecil dan terasa longgar saat besar: semakin besar teks, semakin rapat. Display 40px ke atas -0.03em, H2 28–32px (termasuk angka harga) -0.02em, H3 dan label 20–24px -0.01em, body dan caption tetap normal. Padanan weight: 400 = Regular, 500 = Medium, 600 = Semi Bold.
+Aturan: SATU keluarga font saja, DM Sans, dibedakan lewat weight (Semi Bold judul, Medium UI, Regular body). Line-height longgar (±1.6) untuk body agar nyaman dibaca di HP. Judul memakai tracking rapat karena DM Sans dirancang untuk ukuran kecil dan terasa longgar saat besar: semakin besar teks, semakin rapat. Display 40px ke atas -0.04em, H2 26–32px (termasuk angka harga) -0.03em, H3 dan label 20–24px -0.02em, body dan caption tetap normal. Padanan weight: 400 = Regular, 500 = Medium, 600 = Semi Bold.
 
 Sumber font: Google Fonts (DM Sans), dimuat lewat `next/font/google` dengan variabel `--font-dm-sans`.
 

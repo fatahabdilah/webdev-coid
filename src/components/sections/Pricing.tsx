@@ -87,7 +87,7 @@ function TierCard({ tier }: { tier: Tier }) {
       }`}
     >
       <div className="flex items-start justify-between gap-3">
-        <p className="text-[18px] font-semibold">{tier.name}</p>
+        <p className="text-[18px] font-medium">{tier.name}</p>
         {tier.badge && (
           <span
             className={`shrink-0 rounded-full px-3 py-1 text-[12px] font-medium ${
@@ -105,7 +105,7 @@ function TierCard({ tier }: { tier: Tier }) {
           <span className={`text-[13px] line-through ${dark ? "text-white/50" : "text-muted"}`}>{tier.oldPrice}</span>
         )}
         {tier.pricePrefix && <span className={`text-[13px] ${dark ? "text-white/70" : "text-body"}`}>{tier.pricePrefix}</span>}
-        <span className="text-[32px] font-semibold leading-none tracking-[-0.02em]">{tier.price}</span>
+        <span className="text-[32px] font-medium leading-none tracking-[-0.03em]">{tier.price}</span>
       </div>
       <p className={`mt-3 text-[13px] leading-[1.5] ${dark ? "text-white/60" : "text-muted"}`}>{tier.note}</p>
 

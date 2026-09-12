@@ -5,6 +5,8 @@ import "./globals.css";
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
   subsets: ["latin"],
+  /* Medium is the heaviest weight for headings and copy; SemiBold exists only for
+     the Button primitive, so calls to action carry more weight than the text around them */
   weight: ["400", "500", "600"],
 });
 
