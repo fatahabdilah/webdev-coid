@@ -12,36 +12,15 @@ import { Instagram, Linkedin } from "@/components/ui/icons";
 const INSTAGRAM = "";
 const LINKEDIN = "";
 
-const columns: { title: string; links: { label: string; href: string }[] }[] = [
-  {
-    title: "Layanan",
-    links: [
-      { label: "Landing Page", href: "#harga" },
-      { label: "Company Profile", href: "#harga" },
-      { label: "Toko Online", href: "#harga" },
-      { label: "Web App / Sistem", href: "#harga" },
-      { label: "Redesign Website", href: "#konsultasi" },
-    ],
-  },
-  {
-    title: "Jelajahi",
-    links: [
-      { label: "Portfolio", href: "#portfolio" },
-      { label: "Cara Kerja", href: "#cara-kerja" },
-      /* The old #komitmen section is gone; "Yang selalu kamu dapat" inside #layanan
-         carries the same service promises, so the label still tells the truth. */
-      { label: "Yang Kamu Dapat", href: "#layanan" },
-      { label: "Harga", href: "#harga" },
-    ],
-  },
-  {
-    title: "Hubungi",
-    links: [
-      { label: "Konsultasi Gratis", href: "#konsultasi" },
-      { label: "Instagram", href: INSTAGRAM },
-      { label: "LinkedIn", href: LINKEDIN },
-    ],
-  },
+/* One column, not three. The old "Layanan" column listed five services that all led to
+   the same two anchors -- twelve rows for five destinations -- which is padding, not
+   navigation. On a single-page site the footer only needs to name the sections. */
+const links: { label: string; href: string }[] = [
+  { label: "Cara Kerja", href: "#cara-kerja" },
+  { label: "Layanan", href: "#layanan" },
+  { label: "Portfolio", href: "#portfolio" },
+  { label: "Harga", href: "#harga" },
+  { label: "Konsultasi Gratis", href: "#konsultasi" },
 ];
 
 const socials = [
@@ -52,8 +31,8 @@ const socials = [
 export default function Footer() {
   return (
     <footer className="bg-surface text-white">
-      <Container className="py-16">
-        <div className="grid gap-10 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
+      <Container className="py-14">
+        <div className="grid gap-10 md:grid-cols-[1.6fr_1fr]">
           <div className="max-w-[320px]">
             <Link href="/" aria-label="webdev.co.id" className="relative block h-8 w-38.75">
               <Image src="/brand/logo-white.svg" alt="webdev.co.id" fill className="object-contain object-left" />
@@ -85,33 +64,22 @@ export default function Footer() {
             )}
           </div>
 
-          {columns.map((col) => (
-            <div key={col.title}>
-              <p className="text-[14px] leading-[1.55] font-medium">{col.title}</p>
-              {/* Roomier rows on phones: as bare inline text these links were 18px tall
-                  and stacked close together, which is a mis-tap waiting to happen. They
-                  tighten back up from md, where there is a pointer. */}
-              <ul className="mt-2 flex flex-col md:mt-4 md:gap-3">
-                {col.links.map((link) => (
-                  <li key={link.label}>
-                    {link.href ? (
-                      <FooterLink href={link.href}>{link.label}</FooterLink>
-                    ) : (
-                      /* No destination yet: shown, but plainly not a link */
-                      <span className="flex min-h-11 items-center text-[14px] leading-[1.55] text-on-dark-muted md:min-h-0">
-                        {link.label}
-                      </span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Roomier rows on phones: as bare inline text these links were 18px tall and
+              stacked close together, which is a mis-tap waiting to happen. They tighten
+              back up from md, where there is a pointer. */}
+          <ul className="flex flex-col md:gap-3">
+            {links.map((link) => (
+              <li key={link.label}>
+                <FooterLink href={link.href}>{link.label}</FooterLink>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <div className="mt-14 flex flex-col gap-2 border-t border-white/10 pt-6 text-[14px] leading-[1.55] text-on-dark-muted md:flex-row md:items-center md:justify-between">
+        {/* The second line here used to restate the tagline sitting a few rows above it,
+            so only the copyright remains. */}
+        <div className="mt-12 border-t border-white/10 pt-6 text-[14px] leading-[1.55] text-on-dark-muted">
           <p>© 2026 webdev.co.id. Semua hak dilindungi.</p>
-          <p>Solusi digital untuk bisnis yang ingin berkembang.</p>
         </div>
       </Container>
     </footer>
