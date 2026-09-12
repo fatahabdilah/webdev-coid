@@ -29,13 +29,13 @@ const SCROLLED_AFTER = 24;
 /* data-scrolled:, not group-data-scrolled:, because the attribute sits on this very
    element; the group-* variants only look at ancestors, so they never matched here. */
 const BAR =
-  "border-b border-transparent bg-transparent shadow-none " +
-  "transition-[background-color,border-color,box-shadow] duration-250 ease-out " +
+  "bg-transparent shadow-none " +
+  "transition-[background-color,box-shadow] duration-250 ease-out " +
   /* A shadow only once the bar has a white ground to cast it: over the hero the bar is
-     transparent, and a shadow there would hang in mid-air with nothing above it. Kept
-     very soft so it reads as the page sliding under the bar rather than as a raised
-     panel. */
-  "data-scrolled:border-line data-scrolled:bg-white data-scrolled:shadow-[0_1px_3px_rgba(10,10,10,0.06)] " +
+     transparent, and a shadow there would hang in mid-air with nothing above it. It does
+     the separating on its own, with no bottom border, so the edge stays soft rather than
+     drawing a hard line across the page. */
+  "data-scrolled:bg-white data-scrolled:shadow-[0_2px_8px_rgba(10,10,10,0.10)] " +
   "motion-reduce:transition-none";
 
 /* White ground needs dark text. The softer resting tone is baked into the start colour

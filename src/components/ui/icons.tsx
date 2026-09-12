@@ -19,6 +19,7 @@ export {
   RiFlashlightFill as Zap,
   RiPriceTag3Fill as Tag,
   RiInstagramFill as Instagram,
+  RiMailFill as Mail,
   RiLinkedinFill as Linkedin,
   RiLayout4Fill as LayoutTemplate,
   RiShoppingBag3Fill as ShoppingBag,

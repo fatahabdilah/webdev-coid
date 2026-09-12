@@ -1,38 +1,44 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui";
-import { Instagram, Linkedin } from "@/components/ui/icons";
+import { Instagram, Mail, Whatsapp } from "@/components/ui/icons";
 
 /* Off-site destinations in one place, so a change lands everywhere at once.
 
    TODO: fill these in before launch. They are deliberately left empty rather than
-   guessed: a made-up handle or phone number renders as a working link and would ship
-   unnoticed, while an empty one is visibly unfinished. Links with no destination are
-   rendered as plain text below, so nothing pretends to be clickable. */
-const INSTAGRAM = "";
-const LINKEDIN = "";
+   guessed: a made-up handle, number or address renders as a working link and would ship
+   unnoticed, while an empty one is visibly unfinished. Each row below is only rendered
+   once its destination exists, so nothing pretends to be clickable.
 
-/* One column, not three. The old "Layanan" column listed five services that all led to
-   the same two anchors -- twelve rows for five destinations -- which is padding, not
-   navigation. On a single-page site the footer only needs to name the sections. */
+   WHATSAPP is the number in international form without "+" or spaces (e.g. 6281234567890);
+   it is also what every "Konsultasi Gratis" button on the page should eventually point at,
+   instead of the #konsultasi anchor they use now. */
+const WHATSAPP = "";
+const EMAIL = "";
+const INSTAGRAM = "";
+
+/* The same four destinations as the navbar, in the same order, so the two agree on what
+   the site is made of. Keep this list in step with `menu` in Navbar.tsx. */
 const links: { label: string; href: string }[] = [
-  { label: "Cara Kerja", href: "#cara-kerja" },
+  { label: "Beranda", href: "#beranda" },
   { label: "Layanan", href: "#layanan" },
   { label: "Portfolio", href: "#portfolio" },
   { label: "Harga", href: "#harga" },
-  { label: "Konsultasi Gratis", href: "#konsultasi" },
 ];
 
-const socials = [
+/* Contact rows: an icon, a label, and the real destination behind it. Shown as text
+   rather than bare icons so the number and address can be read without clicking. */
+const contacts = [
+  { label: "WhatsApp", icon: Whatsapp, href: WHATSAPP ? `https://wa.me/${WHATSAPP}` : "" },
+  { label: "Email", icon: Mail, href: EMAIL ? `mailto:${EMAIL}` : "" },
   { label: "Instagram", icon: Instagram, href: INSTAGRAM },
-  { label: "LinkedIn", icon: Linkedin, href: LINKEDIN },
 ];
 
 export default function Footer() {
   return (
     <footer className="bg-surface text-white">
       <Container className="py-14">
-        <div className="grid gap-10 md:grid-cols-[1.6fr_1fr]">
+        <div className="grid gap-10 md:grid-cols-[1.6fr_1fr_1fr]">
           <div className="max-w-[320px]">
             <Link href="/" aria-label="webdev.co.id" className="relative block h-8 w-38.75">
               <Image src="/brand/logo-white.svg" alt="webdev.co.id" fill className="object-contain object-left" />
@@ -42,38 +48,41 @@ export default function Footer() {
               Agensi web development di Indonesia. Kami bantu brand baru, startup, perusahaan, dan institusi
               tampil profesional secara online.
             </p>
-            {/* Only rendered once the account exists: an icon that looks tappable and
-                does nothing is worse than no icon. */}
-            {socials.some((s) => s.href) && (
-              <div className="mt-6 flex gap-3">
-                {socials
-                  .filter((s) => s.href)
-                  .map(({ label, icon: Icon, href }) => (
-                    <a
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={label}
-                      className="flex size-11 items-center justify-center rounded-lg bg-elevated text-on-dark-body transition-colors duration-200 hover:bg-white/10 hover:text-white"
-                    >
-                      <Icon className="size-5" />
-                    </a>
-                  ))}
-              </div>
-            )}
           </div>
 
-          {/* Roomier rows on phones: as bare inline text these links were 18px tall and
-              stacked close together, which is a mis-tap waiting to happen. They tighten
-              back up from md, where there is a pointer. */}
-          <ul className="flex flex-col md:gap-3">
-            {links.map((link) => (
-              <li key={link.label}>
-                <FooterLink href={link.href}>{link.label}</FooterLink>
-              </li>
-            ))}
-          </ul>
+          <div>
+            <p className="text-[14px] leading-[1.55] font-medium">Jelajahi</p>
+            {/* Roomier rows on phones: as bare inline text these links were 18px tall and
+                stacked close together, which is a mis-tap waiting to happen. They tighten
+                back up from md, where there is a pointer. */}
+            <ul className="mt-2 flex flex-col md:mt-4 md:gap-3">
+              {links.map((link) => (
+                <li key={link.label}>
+                  <FooterLink href={link.href}>{link.label}</FooterLink>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Only the rows whose destination exists: a contact that looks tappable and
+              goes nowhere is worse than one that is simply not listed yet. */}
+          {contacts.some((c) => c.href) && (
+            <div>
+              <p className="text-[14px] leading-[1.55] font-medium">Hubungi</p>
+              <ul className="mt-2 flex flex-col md:mt-4 md:gap-3">
+                {contacts
+                  .filter((c) => c.href)
+                  .map(({ label, icon: Icon, href }) => (
+                    <li key={label}>
+                      <FooterLink href={href}>
+                        <Icon className="size-4 shrink-0" />
+                        {label}
+                      </FooterLink>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          )}
         </div>
 
         {/* The second line here used to restate the tagline sitting a few rows above it,
@@ -86,17 +95,19 @@ export default function Footer() {
   );
 }
 
-/* One row in a footer column. External destinations open in a new tab and are marked up
-   as such; in-page anchors stay in this tab. The colour change is the only movement:
-   fourteen rows sliding on hover would make the footer restless. */
+/* One row in a footer column. Off-site destinations open in a new tab; in-page anchors
+   stay in this tab. mailto: counts as off-site but must NOT get target="_blank" -- that
+   leaves an empty tab behind once the mail client takes over. The colour change is the
+   only movement: rows sliding on hover would make the footer restless. */
 function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
-  const external = href.startsWith("http");
+  const newTab = href.startsWith("http");
+  const sameTabExternal = href.startsWith("mailto:");
   const className =
-    "flex min-h-11 items-center text-[14px] leading-[1.55] text-on-dark-body transition-colors duration-200 hover:text-white md:min-h-0";
+    "flex min-h-11 items-center gap-2 text-[14px] leading-[1.55] text-on-dark-body transition-colors duration-200 hover:text-white md:min-h-0";
 
-  if (external) {
+  if (newTab || sameTabExternal) {
     return (
-      <a href={href} target="_blank" rel="noreferrer" className={className}>
+      <a href={href} className={className} {...(newTab && { target: "_blank", rel: "noreferrer" })}>
         {children}
       </a>
     );
