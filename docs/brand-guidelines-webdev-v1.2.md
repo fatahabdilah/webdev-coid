@@ -312,7 +312,62 @@ Sumber font: Google Fonts (DM Sans), dimuat lewat `next/font/google` dengan vari
 
 ---
 
-## 8. GAYA VISUAL KONTEN (INSTAGRAM)
+## 8. GERAK & INTERAKSI
+
+Prinsipnya satu: **makin kecil perubahannya, makin cepat.** Perubahan warna harus terasa
+seketika; sesuatu yang bergerak melintasi layar butuh waktu supaya matanya bisa mengikuti.
+
+### 8.1 Tangga Durasi
+
+| Durasi | Untuk |
+|--------|-------|
+| 150ms | Respons tekan (tombol mengecil) |
+| 200ms | Perubahan warna: hover link, hover tombol, hover background |
+| 300ms | Fade opacity, pergeseran kecil |
+| 500ms | Kartu melebar, panel naik, elemen berpindah tempat |
+| 700ms | Perpindahan besar antar kartu di showcase |
+
+Jangan memakai durasi di luar daftar. Kalau sebuah gerakan terasa butuh angka antara,
+biasanya yang salah adalah jarak tempuhnya, bukan durasinya.
+
+### 8.2 Easing
+
+Dua saja:
+
+- `ease-out` — untuk hampir semua hal. Mulai cepat, mendarat pelan; terasa responsif.
+- `cubic-bezier(0.22, 1, 0.36, 1)` — untuk gerakan besar yang perlu mendarat lembut
+  (kartu naik, panel masuk).
+
+Jangan `ease-in` sendirian: gerakan yang mulai lambat terasa lamban saat merespons klik.
+
+### 8.3 Umpan Balik Tekan
+
+Setiap tombol mengecil saat ditekan: `active:scale-[0.97]` untuk tombol besar,
+`active:scale-90` untuk tombol ikon. Ini satu-satunya bahasa "tertekan" di seluruh
+halaman, jadi klik terasa sama di mana pun.
+
+### 8.4 Hormati Pengaturan Pengguna
+
+`prefers-reduced-motion: reduce` ditangani sekali di `globals.css` untuk seluruh halaman,
+bukan per komponen. Dulu hanya 8 dari 34 transisi yang memasang `motion-reduce:`, dan tiap
+komponen baru adalah kesempatan untuk lupa. Sekarang animasi dan transisi runtuh jadi
+seketika, dan `scroll-behavior` jadi lompat, tanpa perlu diingat lagi.
+
+Animasi berulang (marquee, caret) tidak dimatikan dengan `animation: none` — itu akan
+membekukannya di tengah jalan. Dijalankan sekali secara instan supaya berhenti di posisi
+yang wajar.
+
+### 8.5 Fokus Keyboard
+
+`:focus-visible` diatur global: garis 2px warna Primary dengan halo putih 65% supaya tetap
+terlihat di atas alas gelap maupun terang. Memakai `:focus-visible`, bukan `:focus`, agar
+cincin hanya muncul untuk pengguna keyboard dan tidak berkedip tiap kali diklik mouse.
+
+Jangan pernah memakai `outline: none` tanpa menyediakan penanda fokus penggantinya.
+
+---
+
+## 9. GAYA VISUAL KONTEN (INSTAGRAM)
 
 - Dominan biru brand + putih, background bersih, banyak whitespace.
 - Foto orang dari berbagai kalangan profesional (tidak terbatas UMKM) + mockup website.
@@ -322,25 +377,25 @@ Sumber font: Google Fonts (DM Sans), dimuat lewat `next/font/google` dengan vari
 
 ---
 
-## 9. MESSAGING TOOLKIT
+## 10. MESSAGING TOOLKIT
 
-### 9.1 Tagline
+### 10.1 Tagline
 - Utama: **"Agency lokal, standar global."**
 - Pendukung: "Solusi digital untuk bisnis yang ingin berkembang."
 
-### 9.2 Bio Instagram
+### 10.2 Bio Instagram
 > 🚀 Agency lokal, standar global
 > Solusi digital untuk bisnis yang ingin berkembang.
 > Web Development • UI/UX • Brand, Startup & Perusahaan
 > 💬 Konsultasi gratis →
 
-### 9.3 Hero Website (saat ini)
+### 10.3 Hero Website (saat ini)
 - Badge: "Agency lokal, standar global"
 - Judul (H1): "Website profesional untuk bisnis yang ingin berkembang"
 - Sub: "Kami bikin website cepat dan berkualitas, dirancang khusus sesuai kebutuhan bisnis kamu."
 - CTA hero: "Lihat Harga" (utama) + "Lihat Portfolio" (teks). "Konsultasi Gratis" berada di navbar (kanan).
 
-### 9.4 Pesan Kunci per Segmen
+### 10.4 Pesan Kunci per Segmen
 - **Brand baru:** "Mulai dengan website yang langsung bikin brand kamu kelihatan meyakinkan."
 - **Startup:** "Website cepat dan modern, dieksekusi tanpa drama, siap mendukung pertumbuhan."
 - **Perusahaan:** "Company profile profesional yang mencerminkan kredibilitas bisnis kamu."
@@ -348,7 +403,7 @@ Sumber font: Google Fonts (DM Sans), dimuat lewat `next/font/google` dengan vari
 
 ---
 
-## 10. PENGGUNAAN DENGAN AI AGENT
+## 11. PENGGUNAAN DENGAN AI AGENT
 
 Dokumen ini adalah acuan resmi untuk agent `copywriter-id`, `creative-director`, `uiux-figma`, dan developer di sistem Claude Code. Saat bekerja, agent wajib:
 1. Mengikuti Tone of Voice (Section 4) dan rasio 70/30 (Section 3.1).
@@ -358,7 +413,7 @@ Dokumen ini adalah acuan resmi untuk agent `copywriter-id`, `creative-director`,
 
 ---
 
-## 11. LANGKAH LANJUTAN (OPSIONAL)
+## 12. LANGKAH LANJUTAN (OPSIONAL)
 
 Beberapa bagian bisa dipertajam lebih lanjut kapan pun kamu siap: Visi, Misi, Nilai, dan Pembeda utama (kalau ingin dipertegas dengan bukti/spesialisasi), aturan logo (clear space, ukuran minimum, versi terang/gelap), serta skala tipografi final. Setelah dilengkapi, versi bisa dinaikkan ke 1.2.
 

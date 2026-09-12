@@ -193,7 +193,7 @@ function CallToAction({ sites }: { sites: Site[] }) {
       {/* One action, on its own rule: the same WhatsApp chat the visual depicts */}
       <Link
         href="#konsultasi"
-        className="group flex items-center justify-between gap-6 border-y border-line py-4 text-[16px] leading-[1.6] font-medium text-ink transition-colors hover:text-primary"
+        className="group flex items-center justify-between gap-6 border-y border-line py-4 text-[16px] leading-[1.6] font-medium text-ink transition-colors duration-200 hover:text-primary"
       >
         Konsultasi gratis lewat WhatsApp
         <ArrowRight className="size-4 shrink-0 text-primary transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1" />

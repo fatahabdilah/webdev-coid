@@ -94,8 +94,9 @@
 
 html {
   scroll-behavior: smooth;
-  /* Keep anchored sections clear of the fixed 72px navbar */
-  scroll-padding-top: 72px;
+  /* Clear the floating navbar (panel ends at 64px) plus a little breathing room, so an
+     anchored section does not start flush against it */
+  scroll-padding-top: 88px;
   /* No rubber-banding past the ends of the page: pulling down at the top exposed the
      document ground above the hero. And that ground is navy rather than white, so on
      browsers that still show a sliver during overscroll it reads as part of the hero. */
@@ -107,6 +108,41 @@ body {
   background: #ffffff;
   color: var(--color-ink);
   font-family: var(--font-dm-sans), system-ui, sans-serif;
+}
+
+/* Keyboard focus. :focus-visible rather than :focus, so the ring appears for keyboard
+   users without flashing on every mouse click. The default UA outline is nearly invisible
+   against navy, so this sets a brand ring with a white gap to hold it off dark grounds;
+   on the dark sections the white side is what carries it. */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+  box-shadow: 0 0 0 4px rgb(255 255 255 / 0.65);
+}
+
+/* Honour the OS "reduce motion" setting everywhere at once. Individual components used
+   to opt in with motion-reduce:transition-none, but only 8 of 34 transitions carried it,
+   and each new component was another chance to forget. Handled here, nothing can slip
+   through: transitions and animations collapse to an instant, and smooth scrolling —
+   which anchor links trigger on every click — becomes a jump.
+
+   Not `animation: none`: a looping marquee would stop mid-track and a caret would freeze
+   wherever it was. Running them once, instantly, leaves everything in a settled state. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Gradient border, inner stays transparent. Used on the navbar CTA.

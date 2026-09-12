@@ -90,7 +90,9 @@ export function Button({
   return (
     <Link
       href={href}
-      className={`inline-flex h-12 items-center justify-center gap-2 rounded-lg px-6 text-[16px] leading-[1.6] font-semibold transition-colors ${variants[variant]} ${className}`}
+      /* Colour on hover, a small give on press. The press is the same gesture the send
+         button in the showcase makes, so the whole page answers a tap the same way. */
+      className={`inline-flex h-12 items-center justify-center gap-2 rounded-lg px-6 text-[16px] leading-[1.6] font-semibold transition-[background-color,border-color,scale] duration-200 ease-out active:scale-[0.97] ${variants[variant]} ${className}`}
     >
       {children}
     </Link>

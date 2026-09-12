@@ -43,7 +43,7 @@ export default function ExtraCards() {
           onMouseLeave={() => setShown(0)}
           onFocus={() => setShown(i)}
           onBlur={() => setShown(0)}
-          className="group relative flex min-h-37.5 flex-col justify-between rounded-2xl bg-offwhite p-6 transition-colors duration-300 hover:bg-primary/5"
+          className="group relative flex min-h-37.5 flex-col justify-between rounded-2xl bg-offwhite p-6 transition-colors duration-200 hover:bg-primary/5"
         >
           {/* Clipping frame: the screen never leaves the card, it just rises inside it */}
           <span aria-hidden className="pointer-events-none absolute inset-0 hidden overflow-hidden rounded-2xl sm:block">

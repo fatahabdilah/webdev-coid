@@ -1,7 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui";
-import { Instagram, Linkedin, MessageCircle } from "@/components/ui/icons";
+import { Instagram, Linkedin } from "@/components/ui/icons";
+
+/* Off-site destinations in one place, so a change lands everywhere at once.
+
+   TODO: fill these in before launch. They are deliberately left empty rather than
+   guessed: a made-up handle or phone number renders as a working link and would ship
+   unnoticed, while an empty one is visibly unfinished. Links with no destination are
+   rendered as plain text below, so nothing pretends to be clickable. */
+const INSTAGRAM = "";
+const LINKEDIN = "";
 
 const columns: { title: string; links: { label: string; href: string }[] }[] = [
   {
@@ -19,7 +28,9 @@ const columns: { title: string; links: { label: string; href: string }[] }[] = [
     links: [
       { label: "Portfolio", href: "#portfolio" },
       { label: "Cara Kerja", href: "#cara-kerja" },
-      { label: "Komitmen Kami", href: "#komitmen" },
+      /* The old #komitmen section is gone; "Yang selalu kamu dapat" in #jenis-website
+         carries the same service promises, so the label still tells the truth. */
+      { label: "Yang Kamu Dapat", href: "#jenis-website" },
       { label: "Harga", href: "#harga" },
     ],
   },
@@ -27,17 +38,15 @@ const columns: { title: string; links: { label: string; href: string }[] }[] = [
     title: "Hubungi",
     links: [
       { label: "Konsultasi Gratis", href: "#konsultasi" },
-      { label: "WhatsApp", href: "#konsultasi" },
-      { label: "Instagram", href: "#" },
-      { label: "LinkedIn", href: "#" },
+      { label: "Instagram", href: INSTAGRAM },
+      { label: "LinkedIn", href: LINKEDIN },
     ],
   },
 ];
 
 const socials = [
-  { label: "WhatsApp", icon: MessageCircle },
-  { label: "Instagram", icon: Instagram },
-  { label: "LinkedIn", icon: Linkedin },
+  { label: "Instagram", icon: Instagram, href: INSTAGRAM },
+  { label: "LinkedIn", icon: Linkedin, href: LINKEDIN },
 ];
 
 export default function Footer() {
@@ -54,18 +63,26 @@ export default function Footer() {
               Agensi web development di Indonesia. Kami bantu brand baru, startup, perusahaan, dan institusi
               tampil profesional secara online.
             </p>
-            <div className="mt-6 flex gap-3">
-              {socials.map(({ label, icon: Icon }) => (
-                <Link
-                  key={label}
-                  href="#"
-                  aria-label={label}
-                  className="flex size-11 items-center justify-center rounded-lg bg-elevated text-on-dark-body transition-colors hover:bg-white/10 hover:text-white"
-                >
-                  <Icon className="size-5" />
-                </Link>
-              ))}
-            </div>
+            {/* Only rendered once the account exists: an icon that looks tappable and
+                does nothing is worse than no icon. */}
+            {socials.some((s) => s.href) && (
+              <div className="mt-6 flex gap-3">
+                {socials
+                  .filter((s) => s.href)
+                  .map(({ label, icon: Icon, href }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={label}
+                      className="flex size-11 items-center justify-center rounded-lg bg-elevated text-on-dark-body transition-colors duration-200 hover:bg-white/10 hover:text-white"
+                    >
+                      <Icon className="size-5" />
+                    </a>
+                  ))}
+              </div>
+            )}
           </div>
 
           {columns.map((col) => (
@@ -77,12 +94,14 @@ export default function Footer() {
               <ul className="mt-2 flex flex-col md:mt-4 md:gap-3">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="flex min-h-11 items-center text-[14px] leading-[1.55] text-on-dark-body transition-colors hover:text-white md:min-h-0"
-                    >
-                      {link.label}
-                    </Link>
+                    {link.href ? (
+                      <FooterLink href={link.href}>{link.label}</FooterLink>
+                    ) : (
+                      /* No destination yet: shown, but plainly not a link */
+                      <span className="flex min-h-11 items-center text-[14px] leading-[1.55] text-on-dark-muted md:min-h-0">
+                        {link.label}
+                      </span>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -96,5 +115,27 @@ export default function Footer() {
         </div>
       </Container>
     </footer>
+  );
+}
+
+/* One row in a footer column. External destinations open in a new tab and are marked up
+   as such; in-page anchors stay in this tab. The colour change is the only movement:
+   fourteen rows sliding on hover would make the footer restless. */
+function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
+  const external = href.startsWith("http");
+  const className =
+    "flex min-h-11 items-center text-[14px] leading-[1.55] text-on-dark-body transition-colors duration-200 hover:text-white md:min-h-0";
+
+  if (external) {
+    return (
+      <a href={href} target="_blank" rel="noreferrer" className={className}>
+        {children}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className={className}>
+      {children}
+    </Link>
   );
 }

@@ -7,7 +7,7 @@ import { Container } from "@/components/ui";
 import { Close, Menu, Whatsapp } from "@/components/ui/icons";
 
 const menu = [
-  { label: "Beranda", href: "#" },
+  { label: "Beranda", href: "/" },
   { label: "Layanan", href: "#layanan" },
   { label: "Portfolio", href: "#portfolio" },
   { label: "Harga", href: "#harga" },
@@ -170,7 +170,7 @@ export default function Navbar() {
           onClick={() => setOpen(true)}
           aria-label="Buka menu"
           aria-expanded={open}
-          className={`relative -mr-2 inline-flex size-11 items-center justify-center rounded-full md:hidden ${INK_WHEN_SCROLLED}`}
+          className={`relative -mr-2 inline-flex size-11 items-center justify-center rounded-full transition-[scale] duration-150 ease-out active:scale-90 md:hidden ${INK_WHEN_SCROLLED}`}
         >
           <Menu className="size-6" />
         </button>
@@ -202,7 +202,7 @@ function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) 
           type="button"
           onClick={onClose}
           aria-label="Tutup menu"
-          className="-mr-2 inline-flex size-11 items-center justify-center rounded-full text-white"
+          className="-mr-2 inline-flex size-11 items-center justify-center rounded-full text-white transition-[scale] duration-150 ease-out active:scale-90"
         >
           <Close className="size-6" />
         </button>
@@ -214,7 +214,7 @@ function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) 
             key={item.label}
             href={item.href}
             onClick={onClose}
-            className="flex h-12 items-center border-b border-white/10 text-[18px] leading-[1.5] text-white"
+            className="flex h-12 items-center border-b border-white/10 text-[18px] leading-[1.5] text-white transition-colors duration-200 active:text-on-dark-body"
           >
             {item.label}
           </Link>
@@ -223,7 +223,7 @@ function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) 
         <Link
           href="#konsultasi"
           onClick={onClose}
-          className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white text-[16px] leading-[1.6] font-semibold text-navy"
+          className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white text-[16px] leading-[1.6] font-semibold text-navy transition-[scale] duration-200 ease-out active:scale-[0.97]"
         >
           <Whatsapp className="size-5" />
           Konsultasi Gratis
