@@ -90,7 +90,7 @@ export default function WorkRow({ works }: { works: Work[] }) {
           mask on the track would put its soft edge far off-screen where nobody would see it. */}
       <div
         ref={boxRef}
-        className="w-full max-w-500 overflow-hidden"
+        className="w-full max-w-[2000px] overflow-hidden"
         style={fade.left || fade.right ? { maskImage, WebkitMaskImage: maskImage } : undefined}
       >
         {/* Two sibling groups rather than one long row of duplicated cards: the gap between

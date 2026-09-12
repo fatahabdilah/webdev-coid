@@ -164,7 +164,33 @@ Palet dibagi 4 kelompok. Nama token dipakai konsisten di desain dan kode.
 
 Cara pakai: Surface sebagai alas, Elevated untuk kartu di atasnya. Karena Elevated sedikit lebih terang, kartu "naik" tanpa perlu border. Black tetap untuk teks. Ketiganya berdekatan; bedanya baru terlihat saat bertumpuk.
 
-### 6.4 Semantic
+### 6.4 Teks di Atas Alas Gelap
+
+Sisi terang punya tiga peran jelas (Black / Body / Muted). Sisi gelap butuh padanannya,
+tapi tidak bisa memakai warna rata: alpha yang sama memberi kontras berbeda tergantung
+alasnya — putih 70% = 6.9:1 di atas Navy, tapi 9.5:1 di atas Surface. Karena itu
+perannya yang diberi nama, bukan angkanya.
+
+| Token | Nilai | Padanan terang | Kontras (Navy / Surface) |
+|-------|-------|----------------|--------------------------|
+| On-dark | #FFFFFF | Black | 12.5 / 19.0 |
+| On-dark Body | putih 70% | Body | 6.9 / 9.5 |
+| On-dark Muted | putih 45% | Muted | 3.6 / 4.5 |
+| On-dark Faint | putih 30% | — | 2.4 / 2.7 |
+
+Nilainya dipilih agar kontrasnya membayangi ramp terang (Black 19.8, Body 7.5, Muted 3.1).
+On-dark Faint sengaja di bawah ambang teks: hanya untuk harga yang dicoret dan fitur
+yang tidak termasuk — jangan dipakai untuk teks yang harus dibaca.
+
+Wajib: jangan tulis `text-white/70` langsung. Pakai `text-on-dark-body` dan seterusnya.
+Angka lepas seperti itu yang dulu membuat satu peran punya empat nilai berbeda dalam
+satu kartu harga.
+
+Pengecualian: teks di atas foto (kartu showcase) boleh memakai alpha mentah yang lebih
+tinggi, karena alasnya gambar — bukan warna brand rata — jadi butuh cadangan agar tetap
+terbaca di bagian foto yang terang.
+
+### 6.5 Semantic
 
 | Token | Hex | Peran |
 |-------|-----|-------|
@@ -172,45 +198,60 @@ Cara pakai: Surface sebagai alas, Elevated untuk kartu di atasnya. Karena Elevat
 | Warning | #E08700 | Peringatan |
 | Error | #DC2626 | Error form/validasi |
 
-### 6.5 Aturan Keterbacaan (Wajib)
+### 6.6 Aturan Keterbacaan (Wajib)
 - Teks putih aman di atas: Navy, Primary, Primary Dark, Black, Surface, Elevated, Success, Error.
 - Warning #E08700 pakai teks gelap.
 - Teks gelap (Black) dipakai di atas: Muted, Border, Off-white, White.
 - Untuk teks kecil di atas Primary, lebih aman pakai Navy sebagai alas (kontras Primary + putih pas-pasan untuk teks kecil).
 
-### 6.6 Konfigurasi Tailwind (siap tempel)
+### 6.7 Konfigurasi Tailwind (siap tempel)
 
-```js
-// tailwind.config.js
-module.exports = {
-  theme: {
-    extend: {
-      colors: {
-        navy: '#003466',
-        primary: { DEFAULT: '#0066CB', dark: '#0052A3' },
-        ink: '#0A0A0A',          // "Black" — pakai text-ink agar tidak bentrok util 'black'
-        body: '#4A5568',
-        muted: '#8A94A6',
-        line: '#D9E1EC',         // "Border" — pakai border-line agar jelas
-        offwhite: '#F7F9FC',
-        surface: '#101011',
-        elevated: '#18181A',
-        success: '#16A34A',
-        warning: '#E08700',
-        error: '#DC2626',
-      },
-      backgroundImage: {
-        'brand-gradient': 'linear-gradient(to bottom, #003466, #0066CB)',
-      },
-      fontFamily: {
-        sans: ['DM Sans', 'sans-serif'],
-      },
-    },
-  },
+Tailwind 4 tidak lagi memakai `tailwind.config.js`; token ditulis langsung di CSS lewat
+blok `@theme`. Sumber sebenarnya ada di `src/app/globals.css` — di bawah ini salinannya.
+
+```css
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #003466;
+  --color-primary: #0066cb;
+  --color-primary-dark: #0052a3;
+  --color-ink: #0a0a0a;      /* "Black" — text-ink agar tidak bentrok util 'black' */
+  --color-body: #4a5568;
+  --color-muted: #8a94a6;
+  --color-line: #d9e1ec;     /* "Border" — border-line agar jelas */
+  --color-offwhite: #f7f9fc;
+  --color-surface: #101011;
+  --color-elevated: #18181a;
+  --color-success: #16a34a;
+  --color-warning: #e08700;
+  --color-error: #dc2626;
+
+  /* Teks di atas alas gelap — lihat 6.4 */
+  --color-on-dark: #ffffff;
+  --color-on-dark-body: rgb(255 255 255 / 0.7);
+  --color-on-dark-muted: rgb(255 255 255 / 0.45);
+  --color-on-dark-faint: rgb(255 255 255 / 0.3);
+
+  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
+}
+
+@utility bg-brand-gradient {
+  background-image: linear-gradient(180deg, #003466 0%, #0066cb 100%);
+}
+
+/* Kartu yang terangkat dari halaman. Bayangannya bernuansa Navy, bukan hitam netral,
+   supaya bayangan ikut berada di dalam hue brand. */
+@utility shadow-lift {
+  box-shadow: 0 18px 40px -20px rgb(0 52 102 / 0.38);
 }
 ```
 
-Catatan: token "Black" dan "Border" saya beri nama kode `ink` dan `line` agar tidak bentrok dengan utility bawaan Tailwind (`text-black`, `border`). Nama tampilan di brand tetap "Black" dan "Border". Contoh pakai: `bg-primary`, `hover:bg-primary-dark`, `text-ink`, `text-body`, `border-line`, `bg-offwhite`, `bg-surface`, `bg-brand-gradient`.
+Catatan: token "Black" dan "Border" diberi nama kode `ink` dan `line` agar tidak bentrok
+dengan utility bawaan Tailwind (`text-black`, `border`). Nama tampilan di brand tetap
+"Black" dan "Border". Contoh pakai: `bg-primary`, `hover:bg-primary-dark`, `text-ink`,
+`text-body`, `border-line`, `bg-offwhite`, `bg-surface`, `bg-brand-gradient`,
+`text-on-dark-body`, `shadow-lift`.
 
 ---
 
@@ -218,21 +259,54 @@ Catatan: token "Black" dan "Border" saya beri nama kode `ink` dan `line` agar ti
 
 | Penggunaan | Font | Weight |
 |------------|------|--------|
-| Heading / display | **DM Sans** | Semibold (judul), Medium (label) |
-| UI / tombol / link | **DM Sans** | Medium |
-| Paragraf / body | **DM Sans** | Regular |
+| Heading / display | **DM Sans** | Medium (500) |
+| UI / tombol / link | **DM Sans** | Medium (500) |
+| Paragraf / body | **DM Sans** | Regular (400) |
 
-Skala usulan, sesuaikan bila perlu:
+**Weight maksimal Medium (500).** Judul besar sudah cukup menonjol lewat ukuran dan
+tracking rapat; menambah Semi Bold di atasnya membuat halaman terasa berat dan ramai.
+Satu-satunya pengecualian adalah komponen Button, yang memakai 600 agar label pendek
+di dalam bidang berwarna tetap terbaca. Karena itu font hanya dimuat pada 400/500/600.
 
-| Level | Ukuran | Font/Weight |
-|-------|--------|-------------|
-| H1 (hero) | 36–40px | DM Sans Semibold |
-| H2 | 28–30px | DM Sans Semibold |
-| H3 | 22–24px | DM Sans Medium |
-| Body | 14–16px | DM Sans Regular |
-| Caption/Muted | 12–13px | DM Sans Regular |
+### 7.1 Skala Ukuran
 
-Aturan: SATU keluarga font saja, DM Sans, dibedakan lewat weight (Semi Bold judul, Medium UI, Regular body). Line-height longgar (±1.6) untuk body agar nyaman dibaca di HP. Judul memakai tracking rapat karena DM Sans dirancang untuk ukuran kecil dan terasa longgar saat besar: semakin besar teks, semakin rapat. Display 40px ke atas -0.04em, H2 26–32px (termasuk angka harga) -0.03em, H3 dan label 20–24px -0.02em, body dan caption tetap normal. Padanan weight: 400 = Regular, 500 = Medium, 600 = Semi Bold.
+Sembilan langkah, rasio ±1.25. Tiap ukuran punya satu line-height, tidak ditawar per
+tempat — inilah yang dulu membuat satu halaman punya 25 gaya teks berbeda.
+
+| Ukuran | Line-height | Tracking | Penggunaan |
+|--------|-------------|----------|------------|
+| 72px | 1.1 | -0.04em | Display hero (desktop) |
+| 40px | 1.1 | -0.04em | Display hero (mobile) |
+| 30px | 1.25 | -0.03em | H2 (desktop), angka harga |
+| 26px | 1.25 | -0.03em | H2 (mobile) |
+| 24px | 1.3 | -0.02em | H3 |
+| 20px | 1.3 | -0.02em | H3 kecil, label besar |
+| 18px | 1.5 | normal | Paragraf pengantar |
+| 16px | 1.6 | normal | Body |
+| 14px | 1.55 | normal | Body kecil, UI, link |
+| 12px | 1.45 | normal | Caption, pill, timestamp |
+
+Tracking rapat dipakai karena DM Sans dirancang untuk ukuran kecil dan terasa longgar
+saat besar: semakin besar teks, semakin rapat. Body dan caption tetap normal.
+
+Jangan memakai ukuran di luar daftar ini (13px, 15px, 17px dan sejenisnya). Kalau sebuah
+teks terasa butuh ukuran antara, biasanya yang salah adalah hierarkinya, bukan skalanya.
+
+### 7.2 Lebar Maksimal Teks
+
+Baris yang terlalu panjang melelahkan dibaca; sasarannya 45–75 karakter.
+
+| Nilai | Peran |
+|-------|-------|
+| 1200px | Container halaman |
+| 800px | Judul hero |
+| 680px | Judul section (H2) |
+| 600px | Paragraf di bawah judul |
+| 320px | Kolom teks di footer |
+
+Satu nilai untuk satu peran. Jangan menambah nilai baru tanpa peran baru, dan tulis
+selalu dalam piksel eksplisit (`max-w-[600px]`), bukan skala spacing (`max-w-150`),
+supaya dua notasi tidak bercampur untuk hal yang sama.
 
 Sumber font: Google Fonts (DM Sans), dimuat lewat `next/font/google` dengan variabel `--font-dm-sans`.
 
