@@ -109,10 +109,11 @@ export default function Navbar() {
             <Link
               key={item.label}
               href={item.href}
-              /* No transition of its own: a second `transition` declaration here would
-                 override the one inherited from <nav>, which is exactly why these links
-                 used to snap dark while the CTA (which has no such rule) did not. */
-              className="hover:text-white group-data-scrolled:hover:text-primary"
+              /* Fades rather than recolours, so one rule covers both the dark hero and the
+                 white bar. Its own transition is safe here because it names opacity only:
+                 the colour switch stays with <nav>, so the two never overwrite each other
+                 the way an unscoped `transition` on the link once did. */
+              className="opacity-100 transition-opacity duration-200 ease-out hover:opacity-75 motion-reduce:transition-none"
             >
               {item.label}
             </Link>
