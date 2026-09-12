@@ -29,7 +29,7 @@ export function Eyebrow({ children, tone = "light" }: { children: ReactNode; ton
       ? "bg-white/10 text-white"
       : "bg-primary/10 text-primary";
   return (
-    <span className={`inline-flex items-center rounded-full px-3.5 py-1.5 text-[13px] font-medium ${cls}`}>
+    <span className={`inline-flex items-center rounded-full px-3.5 py-1.5 text-[14px] leading-[1.55] font-medium ${cls}`}>
       {children}
     </span>
   );
@@ -60,7 +60,7 @@ export function SectionHeader({
         {title}
       </h2>
       {description && (
-        <p className={`mt-4 max-w-[600px] text-base leading-[1.6] ${tone === "dark" ? "text-white/70" : "text-body"}`}>
+        <p className={`mt-4 max-w-[600px] text-base leading-[1.6] ${tone === "dark" ? "text-on-dark-body" : "text-body"}`}>
           {description}
         </p>
       )}
@@ -90,7 +90,7 @@ export function Button({
   return (
     <Link
       href={href}
-      className={`inline-flex h-12 items-center justify-center gap-2 rounded-lg px-6 text-[15px] font-semibold transition-colors ${variants[variant]} ${className}`}
+      className={`inline-flex h-12 items-center justify-center gap-2 rounded-lg px-6 text-[16px] leading-[1.6] font-semibold transition-colors ${variants[variant]} ${className}`}
     >
       {children}
     </Link>

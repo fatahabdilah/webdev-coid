@@ -38,8 +38,8 @@ export default function Reviews() {
           className="rounded-2xl border border-white/10 bg-white/5 p-5"
         >
           <figcaption>
-            <span className="block text-[14px] font-medium text-white">{name}</span>
-            <span className="mt-0.5 block text-[12px] text-white/50">{business}</span>
+            <span className="block text-[14px] leading-[1.55] font-medium text-white">{name}</span>
+            <span className="mt-0.5 block text-[12px] leading-[1.45] text-on-dark-muted">{business}</span>
           </figcaption>
 
           <span className="mt-3 flex gap-0.5" aria-label="Lima dari lima bintang">
@@ -48,7 +48,7 @@ export default function Reviews() {
             ))}
           </span>
 
-          <blockquote className="mt-3 text-[13px] leading-[1.6] text-white/70">{quote}</blockquote>
+          <blockquote className="mt-3 text-[14px] leading-[1.55] text-on-dark-body">{quote}</blockquote>
         </figure>
       ))}
     </div>

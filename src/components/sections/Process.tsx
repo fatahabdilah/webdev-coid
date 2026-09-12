@@ -149,7 +149,7 @@ export default function Process() {
         {/* Heading sits in the right column but is pulled out of the flex flow on desktop,
             so the copy below it can sit directly underneath rather than a stretched row apart. */}
         <div className="lg:order-2 lg:col-start-2">
-          <h2 className="text-[26px] font-medium leading-tight tracking-[-0.03em] text-ink md:text-[30px]">
+          <h2 className="text-[26px] font-medium leading-[1.25] tracking-[-0.03em] text-ink md:text-[30px]">
             Kamu arahkan, kami yang bangun.
           </h2>
           <p className="mt-4 text-base leading-[1.6] text-body">
@@ -193,7 +193,7 @@ function CallToAction({ sites }: { sites: Site[] }) {
       {/* One action, on its own rule: the same WhatsApp chat the visual depicts */}
       <Link
         href="#konsultasi"
-        className="group flex items-center justify-between gap-6 border-y border-line py-4 text-[16px] font-medium text-ink transition-colors hover:text-primary"
+        className="group flex items-center justify-between gap-6 border-y border-line py-4 text-[16px] leading-[1.6] font-medium text-ink transition-colors hover:text-primary"
       >
         Konsultasi gratis lewat WhatsApp
         <ArrowRight className="size-4 shrink-0 text-primary transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1" />
@@ -208,11 +208,11 @@ function CallToAction({ sites }: { sites: Site[] }) {
             </span>
           ))}
           {/* Sits on top of the avatars, so its number is never clipped */}
-          <span className="relative z-10 flex size-9 items-center justify-center rounded-full bg-primary text-[11px] font-medium text-white ring-2 ring-white">
+          <span className="relative z-10 flex size-9 items-center justify-center rounded-full bg-primary text-[12px] leading-[1.45] font-medium text-white ring-2 ring-white">
             {CLIENT_COUNT}
           </span>
         </div>
-        <p className="text-[14px] leading-[1.45] text-body">
+        <p className="text-[14px] leading-[1.55] text-body">
           bisnis sudah tayang
           <br />
           bersama webdev.co.id

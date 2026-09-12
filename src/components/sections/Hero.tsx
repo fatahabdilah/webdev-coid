@@ -15,14 +15,14 @@ export default function Hero() {
         className="pointer-events-none object-cover"
       />
       <Container className="relative flex flex-col items-center pb-16 pt-[136px] text-center md:pb-24 md:pt-[168px]">
-        <h1 className="max-w-200 text-[40px] font-normal leading-[1.1] tracking-[-0.04em] md:text-[72px] md:leading-20">
+        <h1 className="max-w-200 text-[40px] font-normal leading-[1.1] tracking-[-0.04em] md:text-[72px]">
           {/* The break is deliberate rather than left to the line box, so the second thought
               always lands on its own line at every width */}
           Bisnis kamu, online.
           <br />
           Tanpa ribet.
         </h1>
-        <p className="mt-5 max-w-[560px] text-base leading-[1.6] text-white md:text-[17px]">
+        <p className="mt-5 max-w-[560px] text-base leading-[1.5] text-white md:text-[18px]">
           {/* Second sentence drops to its own line from md up; below that the paragraph
               wraps on its own, where a forced break would leave an odd short line */}
           Dari desain sampai online, satu tim yang mengurus semuanya.
@@ -34,7 +34,7 @@ export default function Hero() {
           Lihat Harga
         </Button>
 
-        <p className="mt-6 inline-flex items-center gap-2 text-[13px] text-white">
+        <p className="mt-6 inline-flex items-center gap-2 text-[14px] leading-[1.55] text-white">
           <ShieldCheck className="size-4" />
           Harga jelas dari awal, tanpa biaya tersembunyi
         </p>

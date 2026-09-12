@@ -87,10 +87,10 @@ function TierCard({ tier }: { tier: Tier }) {
       }`}
     >
       <div className="flex items-start justify-between gap-3">
-        <p className="text-[18px] font-medium">{tier.name}</p>
+        <p className="text-[18px] leading-[1.5] font-medium">{tier.name}</p>
         {tier.badge && (
           <span
-            className={`shrink-0 rounded-full px-3 py-1 text-[12px] font-medium ${
+            className={`shrink-0 rounded-full px-3 py-1 text-[12px] leading-[1.45] font-medium ${
               dark ? "bg-white/10 text-white" : "bg-primary/10 text-primary"
             }`}
           >
@@ -98,16 +98,16 @@ function TierCard({ tier }: { tier: Tier }) {
           </span>
         )}
       </div>
-      <p className={`mt-2 text-[14px] leading-[1.6] ${dark ? "text-white/70" : "text-body"}`}>{tier.desc}</p>
+      <p className={`mt-2 text-[14px] leading-[1.55] ${dark ? "text-on-dark-body" : "text-body"}`}>{tier.desc}</p>
 
       <div className="mt-6 flex flex-wrap items-baseline gap-x-2">
         {tier.oldPrice && (
-          <span className={`text-[13px] line-through ${dark ? "text-white/50" : "text-muted"}`}>{tier.oldPrice}</span>
+          <span className={`text-[14px] leading-[1.55] line-through ${dark ? "text-on-dark-muted" : "text-muted"}`}>{tier.oldPrice}</span>
         )}
-        {tier.pricePrefix && <span className={`text-[13px] ${dark ? "text-white/70" : "text-body"}`}>{tier.pricePrefix}</span>}
-        <span className="text-[32px] font-medium leading-none tracking-[-0.03em]">{tier.price}</span>
+        {tier.pricePrefix && <span className={`text-[14px] leading-[1.55] ${dark ? "text-on-dark-body" : "text-body"}`}>{tier.pricePrefix}</span>}
+        <span className="text-[32px] font-medium leading-[1.1] tracking-[-0.03em]">{tier.price}</span>
       </div>
-      <p className={`mt-3 text-[13px] leading-[1.5] ${dark ? "text-white/60" : "text-muted"}`}>{tier.note}</p>
+      <p className={`mt-3 text-[14px] leading-[1.55] ${dark ? "text-on-dark-muted" : "text-muted"}`}>{tier.note}</p>
 
       <Button href="#konsultasi" variant={dark ? "primary" : "secondary"} className="mt-6 w-full">
         {tier.cta}
@@ -117,21 +117,21 @@ function TierCard({ tier }: { tier: Tier }) {
 
       <ul className="flex flex-col gap-3">
         {tier.features.map((f) => (
-          <li key={f.text} className="flex items-center gap-3 text-[14px]">
+          <li key={f.text} className="flex items-center gap-3 text-[14px] leading-[1.55]">
             {f.included ? (
               <Check className={`size-5 shrink-0 ${dark ? "text-white" : "text-primary"}`} />
             ) : (
-              <Minus className={`size-5 shrink-0 ${dark ? "text-white/30" : "text-muted"}`} />
+              <Minus className={`size-5 shrink-0 ${dark ? "text-on-dark-faint" : "text-muted"}`} />
             )}
-            <span className={f.included ? "" : dark ? "text-white/40" : "text-muted"}>{f.text}</span>
+            <span className={f.included ? "" : dark ? "text-on-dark-faint" : "text-muted"}>{f.text}</span>
           </li>
         ))}
       </ul>
 
       {tier.why && (
         <div className="mt-6 rounded-xl bg-white/5 p-4">
-          <p className="text-[13px] font-medium">Kenapa pilihan ini?</p>
-          <p className="mt-1 text-[13px] leading-[1.6] text-white/70">{tier.why}</p>
+          <p className="text-[14px] leading-[1.55] font-medium">Kenapa pilihan ini?</p>
+          <p className="mt-1 text-[14px] leading-[1.55] text-on-dark-body">{tier.why}</p>
         </div>
       )}
     </div>

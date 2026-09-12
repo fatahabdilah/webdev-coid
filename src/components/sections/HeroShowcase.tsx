@@ -51,7 +51,7 @@ export default function HeroShowcase() {
                 } ${item.tint ? "img-brand-tint" : ""}`}
               />
               <span
-                className={`absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/50 py-1 pl-2.5 pr-3 text-[12px] font-medium text-ink backdrop-blur-md transition-opacity duration-300 ${
+                className={`absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/50 py-1 pl-2.5 pr-3 text-[12px] leading-[1.45] font-medium text-ink backdrop-blur-md transition-opacity duration-300 ${
                   isActive ? "opacity-100" : "opacity-0"
                 }`}
               >

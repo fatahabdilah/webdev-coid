@@ -11,7 +11,7 @@ export default function Cta() {
           <br />
           Yuk, wujudkan sekarang.
         </h2>
-        <p className="mt-4 max-w-130 text-base leading-[1.6] text-white/85">
+        <p className="mt-4 max-w-130 text-base leading-[1.6] text-on-dark-body">
           Konsultasi gratis dulu. Kami bantu tentukan jenis website yang paling pas untuk bisnis kamu, tanpa komitmen.
         </p>
         <Button href="#konsultasi" variant="white" className="mt-8">

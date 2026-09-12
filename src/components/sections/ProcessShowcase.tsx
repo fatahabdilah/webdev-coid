@@ -56,7 +56,7 @@ const DEPTH = [
   { y: "-19%", s: 0.9, o: 0.75, z: 10 },
 ];
 
-const SURFACE = "rounded-xl border border-line bg-white shadow-[0_18px_40px_-22px_rgba(0,52,102,0.3)] md:rounded-2xl";
+const SURFACE = "rounded-xl border border-line bg-white shadow-lift md:rounded-2xl";
 
 export default function ProcessShowcase({ sites, active, handoff, typed, sending }: Props) {
   const n = sites.length;
@@ -126,9 +126,9 @@ export default function ProcessShowcase({ sites, active, handoff, typed, sending
         </span>
 
         <div className={`min-w-0 flex-1 transition-opacity duration-300 ${handingOff ? "opacity-0" : "opacity-100"}`}>
-          <p className="text-[11px] font-medium text-muted md:text-[12px]">{site.sender}</p>
+          <p className="text-[12px] leading-[1.45] font-medium text-muted">{site.sender}</p>
           {/* Fixed at two lines, so the box keeps one height whatever is being typed */}
-          <p className="mt-0.5 line-clamp-2 h-[2.8em] text-[14px] leading-[1.4] text-ink md:mt-1 md:text-[16px]">
+          <p className="mt-0.5 line-clamp-2 h-[2.8em] text-[14px] leading-[1.5] text-ink md:mt-1 md:text-[16px]">
             {text}
             <span
               className={`ml-0.5 inline-block h-[1em] w-0.5 translate-y-0.5 bg-primary ${done ? "animate-caret" : ""}`}
@@ -158,28 +158,32 @@ function SiteCard({ site }: { site: Site }) {
       <div className={`absolute inset-0 bg-linear-to-r ${site.wash}`} />
       <div className="absolute inset-0 bg-linear-to-t from-black/35 via-transparent to-transparent" />
 
+      {/* Text here keeps raw white alphas rather than the on-dark-* roles: the ground is a
+          photograph plus a per-site wash, not a flat brand colour, so it is held higher than
+          the roles would put it to stay legible over the lighter patches. */}
       <div className="relative flex h-full flex-col p-4 md:p-6">
         {/* site nav */}
-        <div className="flex items-center justify-between">
-          <span className="text-[10px] font-medium text-white md:text-[13px]">{site.name}</span>
-          <span className="hidden gap-3 text-[8px] text-white/75 md:flex md:text-[10px]">
+        <div className="flex items-center justify-between gap-2">
+          <span className="shrink-0 text-[12px] font-medium leading-[1.5] text-white md:text-[14px]">{site.name}</span>
+          {/* Dropped below md, where the name and the pill alone fill the row */}
+          <span className="hidden min-w-0 gap-3 overflow-hidden text-[12px] leading-[1.45] whitespace-nowrap text-white/85 md:flex">
             {site.nav.map((item) => (
               <span key={item}>{item}</span>
             ))}
           </span>
-          <span className="rounded-full bg-white/15 px-2 py-0.5 text-[8px] font-medium text-white backdrop-blur-sm md:text-[10px]">
+          <span className="shrink-0 rounded-full bg-white/15 px-2 py-0.5 text-[12px] font-medium leading-[1.45] text-white backdrop-blur-sm">
             {site.kind}
           </span>
         </div>
 
         {/* hero copy */}
         <div className="mt-auto max-w-[62%]">
-          <p className="text-[16px] font-medium leading-[1.1] tracking-[-0.03em] text-balance text-white md:text-[26px]">
+          <p className="text-[16px] font-medium leading-[1.25] tracking-[-0.03em] text-balance text-white md:text-[26px]">
             {site.headline}
           </p>
-          <p className="mt-1.5 hidden text-[10px] leading-normal text-white/80 md:block md:text-[12px]">{site.sub}</p>
+          <p className="mt-1.5 hidden text-[12px] leading-[1.45] text-white/80 md:block">{site.sub}</p>
           <span
-            className={`mt-2 inline-block rounded-full px-3 py-1 text-[9px] font-medium md:mt-3 md:px-4 md:py-1.5 md:text-[11px] ${site.button}`}
+            className={`mt-2 inline-block rounded-full px-3 py-1 text-[12px] leading-[1.45] font-medium md:mt-3 md:px-4 md:py-1.5 ${site.button}`}
           >
             {site.cta}
           </span>

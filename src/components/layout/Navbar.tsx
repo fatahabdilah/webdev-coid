@@ -125,7 +125,7 @@ export default function Navbar() {
           />
         </Link>
 
-        <nav className={`relative hidden items-center gap-8 text-[14px] md:flex ${INK_WHEN_SCROLLED}`}>
+        <nav className={`relative hidden items-center gap-8 text-[14px] leading-[1.55] md:flex ${INK_WHEN_SCROLLED}`}>
           {menu.map((item) => (
             <Link
               key={item.label}
@@ -142,7 +142,7 @@ export default function Navbar() {
 
         <Link
           href="#konsultasi"
-          className={`border-gradient-accent relative inline-flex h-10 items-center gap-2 rounded-full px-4 text-[14px] font-medium text-white hover:bg-white/10 group-data-scrolled:text-ink group-data-scrolled:hover:bg-ink/5 ${CTA_TRANSITION} ${CTA_SHIFT}`}
+          className={`border-gradient-accent relative inline-flex h-10 items-center gap-2 rounded-full px-4 text-[14px] leading-[1.55] font-medium text-white hover:bg-white/10 group-data-scrolled:text-ink group-data-scrolled:hover:bg-ink/5 ${CTA_TRANSITION} ${CTA_SHIFT}`}
         >
           <Whatsapp className="size-5" />
           Konsultasi Gratis

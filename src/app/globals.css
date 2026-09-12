@@ -16,6 +16,15 @@
   --color-warning: #e08700;
   --color-error: #dc2626;
 
+  /* Text on dark grounds, mirroring ink / body / muted role for role. Alpha rather than
+     flat colour so one token works over navy, surface and elevated alike; the values are
+     chosen so the contrast lands near the light-ground ramp (ink 19.8, body 7.5, muted 3.1).
+     Use these instead of a bare text-white/NN, which drifts between components. */
+  --color-on-dark: #ffffff; /* ink     — headings, emphasis */
+  --color-on-dark-body: rgb(255 255 255 / 0.7); /* body    — 6.9 on navy, 9.5 on surface */
+  --color-on-dark-muted: rgb(255 255 255 / 0.45); /* muted   — 3.6 on navy, 4.5 on surface */
+  --color-on-dark-faint: rgb(255 255 255 / 0.3); /* disabled/struck — deliberately below body text use */
+
   --font-sans: var(--font-dm-sans), system-ui, sans-serif;
 
   /* Blinking caret in the "Cara Kerja" showcase (ProcessShowcase.tsx). */
@@ -70,6 +79,12 @@
     mask-composite: exclude;
     pointer-events: none;
   }
+}
+
+/* A card lifting off the page. Tinted with navy rather than neutral black so the shade
+   sits in the brand's hue; one definition so every lifted card casts the same shadow. */
+@utility shadow-lift {
+  box-shadow: 0 18px 40px -20px rgb(0 52 102 / 0.38);
 }
 
 /* Placeholder images from the design file lean purple; shift them toward brand blue. */

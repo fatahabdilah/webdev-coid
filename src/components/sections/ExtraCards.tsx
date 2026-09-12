@@ -43,7 +43,7 @@ export default function ExtraCards() {
           onMouseLeave={() => setShown(0)}
           onFocus={() => setShown(i)}
           onBlur={() => setShown(0)}
-          className="group relative flex min-h-37.5 flex-col justify-between rounded-2xl bg-offwhite p-6 transition-colors duration-300 hover:bg-primary/8"
+          className="group relative flex min-h-37.5 flex-col justify-between rounded-2xl bg-offwhite p-6 transition-colors duration-300 hover:bg-primary/5"
         >
           {/* Clipping frame: the screen never leaves the card, it just rises inside it */}
           <span aria-hidden className="pointer-events-none absolute inset-0 hidden overflow-hidden rounded-2xl sm:block">
@@ -53,7 +53,7 @@ export default function ExtraCards() {
                 shown === i ? "-translate-y-[calc(100%-0.5rem)]" : "translate-y-6"
               }`}
             >
-              <span className="block overflow-hidden rounded-lg shadow-[0_18px_40px_-18px_rgba(0,52,102,0.45)]">
+              <span className="block overflow-hidden rounded-lg shadow-lift">
                 <Image src={preview} alt="" width={520} height={325} className="block h-auto w-full object-cover" />
               </span>
             </span>
@@ -63,8 +63,8 @@ export default function ExtraCards() {
             <Icon className="size-6 text-primary" />
           </span>
           <span className="relative mt-6 block max-w-[62%]">
-            <span className="block text-[17px] font-medium text-ink md:text-[18px]">{title}</span>
-            <span className="mt-1 block text-[14px] leading-[1.6] text-body">{desc}</span>
+            <span className="block text-[18px] leading-[1.5] font-medium text-ink">{title}</span>
+            <span className="mt-1 block text-[14px] leading-[1.55] text-body">{desc}</span>
           </span>
         </Link>
       ))}
