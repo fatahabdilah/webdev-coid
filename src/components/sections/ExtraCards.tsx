@@ -60,7 +60,7 @@ export default function ExtraCards() {
           </span>
 
           <span className="relative flex items-start">
-            <Icon className="size-6 text-primary" />
+            <Icon className="size-6 text-ink" />
           </span>
           {/* The 62% clearance is for the preview screen, which only exists from sm up;
               below that the text has the card to itself. */}
