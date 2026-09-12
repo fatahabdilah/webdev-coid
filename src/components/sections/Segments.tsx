@@ -1,81 +1,73 @@
+import Image from "next/image";
 import { Container, Section, SectionHeader } from "@/components/ui";
-import { Gauge, LifeBuoy, Palette, PenLine } from "@/components/ui/icons";
+import Reviews from "./Reviews";
+import WorkRow, { type Work } from "./WorkRow";
 
-const included = [
-  {
-    icon: Palette,
-    title: "Desain UI/UX",
-    desc: "Tampilan modern yang nyaman dipakai, bukan sekadar bagus dilihat.",
-  },
-  {
-    icon: PenLine,
-    title: "Copywriting",
-    desc: "Teks website yang jelas, meyakinkan, dan sesuai karakter brand kamu.",
-  },
-  {
-    icon: Gauge,
-    title: "Optimasi kecepatan",
-    desc: "Ringan dan cepat dibuka, termasuk dari HP dengan sinyal pas-pasan.",
-  },
-  {
-    icon: LifeBuoy,
-    title: "Dukungan setelah tayang",
-    desc: "Bantuan pembaruan konten dan perbaikan kecil setelah website online.",
-  },
-];
+/* Portfolio: an endless marquee of the work, with a row of client quotes beneath it.
 
-const segments = [
-  { title: "Brand baru", desc: "Website pertama yang langsung bikin brand kamu kelihatan meyakinkan." },
-  { title: "Startup", desc: "Cepat dan modern, dieksekusi tanpa drama, siap mendukung pertumbuhan." },
-  { title: "Perusahaan", desc: "Company profile profesional yang mencerminkan kredibilitas bisnis kamu." },
+   TODO: these are example projects, consistent with the Cara Kerja showcase.
+   Replace names, copy and photos with real client work before launch. */
+
+
+const works: Work[] = [
   {
-    title: "Institusi & organisasi",
-    desc: "Rapi dan informatif, memudahkan publik mengakses informasi dan layanan online.",
+    href: "#portfolio",
+    client: "Klinik Senyum",
+    photoWide: "/images/work/w169-klinik.webp",
+    photoSquare: "/images/work/w11-klinik.webp",
+  },
+  {
+    href: "#portfolio",
+    client: "Kopi Sudut",
+    photoWide: "/images/work/w169-kopi.webp",
+    photoSquare: "/images/work/w11-kopi.webp",
+  },
+  {
+    href: "#portfolio",
+    client: "Ruang Asana",
+    photoWide: "/images/work/w169-yoga.webp",
+    photoSquare: "/images/work/w11-yoga.webp",
+  },
+  {
+    href: "#portfolio",
+    client: "Panen Tani",
+    photoWide: "/images/work/w169-tani.webp",
+    photoSquare: "/images/work/w11-tani.webp",
+  },
+  {
+    href: "#portfolio",
+    client: "Rasa Nusantara",
+    photoWide: "/images/work/w169-resto.webp",
+    photoSquare: "/images/work/w11-resto.webp",
   },
 ];
 
 export default function Segments() {
   return (
-    <Section id="layanan" className="bg-surface text-white">
-      <Container>
-        <SectionHeader
-          tone="dark"
-          eyebrow="Layanan"
-          title="Lebih dari sekadar website"
-          description="Apa pun jenis website yang kamu pilih, empat hal ini selalu termasuk supaya website-nya bukan hanya tayang, tapi juga bekerja untuk bisnismu."
-        />
+    /* The clip lives on the background image rather than on the section, so the marquee
+       inside can be wider than the window. With overflow-hidden here the strip was pinned
+       to the viewport and its ends could never move off screen, which is what the fade
+       keys off. The section still hides its own horizontal overflow via the wrapper the
+       strip sits in. */
+    <Section id="layanan" className="relative bg-black text-white">
+      <span className="pointer-events-none absolute inset-0 overflow-hidden">
+        {/* `object-cover` keeps the art's proportions (object-fill would squash it). Anchored
+            top-right, the darkest part of the image, so the heading sits on near-black while the
+            blue glow stays down in the corner. */}
+        <Image src="/images/porto-bg.webp" alt="" fill className="object-cover object-top-right" />
+      </span>
+      <Container className="relative">
+        <SectionHeader tone="dark" title="Karya yang sudah tayang" />
+      </Container>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {included.map(({ icon: Icon, title, desc }) => (
-            <div key={title} className="rounded-2xl bg-elevated p-6">
-              <span className="flex size-10 items-center justify-center rounded-lg bg-white/5 text-white">
-                <Icon className="size-5" />
-              </span>
-              <p className="mt-5 text-[16px] font-medium">{title}</p>
-              <p className="mt-2 text-[14px] leading-[1.6] text-white/70">{desc}</p>
-            </div>
-          ))}
-        </div>
+      {/* The marquee sits outside the Container because it caps and pads itself, so it can
+          line its cards up with the heading while still clipping and fading at that edge. */}
+      <div className="relative mt-12">
+        <WorkRow works={works} />
+      </div>
 
-        <div className="mt-20 grid items-start gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-16 md:mt-24">
-          <div>
-            <h3 className="text-[22px] font-medium leading-[1.3] tracking-[-0.01em] md:text-[24px]">
-              Dibangun untuk berbagai skala bisnis
-            </h3>
-            <p className="mt-3 text-[15px] leading-[1.6] text-white/70">
-              Dari brand yang baru mulai sampai institusi besar. Pendekatannya sama: pahami tujuanmu, lalu bangun
-              website yang mendukungnya.
-            </p>
-          </div>
-          <ul className="grid gap-x-10 gap-y-6 sm:grid-cols-2">
-            {segments.map((s) => (
-              <li key={s.title} className="border-t border-white/10 pt-5">
-                <p className="text-[16px] font-medium">{s.title}</p>
-                <p className="mt-1.5 text-[14px] leading-[1.6] text-white/70">{s.desc}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <Container className="relative mt-16 md:mt-20">
+        <Reviews />
       </Container>
     </Section>
   );
