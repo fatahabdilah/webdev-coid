@@ -87,7 +87,7 @@ export default function Navbar() {
     >
       <Container className="relative flex h-18 items-center justify-between">
         <Link href="/" aria-label="webdev.co.id" className="relative block h-8 w-35.5">
-          {/* Both logos are stacked; the white one fades out and the gradient one fades in
+          {/* Both logos are stacked; the white one fades out and the black one fades in
               as the bar turns white */}
           <Image
             src="/brand/logo-white.svg"
@@ -97,7 +97,7 @@ export default function Navbar() {
             className={`object-contain group-data-scrolled:opacity-0 ${LOGO_FADE}`}
           />
           <Image
-            src="/brand/logo-gradient.svg"
+            src="/brand/logo-ink.svg"
             alt="webdev.co.id"
             fill
             className={`object-contain opacity-0 group-data-scrolled:opacity-100 ${LOGO_FADE}`}
