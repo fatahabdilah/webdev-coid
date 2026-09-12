@@ -60,7 +60,7 @@ export default function Footer() {
                   key={label}
                   href="#"
                   aria-label={label}
-                  className="flex size-10 items-center justify-center rounded-lg bg-elevated text-on-dark-body transition-colors hover:bg-white/10 hover:text-white"
+                  className="flex size-11 items-center justify-center rounded-lg bg-elevated text-on-dark-body transition-colors hover:bg-white/10 hover:text-white"
                 >
                   <Icon className="size-5" />
                 </Link>
@@ -71,10 +71,16 @@ export default function Footer() {
           {columns.map((col) => (
             <div key={col.title}>
               <p className="text-[14px] leading-[1.55] font-medium">{col.title}</p>
-              <ul className="mt-4 flex flex-col gap-3">
+              {/* Roomier rows on phones: as bare inline text these links were 18px tall
+                  and stacked close together, which is a mis-tap waiting to happen. They
+                  tighten back up from md, where there is a pointer. */}
+              <ul className="mt-2 flex flex-col md:mt-4 md:gap-3">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    <Link href={link.href} className="text-[14px] leading-[1.55] text-on-dark-body transition-colors hover:text-white">
+                    <Link
+                      href={link.href}
+                      className="flex min-h-11 items-center text-[14px] leading-[1.55] text-on-dark-body transition-colors hover:text-white md:min-h-0"
+                    >
                       {link.label}
                     </Link>
                   </li>

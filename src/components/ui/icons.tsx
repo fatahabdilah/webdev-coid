@@ -26,4 +26,6 @@ export {
   RiWindowFill as AppWindow,
   RiWhatsappLine as Whatsapp,
   RiArrowRightSLine as ChevronRight,
+  RiMenuLine as Menu,
+  RiCloseLine as Close,
 } from "@remixicon/react";

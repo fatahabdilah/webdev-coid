@@ -62,7 +62,9 @@ export default function ExtraCards() {
           <span className="relative flex items-start">
             <Icon className="size-6 text-primary" />
           </span>
-          <span className="relative mt-6 block max-w-[62%]">
+          {/* The 62% clearance is for the preview screen, which only exists from sm up;
+              below that the text has the card to itself. */}
+          <span className="relative mt-6 block sm:max-w-[62%]">
             <span className="block text-[18px] leading-[1.5] font-medium text-ink">{title}</span>
             <span className="mt-1 block text-[14px] leading-[1.55] text-body">{desc}</span>
           </span>

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Container } from "@/components/ui";
-import { Whatsapp } from "@/components/ui/icons";
+import { Close, Menu, Whatsapp } from "@/components/ui/icons";
 
 const menu = [
   { label: "Beranda", href: "#" },
@@ -80,6 +80,21 @@ const CTA_SHIFT = "translate-x-0 group-data-scrolled:-translate-x-2";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  /* The sheet is the page's only scrollable thing while it is open, and Escape closes it. */
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
 
   useEffect(() => {
     let raf = 0;
@@ -140,14 +155,80 @@ export default function Navbar() {
           ))}
         </nav>
 
+        {/* Below md the CTA gives way to the menu button: at 390px the two together left
+            the logo no room, and the same action waits inside the sheet anyway. */}
         <Link
           href="#konsultasi"
-          className={`border-gradient-accent relative inline-flex h-10 items-center gap-2 rounded-full px-4 text-[14px] leading-[1.55] font-medium text-white hover:bg-white/10 group-data-scrolled:text-ink group-data-scrolled:hover:bg-ink/5 ${CTA_TRANSITION} ${CTA_SHIFT}`}
+          className={`border-gradient-accent relative hidden h-10 items-center gap-2 rounded-full px-4 text-[14px] leading-[1.55] font-medium text-white hover:bg-white/10 group-data-scrolled:text-ink group-data-scrolled:hover:bg-ink/5 md:inline-flex ${CTA_TRANSITION} ${CTA_SHIFT}`}
+        >
+          <Whatsapp className="size-5" />
+          Konsultasi Gratis
+        </Link>
+
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          aria-label="Buka menu"
+          aria-expanded={open}
+          className={`relative -mr-2 inline-flex size-11 items-center justify-center rounded-full md:hidden ${INK_WHEN_SCROLLED}`}
+        >
+          <Menu className="size-6" />
+        </button>
+      </Container>
+
+      <MobileSheet open={open} onClose={() => setOpen(false)} />
+    </header>
+  );
+}
+
+/* Full-screen menu for phones. Navy rather than glass: it covers the page outright, so
+   there is nothing behind it worth blurring, and navy keeps it unmistakably ours.
+   Links are 48px tall — the bare text in the footer measured 18px, which is a miss
+   waiting to happen on a touch screen. */
+function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
+  return (
+    <div
+      /* Kept mounted so it can animate both ways; inert to pointer and keyboard when shut. */
+      className={`fixed inset-0 z-50 bg-navy transition-opacity duration-300 ease-out md:hidden motion-reduce:transition-none ${
+        open ? "opacity-100" : "pointer-events-none opacity-0"
+      }`}
+      aria-hidden={!open}
+    >
+      <Container className="flex h-18 items-center justify-between">
+        <span className="relative block h-8 w-35.5">
+          <Image src="/brand/logo-white.svg" alt="webdev.co.id" fill className="object-contain" />
+        </span>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Tutup menu"
+          className="-mr-2 inline-flex size-11 items-center justify-center rounded-full text-white"
+        >
+          <Close className="size-6" />
+        </button>
+      </Container>
+
+      <Container className="mt-4 flex flex-col">
+        {menu.map((item) => (
+          <Link
+            key={item.label}
+            href={item.href}
+            onClick={onClose}
+            className="flex h-12 items-center border-b border-white/10 text-[18px] leading-[1.5] text-white"
+          >
+            {item.label}
+          </Link>
+        ))}
+
+        <Link
+          href="#konsultasi"
+          onClick={onClose}
+          className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white text-[16px] leading-[1.6] font-semibold text-navy"
         >
           <Whatsapp className="size-5" />
           Konsultasi Gratis
         </Link>
       </Container>
-    </header>
+    </div>
   );
 }

@@ -24,8 +24,11 @@ export default function HeroShowcase() {
             type="button"
             onClick={() => setActive(i)}
             aria-pressed={isActive}
+            /* The active card takes far more of the row on phones: sharing 342px four ways
+               left the resting cards 59px wide, too narrow to show anything of the site
+               inside them. From md there is room for the gentler 2.2 ratio. */
             className={`group relative h-56 min-w-0 cursor-pointer rounded-2xl text-left transition-[flex-grow] duration-500 ease-out md:h-80 ${
-              isActive ? "grow-[2.2]" : "grow hover:grow-[1.25]"
+              isActive ? "grow-3 md:grow-[2.2]" : "grow hover:grow-[1.25]"
             }`}
           >
             {/* Glass frame sits outside the card, 10px on every side */}
