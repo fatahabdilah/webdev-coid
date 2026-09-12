@@ -7,7 +7,9 @@ import { Container } from "@/components/ui";
 import { Close, Menu, Whatsapp } from "@/components/ui/icons";
 
 const menu = [
-  { label: "Beranda", href: "/" },
+  /* An anchor, not "/": clicking Beranda should glide back to the top like the other
+     items do, not reload the page. */
+  { label: "Beranda", href: "#beranda" },
   { label: "Layanan", href: "#layanan" },
   { label: "Portfolio", href: "#portfolio" },
   { label: "Harga", href: "#harga" },

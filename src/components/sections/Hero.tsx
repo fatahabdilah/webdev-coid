@@ -5,7 +5,9 @@ import HeroShowcase from "./HeroShowcase";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-navy text-white">
+    /* id so the navbar's "Beranda" can scroll here like every other menu item, rather
+       than navigating to "/" and reloading the page. */
+    <section id="beranda" className="relative overflow-hidden bg-navy text-white">
       <Image
         src="/images/hero-bg.jpg"
         alt=""
