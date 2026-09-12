@@ -36,15 +36,15 @@ const contacts = [
 
 export default function Footer() {
   return (
-    <footer className="bg-surface text-white">
+    <footer className="bg-white text-ink">
       <Container className="py-14">
         <div className="grid gap-10 md:grid-cols-[1.6fr_1fr_1fr]">
           <div className="max-w-[320px]">
             <Link href="/" aria-label="webdev.co.id" className="relative block h-8 w-38.75">
-              <Image src="/brand/logo-white.svg" alt="webdev.co.id" fill className="object-contain object-left" />
+              <Image src="/brand/logo-ink.svg" alt="webdev.co.id" fill className="object-contain object-left" />
             </Link>
             <p className="mt-5 text-[16px] leading-[1.6] font-medium">Agency lokal, standar global.</p>
-            <p className="mt-2 text-[14px] leading-[1.55] text-on-dark-body">
+            <p className="mt-2 text-[14px] leading-[1.55] text-body">
               Agensi web development di Indonesia. Kami bantu brand baru, startup, perusahaan, dan institusi
               tampil profesional secara online.
             </p>
@@ -64,30 +64,33 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Only the rows whose destination exists: a contact that looks tappable and
-              goes nowhere is worse than one that is simply not listed yet. */}
-          {contacts.some((c) => c.href) && (
-            <div>
-              <p className="text-[14px] leading-[1.55] font-medium">Hubungi</p>
-              <ul className="mt-2 flex flex-col md:mt-4 md:gap-3">
-                {contacts
-                  .filter((c) => c.href)
-                  .map(({ label, icon: Icon, href }) => (
-                    <li key={label}>
-                      <FooterLink href={href}>
-                        <Icon className="size-4 shrink-0" />
-                        {label}
-                      </FooterLink>
-                    </li>
-                  ))}
-              </ul>
-            </div>
-          )}
+          <div>
+            <p className="text-[14px] leading-[1.55] font-medium">Hubungi</p>
+            <ul className="mt-2 flex flex-col md:mt-4 md:gap-3">
+              {contacts.map(({ label, icon: Icon, href }) => (
+                <li key={label}>
+                  {href ? (
+                    <FooterLink href={href}>
+                      <Icon className="size-4 shrink-0" />
+                      {label}
+                    </FooterLink>
+                  ) : (
+                    /* No destination yet. Shown, but dimmed and inert, so the column does
+                       not silently vanish and it stays obvious what is still missing. */
+                    <span className="flex min-h-11 items-center gap-2 text-[14px] leading-[1.55] text-muted md:min-h-0">
+                      <Icon className="size-4 shrink-0" />
+                      {label}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         {/* The second line here used to restate the tagline sitting a few rows above it,
             so only the copyright remains. */}
-        <div className="mt-12 border-t border-white/10 pt-6 text-[14px] leading-[1.55] text-on-dark-muted">
+        <div className="mt-12 border-t border-line pt-6 text-[14px] leading-[1.55] text-muted">
           <p>© 2026 webdev.co.id. Semua hak dilindungi.</p>
         </div>
       </Container>
@@ -103,7 +106,7 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
   const newTab = href.startsWith("http");
   const sameTabExternal = href.startsWith("mailto:");
   const className =
-    "flex min-h-11 items-center gap-2 text-[14px] leading-[1.55] text-on-dark-body transition-colors duration-200 hover:text-white md:min-h-0";
+    "flex min-h-11 items-center gap-2 text-[14px] leading-[1.55] text-body transition-colors duration-200 hover:text-ink md:min-h-0";
 
   if (newTab || sameTabExternal) {
     return (
