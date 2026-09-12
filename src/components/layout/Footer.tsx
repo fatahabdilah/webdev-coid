@@ -38,18 +38,26 @@ export default function Footer() {
   return (
     <footer className="border-t border-line bg-white text-ink">
       <Container className="py-10">
-        {/* One band rather than a block of columns: the page has already made its case by
-            here, so the footer only has to sign off and stay reachable. Everything sits on
+        {/* One band rather than a block of columns: the CTA section above already makes
+            the argument, so the footer signs off and stays reachable. Everything sits on
             one line from lg, and stacks in reading order below that. */}
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
-          <Link href="#beranda" aria-label="webdev.co.id" className="relative block h-7 w-33.5 shrink-0">
-            <Image src="/brand/logo-ink.svg" alt="webdev.co.id" fill className="object-contain object-left" />
-          </Link>
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
+          {/* The description rides with the wordmark rather than sitting in its own block:
+              it says who we are, which belongs next to the name, not above the nav. */}
+          <div className="max-w-[340px] shrink-0">
+            <Link href="#beranda" aria-label="webdev.co.id" className="relative block h-7 w-33.5">
+              <Image src="/brand/logo-ink.svg" alt="webdev.co.id" fill className="object-contain object-left" />
+            </Link>
+            <p className="mt-4 text-[14px] leading-[1.55] text-body">
+              Agensi web development di Indonesia. Kami bantu brand baru, startup, perusahaan, dan institusi
+              tampil profesional secara online.
+            </p>
+          </div>
 
           {/* Roomier rows on phones: as bare inline text these links were 18px tall and
               stacked close together, which is a mis-tap waiting to happen. They tighten
               back up from lg, where there is a pointer and they sit on one line. */}
-          <ul className="flex flex-col lg:flex-row lg:items-center lg:gap-8">
+          <ul className="flex flex-col lg:flex-row lg:items-center lg:gap-8 lg:pt-1">
             {links.map((link) => (
               <li key={link.label}>
                 <FooterLink href={link.href}>{link.label}</FooterLink>
