@@ -15,7 +15,7 @@ export default function HeroShowcase() {
   const [active, setActive] = useState(0);
 
   return (
-    <div id="portfolio" className="mt-14 flex w-full gap-3 md:mt-16 md:gap-4">
+    <div className="mt-14 flex w-full gap-3 md:mt-16 md:gap-4">
       {items.map((item, i) => {
         const isActive = i === active;
         return (
@@ -54,8 +54,10 @@ export default function HeroShowcase() {
                 } ${item.tint ? "img-brand-tint" : ""}`}
               />
               <span
+                /* Also shown on hover, not only when active: without it there is no way to
+                   tell what a resting card is before committing to a click. */
                 className={`absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/50 py-1 pl-2.5 pr-3 text-[12px] leading-[1.45] font-medium text-ink backdrop-blur-md transition-opacity duration-300 ${
-                  isActive ? "opacity-100" : "opacity-0"
+                  isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                 }`}
               >
                 <item.icon className="size-3.5" />

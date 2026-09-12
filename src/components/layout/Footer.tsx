@@ -28,9 +28,9 @@ const columns: { title: string; links: { label: string; href: string }[] }[] = [
     links: [
       { label: "Portfolio", href: "#portfolio" },
       { label: "Cara Kerja", href: "#cara-kerja" },
-      /* The old #komitmen section is gone; "Yang selalu kamu dapat" in #jenis-website
+      /* The old #komitmen section is gone; "Yang selalu kamu dapat" inside #layanan
          carries the same service promises, so the label still tells the truth. */
-      { label: "Yang Kamu Dapat", href: "#jenis-website" },
+      { label: "Yang Kamu Dapat", href: "#layanan" },
       { label: "Harga", href: "#harga" },
     ],
   },

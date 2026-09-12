@@ -196,7 +196,10 @@ function CallToAction({ sites }: { sites: Site[] }) {
         className="group flex items-center justify-between gap-6 border-y border-line py-4 text-[16px] leading-[1.6] font-medium text-ink transition-colors duration-200 hover:text-primary"
       >
         Konsultasi gratis lewat WhatsApp
-        <ArrowRight className="size-4 shrink-0 text-primary transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1" />
+        {/* transition-[translate], not transition-transform: Tailwind 4 sets translate-x
+            through the `translate` property, which transition-transform does not watch,
+            so the arrow used to jump straight to its hover position. */}
+        <ArrowRight className="size-4 shrink-0 text-primary transition-[translate] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1" />
       </Link>
 
       {/* Faces of clients whose sites are in the stack, then the proof line */}

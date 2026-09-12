@@ -49,7 +49,7 @@ export default function ExtraCards() {
           <span aria-hidden className="pointer-events-none absolute inset-0 hidden overflow-hidden rounded-2xl sm:block">
             {/* Parked below the card, sliding up when this card is the one shown */}
             <span
-              className={`absolute -right-6 top-full block w-60 rotate-[-8deg] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
+              className={`absolute -right-6 top-full block w-60 rotate-[-8deg] transition-[translate] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
                 shown === i ? "-translate-y-[calc(100%-0.5rem)]" : "translate-y-6"
               }`}
             >

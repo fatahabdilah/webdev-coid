@@ -49,7 +49,7 @@ export default function Segments() {
        to the viewport and its ends could never move off screen, which is what the fade
        keys off. The section still hides its own horizontal overflow via the wrapper the
        strip sits in. */
-    <Section id="layanan" className="relative bg-black text-white">
+    <Section id="portfolio" className="relative bg-black text-white">
       <span className="pointer-events-none absolute inset-0 overflow-hidden">
         {/* `object-cover` keeps the art's proportions (object-fill would squash it). Anchored
             top-right, the darkest part of the image, so the heading sits on near-black while the

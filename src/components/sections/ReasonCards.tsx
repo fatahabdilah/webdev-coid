@@ -48,7 +48,7 @@ export default function ReasonCards({ reasons }: { reasons: Reason[] }) {
             <span className="mt-4 block text-[16px] leading-[1.6] text-ink">{title}</span>
             {/* Held back until the card is active. Always shown below lg, where there is no hover. */}
             <span
-              className={`mt-1 block text-[14px] leading-[1.55] text-body transition-[opacity,transform] duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] lg:truncate ${
+              className={`mt-1 block text-[14px] leading-[1.55] text-body transition-[opacity,translate] duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] lg:truncate ${
                 isActive ? "lg:translate-y-0 lg:opacity-100" : "lg:translate-y-1 lg:opacity-0"
               }`}
             >

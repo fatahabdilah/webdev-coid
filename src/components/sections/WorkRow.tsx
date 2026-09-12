@@ -148,7 +148,7 @@ function Card({
         className="absolute inset-0 bg-linear-to-t from-black/85 via-black/25 to-black/10 transition-colors duration-200 group-hover/card:via-black/15 group-hover/card:to-transparent"
       />
 
-      <ArrowUpRight className="absolute right-4 top-4 size-5 translate-y-1 text-white opacity-0 transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/card:translate-y-0 group-hover/card:opacity-100 motion-reduce:transition-none" />
+      <ArrowUpRight className="absolute right-4 top-4 size-5 translate-y-1 text-white opacity-0 transition-[opacity,translate] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/card:translate-y-0 group-hover/card:opacity-100 motion-reduce:transition-none" />
 
       <span className="absolute inset-x-4 bottom-4 block text-[16px] leading-[1.6] font-medium text-white">
         {work.client}
