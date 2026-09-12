@@ -36,69 +36,54 @@ const contacts = [
 
 export default function Footer() {
   return (
-    <footer className="bg-white text-ink">
-      <Container className="py-14">
-        {/* Contact leads, navigation follows. Someone who scrolls this far is usually
-            looking for a way to get in touch, not for a link back up the page. */}
-        <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
-          <div className="max-w-[420px]">
-            <p className="text-[24px] font-medium leading-[1.3] tracking-[-0.02em] text-balance">
-              Agency lokal, standar global.
-            </p>
-            <p className="mt-3 text-[16px] leading-[1.6] text-body">
-              Punya rencana website? Ceritakan saja, kami bantu dari awal.
-            </p>
-
-            <ul className="mt-6 flex flex-wrap gap-x-3 gap-y-2">
-              {contacts.map(({ label, icon: Icon, href }) =>
-                href ? (
-                  <li key={label}>
-                    <ContactPill href={href}>
-                      <Icon className="size-4 shrink-0" />
-                      {label}
-                    </ContactPill>
-                  </li>
-                ) : (
-                  /* No destination yet. Shown, but plainly inert, so the row does not
-                     silently vanish and it stays obvious what is still missing. */
-                  <li
-                    key={label}
-                    className="inline-flex min-h-11 items-center gap-2 rounded-full border border-line px-4 text-[14px] leading-[1.55] text-muted md:min-h-0 md:py-2"
-                  >
-                    <Icon className="size-4 shrink-0" />
-                    {label}
-                  </li>
-                ),
-              )}
-            </ul>
-          </div>
+    <footer className="border-t border-line bg-white text-ink">
+      <Container className="py-10">
+        {/* One band rather than a block of columns: the page has already made its case by
+            here, so the footer only has to sign off and stay reachable. Everything sits on
+            one line from lg, and stacks in reading order below that. */}
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+          <Link href="#beranda" aria-label="webdev.co.id" className="relative block h-7 w-33.5 shrink-0">
+            <Image src="/brand/logo-ink.svg" alt="webdev.co.id" fill className="object-contain object-left" />
+          </Link>
 
           {/* Roomier rows on phones: as bare inline text these links were 18px tall and
               stacked close together, which is a mis-tap waiting to happen. They tighten
-              back up from md, where there is a pointer. */}
-          <ul className="flex flex-col md:items-end md:gap-2">
+              back up from lg, where there is a pointer and they sit on one line. */}
+          <ul className="flex flex-col lg:flex-row lg:items-center lg:gap-8">
             {links.map((link) => (
               <li key={link.label}>
                 <FooterLink href={link.href}>{link.label}</FooterLink>
               </li>
             ))}
           </ul>
+
+          <ul className="flex flex-wrap gap-x-3 gap-y-2 lg:shrink-0 lg:justify-end">
+            {contacts.map(({ label, icon: Icon, href }) =>
+              href ? (
+                <li key={label}>
+                  <ContactPill href={href}>
+                    <Icon className="size-4 shrink-0" />
+                    {label}
+                  </ContactPill>
+                </li>
+              ) : (
+                /* No destination yet. Shown, but plainly inert, so the row does not
+                   silently vanish and it stays obvious what is still missing. */
+                <li
+                  key={label}
+                  className="inline-flex min-h-11 items-center gap-2 rounded-full border border-line px-4 text-[14px] leading-[1.55] text-muted lg:min-h-0 lg:py-2"
+                >
+                  <Icon className="size-4 shrink-0" />
+                  {label}
+                </li>
+              ),
+            )}
+          </ul>
         </div>
 
-        {/* The wordmark closes the page rather than opening the footer. Kept to a third
-            of the width: at full bleed it shouted instead of signing off. */}
-        <div className="mt-14 flex flex-col gap-6 border-t border-line pt-8 md:flex-row md:items-end md:justify-between">
-          <Link href="#beranda" aria-label="webdev.co.id" className="block w-full max-w-[220px] md:max-w-[320px]">
-            <Image
-              src="/brand/logo-ink.svg"
-              alt="webdev.co.id"
-              width={611}
-              height={126}
-              className="h-auto w-full"
-            />
-          </Link>
-          <p className="text-[14px] leading-[1.55] text-muted">© 2026 webdev.co.id. Semua hak dilindungi.</p>
-        </div>
+        <p className="mt-8 border-t border-line pt-6 text-[14px] leading-[1.55] text-muted">
+          © 2026 webdev.co.id. Semua hak dilindungi.
+        </p>
       </Container>
     </footer>
   );
