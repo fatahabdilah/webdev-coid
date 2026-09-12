@@ -38,63 +38,84 @@ export default function Footer() {
   return (
     <footer className="bg-white text-ink">
       <Container className="py-14">
-        <div className="grid gap-10 md:grid-cols-[1.6fr_1fr_1fr]">
-          <div className="max-w-[320px]">
-            <Link href="/" aria-label="webdev.co.id" className="relative block h-8 w-38.75">
-              <Image src="/brand/logo-ink.svg" alt="webdev.co.id" fill className="object-contain object-left" />
-            </Link>
-            <p className="mt-5 text-[16px] leading-[1.6] font-medium">Agency lokal, standar global.</p>
-            <p className="mt-2 text-[14px] leading-[1.55] text-body">
-              Agensi web development di Indonesia. Kami bantu brand baru, startup, perusahaan, dan institusi
-              tampil profesional secara online.
+        {/* Contact leads, navigation follows. Someone who scrolls this far is usually
+            looking for a way to get in touch, not for a link back up the page. */}
+        <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+          <div className="max-w-[420px]">
+            <p className="text-[24px] font-medium leading-[1.3] tracking-[-0.02em] text-balance">
+              Agency lokal, standar global.
             </p>
-          </div>
+            <p className="mt-3 text-[16px] leading-[1.6] text-body">
+              Punya rencana website? Ceritakan saja, kami bantu dari awal.
+            </p>
 
-          <div>
-            <p className="text-[14px] leading-[1.55] font-medium">Jelajahi</p>
-            {/* Roomier rows on phones: as bare inline text these links were 18px tall and
-                stacked close together, which is a mis-tap waiting to happen. They tighten
-                back up from md, where there is a pointer. */}
-            <ul className="mt-2 flex flex-col md:mt-4 md:gap-3">
-              {links.map((link) => (
-                <li key={link.label}>
-                  <FooterLink href={link.href}>{link.label}</FooterLink>
-                </li>
-              ))}
+            <ul className="mt-6 flex flex-wrap gap-x-3 gap-y-2">
+              {contacts.map(({ label, icon: Icon, href }) =>
+                href ? (
+                  <li key={label}>
+                    <ContactPill href={href}>
+                      <Icon className="size-4 shrink-0" />
+                      {label}
+                    </ContactPill>
+                  </li>
+                ) : (
+                  /* No destination yet. Shown, but plainly inert, so the row does not
+                     silently vanish and it stays obvious what is still missing. */
+                  <li
+                    key={label}
+                    className="inline-flex min-h-11 items-center gap-2 rounded-full border border-line px-4 text-[14px] leading-[1.55] text-muted md:min-h-0 md:py-2"
+                  >
+                    <Icon className="size-4 shrink-0" />
+                    {label}
+                  </li>
+                ),
+              )}
             </ul>
           </div>
 
-          <div>
-            <p className="text-[14px] leading-[1.55] font-medium">Hubungi</p>
-            <ul className="mt-2 flex flex-col md:mt-4 md:gap-3">
-              {contacts.map(({ label, icon: Icon, href }) => (
-                <li key={label}>
-                  {href ? (
-                    <FooterLink href={href}>
-                      <Icon className="size-4 shrink-0" />
-                      {label}
-                    </FooterLink>
-                  ) : (
-                    /* No destination yet. Shown, but dimmed and inert, so the column does
-                       not silently vanish and it stays obvious what is still missing. */
-                    <span className="flex min-h-11 items-center gap-2 text-[14px] leading-[1.55] text-muted md:min-h-0">
-                      <Icon className="size-4 shrink-0" />
-                      {label}
-                    </span>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Roomier rows on phones: as bare inline text these links were 18px tall and
+              stacked close together, which is a mis-tap waiting to happen. They tighten
+              back up from md, where there is a pointer. */}
+          <ul className="flex flex-col md:items-end md:gap-2">
+            {links.map((link) => (
+              <li key={link.label}>
+                <FooterLink href={link.href}>{link.label}</FooterLink>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* The second line here used to restate the tagline sitting a few rows above it,
-            so only the copyright remains. */}
-        <div className="mt-12 border-t border-line pt-6 text-[14px] leading-[1.55] text-muted">
-          <p>© 2026 webdev.co.id. Semua hak dilindungi.</p>
+        {/* The wordmark closes the page rather than opening the footer. Kept to a third
+            of the width: at full bleed it shouted instead of signing off. */}
+        <div className="mt-14 flex flex-col gap-6 border-t border-line pt-8 md:flex-row md:items-end md:justify-between">
+          <Link href="#beranda" aria-label="webdev.co.id" className="block w-full max-w-[220px] md:max-w-[320px]">
+            <Image
+              src="/brand/logo-ink.svg"
+              alt="webdev.co.id"
+              width={611}
+              height={126}
+              className="h-auto w-full"
+            />
+          </Link>
+          <p className="text-[14px] leading-[1.55] text-muted">© 2026 webdev.co.id. Semua hak dilindungi.</p>
         </div>
       </Container>
     </footer>
+  );
+}
+
+/* A contact as a pill rather than a list row: there are only ever a few, and set side by
+   side they read as the one thing to act on instead of a second column of links. */
+function ContactPill({ href, children }: { href: string; children: React.ReactNode }) {
+  const newTab = href.startsWith("http");
+  return (
+    <a
+      href={href}
+      className="inline-flex min-h-11 items-center gap-2 rounded-full border border-line px-4 text-[14px] leading-[1.55] text-ink transition-colors duration-200 hover:border-ink hover:bg-offwhite md:min-h-0 md:py-2"
+      {...(newTab && { target: "_blank", rel: "noreferrer" })}
+    >
+      {children}
+    </a>
   );
 }
 
