@@ -28,4 +28,9 @@ export {
   RiArrowRightSLine as ChevronRight,
   RiMenuLine as Menu,
   RiCloseLine as Close,
+  /* Line variants. The set is Fill by default, which suits small icons on dark grounds
+     (the 16px shield in the hero). At 24px on a pale card the solid shapes read heavy,
+     so the two secondary cards use these instead. */
+  RiPencilLine as PenLineOutline,
+  RiShieldCheckLine as ShieldCheckOutline,
 } from "@remixicon/react";

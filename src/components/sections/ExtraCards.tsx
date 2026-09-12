@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { PenLine, ShieldCheck } from "@/components/ui/icons";
+import { PenLineOutline, ShieldCheckOutline } from "@/components/ui/icons";
 
 /* The two secondary cards. Exactly one preview is up at a time: the first card's
    preview rests up by default, and hovering the other card hands it over.
@@ -14,14 +14,14 @@ import { PenLine, ShieldCheck } from "@/components/ui/icons";
 const extras = [
   {
     href: "#konsultasi",
-    icon: PenLine,
+    icon: PenLineOutline,
     title: "Sudah punya website?",
     desc: "Kami bantu perbarui tampilan atau perbaiki yang bermasalah.",
     preview: "/images/types/preview-redesign.webp",
   },
   {
     href: "#konsultasi",
-    icon: ShieldCheck,
+    icon: ShieldCheckOutline,
     title: "Perlu dirawat rutin?",
     desc: "Pembaruan konten, backup, dan pemantauan tiap bulan.",
     preview: "/images/types/preview-maintenance.webp",
