@@ -143,7 +143,6 @@ export default function Pricing() {
     <Section id="harga" className="bg-offwhite">
       <Container>
         <SectionHeader
-          eyebrow="Harga"
           title="Website untuk segala bisnis"
           description="Pilih yang paling dekat dengan kebutuhanmu. Semua harga sudah termasuk domain dan hosting tahun pertama."
         />
