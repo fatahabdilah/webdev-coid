@@ -1,5 +1,6 @@
 import { Button, Container, Section, SectionHeader } from "@/components/ui";
 import { Check, Minus } from "@/components/ui/icons";
+import { waLink } from "@/lib/contact";
 
 type Feature = { text: string; included: boolean };
 
@@ -109,7 +110,7 @@ function TierCard({ tier }: { tier: Tier }) {
       </div>
       <p className={`mt-3 text-[14px] leading-[1.55] ${dark ? "text-on-dark-muted" : "text-muted"}`}>{tier.note}</p>
 
-      <Button href="#konsultasi" variant={dark ? "primary" : "secondary"} className="mt-6 w-full">
+      <Button href={waLink(`Halo, saya tertarik dengan ${tier.name}.`)} variant={dark ? "primary" : "secondary"} className="mt-6 w-full">
         {tier.cta}
       </Button>
 

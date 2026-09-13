@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Container } from "@/components/ui";
 import { Close, Menu, Whatsapp } from "@/components/ui/icons";
+import { waLink } from "@/lib/contact";
 
 const menu = [
   /* An anchor, not "/": clicking Beranda should glide back to the top like the other
@@ -181,7 +182,7 @@ function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) 
         ))}
 
         <Link
-          href="#konsultasi"
+          href={waLink("Halo, saya mau konsultasi soal website.")}
           onClick={onClose}
           className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white text-[16px] leading-[1.6] font-semibold text-navy transition-[scale] duration-200 ease-out active:scale-[0.97]"
         >

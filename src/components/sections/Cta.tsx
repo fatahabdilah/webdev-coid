@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button, Container, Section } from "@/components/ui";
 import { ChevronRight, Globe, Whatsapp } from "@/components/ui/icons";
+import { waLink } from "@/lib/contact";
 
 export default function Cta() {
   return (
@@ -34,7 +35,7 @@ export default function Cta() {
             Konsultasi gratis dulu. Kami bantu tentukan jenis website yang paling pas untuk bisnis kamu, tanpa
             komitmen.
           </p>
-          <Button href="#konsultasi" variant="white" className="mt-8">
+          <Button href={waLink("Halo, saya mau konsultasi soal website.")} variant="white" className="mt-8">
             <Whatsapp className="size-5" />
             Konsultasi Gratis
           </Button>

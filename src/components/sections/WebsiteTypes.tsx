@@ -16,25 +16,21 @@ import ReasonCards, { type Reason } from "./ReasonCards";
 
 const reasons: Reason[] = [
   {
-    href: "#harga",
     photo: "/images/types/work-klinik.webp",
     title: "Dirancang khusus",
     desc: "Bukan template.",
   },
   {
-    href: "#harga",
     photo: "/images/types/work-studio.webp",
     title: "Satu pintu",
     desc: "Domain, hosting, maintenance, kami urus.",
   },
   {
-    href: "#harga",
     photo: "/images/types/work-kopi.webp",
     title: "Harga jelas di awal",
     desc: "Tanpa biaya tersembunyi.",
   },
   {
-    href: "#konsultasi",
     photo: "/images/types/work-yoga.webp",
     title: "Klien langsung terhubung",
     desc: "Masuk ke WhatsApp dan email.",

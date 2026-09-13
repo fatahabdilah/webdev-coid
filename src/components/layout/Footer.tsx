@@ -1,21 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui";
+import { EMAIL, INSTAGRAM, WHATSAPP } from "@/lib/contact";
 import { Instagram, Mail, Whatsapp } from "@/components/ui/icons";
-
-/* Off-site destinations in one place, so a change lands everywhere at once.
-
-   TODO: fill these in before launch. They are deliberately left empty rather than
-   guessed: a made-up handle, number or address renders as a working link and would ship
-   unnoticed, while an empty one is visibly unfinished. Each row below is only rendered
-   once its destination exists, so nothing pretends to be clickable.
-
-   WHATSAPP is the number in international form without "+" or spaces (e.g. 6281234567890);
-   it is also what every "Konsultasi Gratis" button on the page should eventually point at,
-   instead of the #konsultasi anchor they use now. */
-const WHATSAPP = "";
-const EMAIL = "";
-const INSTAGRAM = "";
 
 /* The same four destinations as the navbar, in the same order, so the two agree on what
    the site is made of. Keep this list in step with `menu` in Navbar.tsx. */

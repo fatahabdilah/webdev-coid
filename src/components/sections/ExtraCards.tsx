@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { PenLineOutline, ShieldCheckOutline } from "@/components/ui/icons";
+import { waLink } from "@/lib/contact";
 
 /* The two secondary cards. Exactly one preview is up at a time: the first card's
    preview rests up by default, and hovering the other card hands it over.
@@ -13,14 +14,14 @@ import { PenLineOutline, ShieldCheckOutline } from "@/components/ui/icons";
 
 const extras = [
   {
-    href: "#konsultasi",
+    href: waLink("Halo, saya sudah punya website dan mau diperbarui."),
     icon: PenLineOutline,
     title: "Sudah punya website?",
     desc: "Kami bantu perbarui tampilan atau perbaiki yang bermasalah.",
     preview: "/images/types/preview-redesign.webp",
   },
   {
-    href: "#konsultasi",
+    href: waLink("Halo, saya mau tanya soal perawatan website rutin."),
     icon: ShieldCheckOutline,
     title: "Perlu dirawat rutin?",
     desc: "Pembaruan konten, backup, dan pemantauan tiap bulan.",
