@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Container } from "@/components/ui";
 import { Close, Menu, Whatsapp } from "@/components/ui/icons";
+import AskAi from "./AskAi";
 
 const menu = [
   /* An anchor, not "/": clicking Beranda should glide back to the top like the other
@@ -125,15 +126,9 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Below md the CTA gives way to the menu button: at 390px the two together left
-            the logo no room, and the same action waits inside the sheet anyway. */}
-        <Link
-          href="#konsultasi"
-          className={`border-gradient-accent relative hidden h-10 items-center gap-2 rounded-full px-4 text-[14px] leading-[1.55] font-medium text-white transition-colors duration-250 ease-out hover:bg-white/10 group-data-scrolled:text-ink group-data-scrolled:hover:bg-ink/5 md:inline-flex motion-reduce:transition-none`}
-        >
-          <Whatsapp className="size-5" />
-          Konsultasi Gratis
-        </Link>
+        {/* Below md this gives way to the menu button: at 390px the two together left the
+            logo no room, and the sheet carries the WhatsApp action instead. */}
+        <AskAi />
 
         <button
           type="button"

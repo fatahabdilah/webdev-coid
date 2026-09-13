@@ -28,6 +28,8 @@ export {
   RiWindowFill as AppWindow,
   RiWhatsappLine as Whatsapp,
   RiArrowRightSLine as ChevronRight,
+  RiSparkling2Fill as Sparkle,
+  RiArrowUpLine as ArrowUp,
   RiMenuLine as Menu,
   RiCloseLine as Close,
   /* Line variants. The set is Fill by default, which suits small icons on dark grounds
