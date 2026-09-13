@@ -9,7 +9,17 @@ export default function Cta() {
     <Section id="konsultasi" className="relative overflow-hidden bg-navy text-white">
       {/* Anchored bottom: the dark half of the art sits behind the heading while the blue
           glow gathers under the button. */}
-      <Image src="/images/cta-bg.webp" alt="" fill priority={false} className="pointer-events-none object-cover object-bottom" />
+      {/* The art is a smooth gradient, which is exactly what shows banding when stretched.
+          It is stored at 1600px with fine dither baked in; `sizes` keeps the browser from
+          picking a small variant and re-introducing the steps. */}
+      <Image
+        src="/images/cta-bg.webp"
+        alt=""
+        fill
+        sizes="100vw"
+        quality={95}
+        className="pointer-events-none object-cover object-bottom"
+      />
       <Container className="relative flex flex-col items-center text-center">
         <h2 className="max-w-[680px] text-[26px] font-medium leading-[1.25] tracking-[-0.03em] md:text-[30px]">
           Sudah kebayang websitenya?
