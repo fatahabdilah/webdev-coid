@@ -10,10 +10,6 @@ export default function Cta() {
       {/* Anchored bottom: the dark half of the art sits behind the heading while the blue
           glow gathers under the button. */}
       <Image src="/images/cta-bg.webp" alt="" fill priority={false} className="pointer-events-none object-cover object-bottom" />
-      {/* A light touch of navy where the copy sits. Measured: at .45/.30 it took about a
-          quarter of the blue out of the top half, which is too much for art chosen for its
-          colour; this costs roughly half that and still holds the text clear. */}
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,20,45,.22),rgba(0,20,45,.15)_55%,transparent)]" />
       <Container className="relative flex flex-col items-center text-center">
         <h2 className="max-w-[680px] text-[26px] font-medium leading-[1.25] tracking-[-0.03em] md:text-[30px]">
           Sudah kebayang websitenya?
