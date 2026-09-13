@@ -109,11 +109,7 @@ export default function Navbar() {
           />
         </Link>
 
-        {/* Centred on the bar rather than pushed right: with the CTA gone there are only
-            two items left, and justify-between would sling the menu against the edge. */}
-        <nav
-          className={`absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 text-[14px] leading-[1.55] md:flex ${INK_WHEN_SCROLLED}`}
-        >
+        <nav className={`relative hidden items-center gap-8 text-[14px] leading-[1.55] md:flex ${INK_WHEN_SCROLLED}`}>
           {menu.map((item) => (
             <Link
               key={item.label}
