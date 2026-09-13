@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Container } from "@/components/ui";
 import { Close, Menu, Whatsapp } from "@/components/ui/icons";
-import AskAi from "./AskAi";
 
 const menu = [
   /* An anchor, not "/": clicking Beranda should glide back to the top like the other
@@ -110,7 +109,11 @@ export default function Navbar() {
           />
         </Link>
 
-        <nav className={`relative hidden items-center gap-8 text-[14px] leading-[1.55] md:flex ${INK_WHEN_SCROLLED}`}>
+        {/* Centred on the bar rather than pushed right: with the CTA gone there are only
+            two items left, and justify-between would sling the menu against the edge. */}
+        <nav
+          className={`absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 text-[14px] leading-[1.55] md:flex ${INK_WHEN_SCROLLED}`}
+        >
           {menu.map((item) => (
             <Link
               key={item.label}
@@ -125,10 +128,6 @@ export default function Navbar() {
             </Link>
           ))}
         </nav>
-
-        {/* Below md this gives way to the menu button: at 390px the two together left the
-            logo no room, and the sheet carries the WhatsApp action instead. */}
-        <AskAi />
 
         <button
           type="button"
