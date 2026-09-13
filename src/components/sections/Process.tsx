@@ -135,7 +135,7 @@ export default function Process() {
   }, [visible, paused, handoff, reduced, chars, full, active, sending]);
 
   return (
-    <Section id="cara-kerja">
+    <Section id="layanan">
       <Container className="flex flex-col items-center">
         <SectionHeader
           title="Website untuk setiap kebutuhan bisnis"

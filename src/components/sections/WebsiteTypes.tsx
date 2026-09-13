@@ -43,7 +43,7 @@ const reasons: Reason[] = [
 
 export default function WebsiteTypes() {
   return (
-    <Section id="layanan">
+    <Section id="lainnya">
       <Container>
         {/* Two secondary routes, for people whose need is not a new build */}
         <h2 className="text-[20px] font-medium leading-[1.3] tracking-[-0.02em] text-ink md:text-[24px]">
