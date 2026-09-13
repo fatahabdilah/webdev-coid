@@ -20,6 +20,7 @@ export {
   RiPriceTag3Fill as Tag,
   RiInstagramFill as Instagram,
   RiMailFill as Mail,
+  RiGlobalLine as Globe,
   RiLinkedinFill as Linkedin,
   RiLayout4Fill as LayoutTemplate,
   RiShoppingBag3Fill as ShoppingBag,
