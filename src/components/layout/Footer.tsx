@@ -38,9 +38,9 @@ export default function Footer() {
   return (
     <footer className="border-t border-line bg-white text-ink">
       <Container className="py-10">
-        {/* One band rather than a block of columns: the CTA section above already makes
-            the argument, so the footer signs off and stays reachable. Everything sits on
-            one line from lg, and stacks in reading order below that. */}
+        {/* The CTA section above already makes the argument, so the footer signs off and
+            stays reachable: who we are on the left, where to go and how to reach us in two
+            columns on the right. */}
         <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
           {/* The description rides with the wordmark rather than sitting in its own block:
               it says who we are, which belongs next to the name, not above the nav. */}
@@ -54,39 +54,44 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Roomier rows on phones: as bare inline text these links were 18px tall and
-              stacked close together, which is a mis-tap waiting to happen. They tighten
-              back up from lg, where there is a pointer and they sit on one line. */}
-          <ul className="flex flex-col lg:flex-row lg:items-center lg:gap-8 lg:pt-1">
-            {links.map((link) => (
-              <li key={link.label}>
-                <FooterLink href={link.href}>{link.label}</FooterLink>
-              </li>
-            ))}
-          </ul>
+          {/* Two stacked columns. Roomier rows on phones: as bare inline text these links
+              were 18px tall and stacked close together, which is a mis-tap waiting to
+              happen. They tighten back up from lg, where there is a pointer. */}
+          <div className="flex flex-col gap-8 sm:flex-row sm:gap-16 lg:gap-20">
+            <div>
+              <p className="text-[14px] leading-[1.55] font-medium">Jelajahi</p>
+              <ul className="mt-1 flex flex-col lg:mt-3 lg:gap-2">
+                {links.map((link) => (
+                  <li key={link.label}>
+                    <FooterLink href={link.href}>{link.label}</FooterLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <ul className="flex flex-wrap gap-x-3 gap-y-2 lg:shrink-0 lg:justify-end">
-            {contacts.map(({ label, icon: Icon, href }) =>
-              href ? (
-                <li key={label}>
-                  <ContactPill href={href}>
-                    <Icon className="size-4 shrink-0" />
-                    {label}
-                  </ContactPill>
-                </li>
-              ) : (
-                /* No destination yet. Shown, but plainly inert, so the row does not
-                   silently vanish and it stays obvious what is still missing. */
-                <li
-                  key={label}
-                  className="inline-flex min-h-11 items-center gap-2 rounded-full border border-line px-4 text-[14px] leading-[1.55] text-muted lg:min-h-0 lg:py-2"
-                >
-                  <Icon className="size-4 shrink-0" />
-                  {label}
-                </li>
-              ),
-            )}
-          </ul>
+            <div>
+              <p className="text-[14px] leading-[1.55] font-medium">Hubungi</p>
+              <ul className="mt-1 flex flex-col lg:mt-3 lg:gap-2">
+                {contacts.map(({ label, icon: Icon, href }) => (
+                  <li key={label}>
+                    {href ? (
+                      <FooterLink href={href}>
+                        <Icon className="size-4 shrink-0" />
+                        {label}
+                      </FooterLink>
+                    ) : (
+                      /* No destination yet. Shown, but plainly inert, so the row does not
+                         silently vanish and it stays obvious what is still missing. */
+                      <span className="flex min-h-11 items-center gap-2 text-[14px] leading-[1.55] text-muted lg:min-h-0">
+                        <Icon className="size-4 shrink-0" />
+                        {label}
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
 
         <p className="mt-8 border-t border-line pt-6 text-[14px] leading-[1.55] text-muted">
@@ -94,21 +99,6 @@ export default function Footer() {
         </p>
       </Container>
     </footer>
-  );
-}
-
-/* A contact as a pill rather than a list row: there are only ever a few, and set side by
-   side they read as the one thing to act on instead of a second column of links. */
-function ContactPill({ href, children }: { href: string; children: React.ReactNode }) {
-  const newTab = href.startsWith("http");
-  return (
-    <a
-      href={href}
-      className="inline-flex min-h-11 items-center gap-2 rounded-full border border-line px-4 text-[14px] leading-[1.55] text-ink transition-colors duration-200 hover:border-ink hover:bg-offwhite md:min-h-0 md:py-2"
-      {...(newTab && { target: "_blank", rel: "noreferrer" })}
-    >
-      {children}
-    </a>
   );
 }
 
