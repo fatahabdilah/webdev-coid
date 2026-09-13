@@ -91,7 +91,7 @@ export default function Navbar() {
       data-scrolled={scrolled ? "" : undefined}
     >
       <Container className="relative flex h-18 items-center justify-between">
-        <Link href="/" aria-label="webdev.co.id" className="relative block h-8 w-38.75">
+        <Link href="/" aria-label="webdev.co.id" className="relative block h-8 w-39">
           {/* Both logos are stacked; the white one fades out and the black one fades in
               as the bar turns white */}
           <Image
@@ -165,7 +165,7 @@ function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) 
       aria-hidden={!open}
     >
       <Container className="flex h-18 items-center justify-between">
-        <span className="relative block h-8 w-38.75">
+        <span className="relative block h-8 w-39">
           <Image src="/brand/logo-white.svg" alt="webdev.co.id" fill className="object-contain" />
         </span>
         <button

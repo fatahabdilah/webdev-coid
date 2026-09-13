@@ -45,7 +45,7 @@ export default function Footer() {
           {/* The description rides with the wordmark rather than sitting in its own block:
               it says who we are, which belongs next to the name, not above the nav. */}
           <div className="max-w-[340px] shrink-0">
-            <Link href="#beranda" aria-label="webdev.co.id" className="relative block h-7 w-33.5">
+            <Link href="#beranda" aria-label="webdev.co.id" className="relative block h-7 w-34.25">
               <Image src="/brand/logo-ink.svg" alt="webdev.co.id" fill className="object-contain object-left" />
             </Link>
             <p className="mt-4 text-[14px] leading-[1.55] text-body">
