@@ -110,7 +110,12 @@ export default function Navbar() {
           />
         </Link>
 
-        <nav className={`relative hidden items-center gap-8 text-[14px] leading-[1.55] md:flex ${INK_WHEN_SCROLLED}`}>
+        {/* Centred on the bar rather than left in the flow: with a button back on the
+            right, justify-between would spread logo, menu and button to three corners and
+            leave the menu stranded mid-gap. */}
+        <nav
+          className={`absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 text-[14px] leading-[1.55] md:flex ${INK_WHEN_SCROLLED}`}
+        >
           {menu.map((item) => (
             <Link
               key={item.label}
@@ -125,6 +130,16 @@ export default function Navbar() {
             </Link>
           ))}
         </nav>
+
+        {/* Below md this gives way to the menu button: at 390px the two together left the
+            logo no room, and the sheet carries the same action inside. */}
+        <Link
+          href={waLink("Halo, saya mau konsultasi soal website.")}
+          className={`border-gradient-accent relative hidden h-10 items-center gap-2 rounded-full px-4 text-[14px] leading-[1.55] font-medium text-white transition-colors duration-250 ease-out hover:bg-white/10 group-data-scrolled:text-ink group-data-scrolled:hover:bg-ink/5 md:inline-flex motion-reduce:transition-none`}
+        >
+          <Whatsapp className="size-5" />
+          Konsultasi Gratis
+        </Link>
 
         <button
           type="button"
