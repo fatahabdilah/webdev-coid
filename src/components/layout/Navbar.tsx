@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Container } from "@/components/ui";
+import { Button, Container } from "@/components/ui";
 import { Close, Menu, Whatsapp } from "@/components/ui/icons";
 import { waLink } from "@/lib/contact";
 
@@ -131,23 +131,21 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Styled as a menu item rather than a button, so the bar reads as one row of
-            links. It keeps the WhatsApp icon: it is the only item here that leaves the
-            page, and the icon says so before the click.
+        {/* The same button every other consultation CTA uses, shrunk to sit in a 72px bar:
+            h-10 and the smaller type, but the same fill, radius and hover ring, so it reads
+            as one family. Solid blue works over the hero too, which is navy.
 
             Below md it gives way to the menu button -- at 390px the two together left the
             logo no room -- and the sheet carries the same action inside. */}
-        <Link
-          href={waLink("Halo, saya mau konsultasi soal website.")}
-          /* One transition naming both properties. INK_WHEN_SCROLLED brings its own
-             `transition-colors`, and a second declaration here would overwrite it, leaving
-             the colour to snap while the bar fades -- the same clash that once made these
-             links flicker. */
-          className={`relative hidden items-center gap-2 text-[14px] leading-[1.55] text-[#d9d9d9] opacity-100 [transition:color_.25s_ease-out,opacity_.2s_ease-out] group-data-scrolled:text-ink hover:opacity-75 md:inline-flex motion-reduce:transition-none`}
-        >
-          <Whatsapp className="size-4" />
-          Konsultasi Gratis
-        </Link>
+        {/* Hidden on a wrapper rather than on the Button: the component's own `inline-flex`
+            comes after `hidden` in the class list and wins, so the button stayed visible at
+            390px. */}
+        <span className="relative hidden md:block">
+          <Button href={waLink("Halo, saya mau konsultasi soal website.")} size="sm">
+            <Whatsapp className="size-4" />
+            Konsultasi Gratis
+          </Button>
+        </span>
 
         <button
           type="button"

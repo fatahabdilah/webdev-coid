@@ -69,15 +69,25 @@ export function SectionHeader({
 }
 
 type ButtonVariant = "primary" | "secondary" | "white" | "outline-white";
+type ButtonSize = "md" | "sm";
+
+/* sm exists for the navbar, where a 48px button is too tall for a 72px bar. Same fill,
+   radius and hover ring -- only the height, padding and type step down. */
+const sizes: Record<ButtonSize, string> = {
+  md: "h-12 px-6 text-[16px] leading-[1.6]",
+  sm: "h-10 px-4 text-[14px] leading-[1.55]",
+};
 
 export function Button({
   href,
   variant = "primary",
+  size = "md",
   className = "",
   children,
 }: {
   href: string;
   variant?: ButtonVariant;
+  size?: ButtonSize;
   className?: string;
   children: ReactNode;
 }) {
@@ -98,7 +108,7 @@ export function Button({
       href={href}
       /* Colour on hover, a small give on press. The press is the same gesture the send
          button in the showcase makes, so the whole page answers a tap the same way. */
-      className={`inline-flex h-12 items-center justify-center gap-2 rounded-lg px-6 text-[16px] leading-[1.6] font-semibold transition-[background-color,border-color,color,box-shadow,scale] duration-200 ease-out active:scale-[0.97] ${variants[variant]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-[background-color,border-color,color,box-shadow,scale] duration-200 ease-out active:scale-[0.97] ${sizes[size]} ${variants[variant]} ${className}`}
     >
       {children}
     </Link>
