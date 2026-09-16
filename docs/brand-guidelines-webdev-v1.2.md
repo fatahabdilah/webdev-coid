@@ -340,11 +340,31 @@ Dua saja:
 
 Jangan `ease-in` sendirian: gerakan yang mulai lambat terasa lamban saat merespons klik.
 
-### 8.3 Umpan Balik Tekan
+### 8.3 Bentuk & Umpan Balik Tombol
 
-Setiap tombol mengecil saat ditekan: `active:scale-[0.97]` untuk tombol besar,
-`active:scale-90` untuk tombol ikon. Ini satu-satunya bahasa "tertekan" di seluruh
-halaman, jadi klik terasa sama di mana pun.
+**Kapsul (`rounded-full`).** Bentuk membulat penuh adalah bentuk paling sering di halaman
+ini: pill, badge, avatar, tombol di dalam kartu. Tombol mengikuti, supaya tidak jadi
+satu-satunya benda bersudut kotak.
+
+**Sedikit timbul (`btn-raised`).** Tombol berisi punya tiga lapis bayangan:
+
+1. bayangan kontak rapat, supaya tombol menyentuh halaman, bukan melayang
+2. jatuhan yang lebih lembut di bawahnya — ini yang terbaca sebagai ketinggian
+3. sorotan tipis di tepi atas, seolah cahaya ruangan mengenai muka tombol
+
+Ketiganya bernuansa Navy, bukan hitam netral, sama seperti `shadow-lift`. Sengaja dangkal:
+sisa halaman rata, dan tombol yang terlalu menonjol terasa dipinjam dari desain lain.
+
+Tombol beroutline tetap rata — tidak ada muka yang bisa terkena cahaya — dan mengandalkan
+warna saja.
+
+**Saat ditekan (`btn-pressed`).** Tombol turun ke dalam halaman: jatuhannya hilang dan
+sorotan pindah ke dalam, digabung dengan `active:scale-[0.97]`. Tombol ikon memakai
+`active:scale-90`. Ini satu-satunya bahasa "tertekan" di seluruh halaman, jadi klik terasa
+sama di mana pun.
+
+**Ukuran.** `md` (48px) default; `sm` (40px) hanya untuk navbar, di mana 48px terlalu
+tinggi untuk bar 72px.
 
 ### 8.4 Hormati Pengaturan Pengguna
 

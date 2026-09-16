@@ -91,24 +91,25 @@ export function Button({
   className?: string;
   children: ReactNode;
 }) {
-  /* Hover darkens and draws a soft halo around the button. The halo is a ring, not a
-     shadow, so it stays flat -- the page has no other lifted surfaces.
+  /* Filled buttons sit slightly proud of the page (btn-raised: navy-tinted shadow plus a
+     highlight along the top edge) and settle into it when pressed. Outlined ones stay flat
+     -- there is no face to catch the light -- and lean on colour alone.
 
-     It appears on hover rather than at rest: a permanent ring is the shape a focus
-     indicator takes, and keyboard users could no longer tell the two apart. */
+     See btn-raised in globals.css for what the layers are doing. */
   const variants: Record<ButtonVariant, string> = {
-    primary: "bg-primary text-white hover:bg-primary-dark hover:ring-4 hover:ring-primary/30",
-    secondary:
-      "border border-primary text-primary hover:border-primary-dark hover:bg-primary/10 hover:text-primary-dark hover:ring-4 hover:ring-primary/20",
-    white: "bg-white text-ink hover:bg-line hover:ring-4 hover:ring-white/35",
-    "outline-white": "border border-white/40 text-white hover:border-white/70 hover:bg-white/15 hover:ring-4 hover:ring-white/25",
+    primary: "btn-raised active:btn-pressed bg-primary text-white hover:bg-primary-dark",
+    secondary: "border border-primary text-primary hover:border-primary-dark hover:bg-primary/10 hover:text-primary-dark",
+    white: "btn-raised-light active:btn-pressed bg-white text-ink hover:bg-line",
+    "outline-white": "border border-white/40 text-white hover:border-white/70 hover:bg-white/15",
   };
   return (
     <Link
       href={href}
       /* Colour on hover, a small give on press. The press is the same gesture the send
          button in the showcase makes, so the whole page answers a tap the same way. */
-      className={`inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-[background-color,border-color,color,box-shadow,scale] duration-200 ease-out active:scale-[0.97] ${sizes[size]} ${variants[variant]} ${className}`}
+      /* rounded-full, matching the pills, avatars and cards that shape the rest of the
+         page -- rounded-lg made the buttons the one square thing on it. */
+      className={`inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-[background-color,border-color,color,box-shadow,scale] duration-200 ease-out active:scale-[0.97] ${sizes[size]} ${variants[variant]} ${className}`}
     >
       {children}
     </Link>

@@ -87,6 +87,41 @@
   box-shadow: 0 18px 40px -20px rgb(0 52 102 / 0.38);
 }
 
+/* Buttons sit slightly proud of the page. Three layers, all in the brand's hue rather
+   than neutral black, matching shadow-lift:
+
+   1. a tight contact shadow, so the button meets the page instead of floating
+   2. a softer drop below it, which is what reads as height
+   3. an inset highlight along the top edge -- the light in the room catching the face of
+      the button. It is what makes the shape feel moulded rather than merely shadowed.
+
+   Kept shallow on purpose: the page is flat everywhere else, and a button that stands too
+   far off it looks borrowed from another design. */
+@utility btn-raised {
+  box-shadow:
+    0 1px 2px rgb(0 20 45 / 0.28),
+    0 4px 10px -2px rgb(0 20 45 / 0.22),
+    inset 0 1px 0 rgb(255 255 255 / 0.22);
+}
+
+/* The pressed state: the button settles into the page. The drop collapses and the
+   highlight moves to the bottom, as if the light now catches the far edge. Paired with
+   the 0.97 scale, the whole thing reads as one gesture. */
+@utility btn-pressed {
+  box-shadow:
+    0 1px 1px rgb(0 20 45 / 0.3),
+    inset 0 1px 2px rgb(0 20 45 / 0.22);
+}
+
+/* Light buttons need a darker highlight to read at all -- white on white is invisible --
+   and a shadow that does not muddy them. */
+@utility btn-raised-light {
+  box-shadow:
+    0 1px 2px rgb(0 20 45 / 0.16),
+    0 4px 10px -2px rgb(0 20 45 / 0.14),
+    inset 0 -1px 0 rgb(0 20 45 / 0.08);
+}
+
 /* Placeholder images from the design file lean purple; shift them toward brand blue. */
 @utility img-brand-tint {
   filter: hue-rotate(-40deg) saturate(0.9);
