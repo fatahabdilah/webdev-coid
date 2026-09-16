@@ -32,7 +32,7 @@ export default function Hero() {
           Kamu tinggal fokus ke bisnis.
         </p>
 
-        <Button href="#harga" variant="white" className="mt-8 px-8">
+        <Button href="#harga" variant="white" className="mt-8">
           Lihat Harga
         </Button>
 

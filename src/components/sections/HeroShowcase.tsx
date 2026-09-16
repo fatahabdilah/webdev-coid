@@ -56,7 +56,7 @@ export default function HeroShowcase() {
               <span
                 /* Also shown on hover, not only when active: without it there is no way to
                    tell what a resting card is before committing to a click. */
-                className={`absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/50 py-1 pl-2.5 pr-3 text-[12px] leading-[1.45] font-medium text-ink backdrop-blur-md transition-opacity duration-300 ${
+                className={`absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/50 px-3 py-1 text-[12px] leading-[1.45] font-medium text-ink backdrop-blur-md transition-opacity duration-300 ${
                   isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                 }`}
               >

@@ -81,7 +81,7 @@ function Preview() {
               <br />
               seluruh keluarga
             </p>
-            <span className="mt-3 inline-block rounded-full bg-white px-4 py-1.5 text-[12px] leading-[1.45] font-medium text-[#062A4F]">
+            <span className="mt-3 inline-block rounded-full bg-white px-3 py-1 text-[12px] leading-[1.45] font-medium text-[#062A4F]">
               Booking sekarang
             </span>
           </div>

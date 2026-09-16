@@ -171,7 +171,7 @@ function SiteCard({ site }: { site: Site }) {
               <span key={item}>{item}</span>
             ))}
           </span>
-          <span className="shrink-0 rounded-full bg-white/15 px-2 py-0.5 text-[12px] font-medium leading-[1.45] text-white backdrop-blur-sm">
+          <span className="shrink-0 rounded-full bg-white/15 px-3 py-1 text-[12px] font-medium leading-[1.45] text-white backdrop-blur-sm">
             {site.kind}
           </span>
         </div>
@@ -183,7 +183,7 @@ function SiteCard({ site }: { site: Site }) {
           </p>
           <p className="mt-1.5 hidden text-[12px] leading-[1.45] text-white/80 md:block">{site.sub}</p>
           <span
-            className={`mt-2 inline-block rounded-full px-3 py-1 text-[12px] leading-[1.45] font-medium md:mt-3 md:px-4 md:py-1.5 ${site.button}`}
+            className={`mt-2 inline-block rounded-full px-3 py-1 text-[12px] leading-[1.45] font-medium md:mt-3 ${site.button}`}
           >
             {site.cta}
           </span>
