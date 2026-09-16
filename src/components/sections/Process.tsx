@@ -1,10 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { Container, Section, SectionHeader } from "@/components/ui";
-import { ArrowRight } from "@/components/ui/icons";
+import { Button, Container, Section, SectionHeader } from "@/components/ui";
+import { Whatsapp } from "@/components/ui/icons";
 import { waLink } from "@/lib/contact";
 import ProcessShowcase, { type Handoff, type Site } from "./ProcessShowcase";
 
@@ -191,19 +190,14 @@ export default function Process() {
 function CallToAction({ sites }: { sites: Site[] }) {
   return (
     <>
-      {/* One action, on its own rule: the same WhatsApp chat the visual depicts. Opens the
-          real chat once the number is filled in; until then it falls back to the CTA
-          section -- see src/lib/contact.ts. */}
-      <Link
-        href={waLink("Halo, saya mau konsultasi soal website.")}
-        className="group flex items-center justify-between gap-6 border-y border-line py-4 text-[16px] leading-[1.6] font-medium text-ink transition-colors duration-200 hover:text-primary"
-      >
-        Konsultasi gratis lewat WhatsApp
-        {/* transition-[translate], not transition-transform: Tailwind 4 sets translate-x
-            through the `translate` property, which transition-transform does not watch,
-            so the arrow used to jump straight to its hover position. */}
-        <ArrowRight className="size-4 shrink-0 text-primary transition-[translate] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1" />
-      </Link>
+      {/* The same button every other consultation CTA uses, rather than the full-width
+          ruled row this once was: one action should look the same everywhere it appears.
+          Opens the real chat once the number is filled in; until then it falls back to the
+          CTA section -- see src/lib/contact.ts. */}
+      <Button href={waLink("Halo, saya mau konsultasi soal website.")}>
+        <Whatsapp className="size-5" />
+        Konsultasi Gratis
+      </Button>
 
       {/* Faces of clients whose sites are in the stack, then the proof line */}
       <div className="mt-6 flex items-center gap-3">

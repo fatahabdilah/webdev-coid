@@ -81,21 +81,24 @@ export function Button({
   className?: string;
   children: ReactNode;
 }) {
-  /* Hover darkens, nothing else: no lift, no shadow. It still has to be visible though --
-     white to off-white is three points out of 255, which reads as nothing happening -- so
-     each variant moves far enough to be felt. */
+  /* Hover darkens and draws a soft halo around the button. The halo is a ring, not a
+     shadow, so it stays flat -- the page has no other lifted surfaces.
+
+     It appears on hover rather than at rest: a permanent ring is the shape a focus
+     indicator takes, and keyboard users could no longer tell the two apart. */
   const variants: Record<ButtonVariant, string> = {
-    primary: "bg-primary text-white hover:bg-primary-dark",
-    secondary: "border border-primary text-primary hover:border-primary-dark hover:bg-primary/10 hover:text-primary-dark",
-    white: "bg-white text-ink hover:bg-line",
-    "outline-white": "border border-white/40 text-white hover:border-white/70 hover:bg-white/15",
+    primary: "bg-primary text-white hover:bg-primary-dark hover:ring-4 hover:ring-primary/30",
+    secondary:
+      "border border-primary text-primary hover:border-primary-dark hover:bg-primary/10 hover:text-primary-dark hover:ring-4 hover:ring-primary/20",
+    white: "bg-white text-ink hover:bg-line hover:ring-4 hover:ring-white/35",
+    "outline-white": "border border-white/40 text-white hover:border-white/70 hover:bg-white/15 hover:ring-4 hover:ring-white/25",
   };
   return (
     <Link
       href={href}
       /* Colour on hover, a small give on press. The press is the same gesture the send
          button in the showcase makes, so the whole page answers a tap the same way. */
-      className={`inline-flex h-12 items-center justify-center gap-2 rounded-lg px-6 text-[16px] leading-[1.6] font-semibold transition-[background-color,border-color,color,scale] duration-200 ease-out active:scale-[0.97] ${variants[variant]} ${className}`}
+      className={`inline-flex h-12 items-center justify-center gap-2 rounded-lg px-6 text-[16px] leading-[1.6] font-semibold transition-[background-color,border-color,color,box-shadow,scale] duration-200 ease-out active:scale-[0.97] ${variants[variant]} ${className}`}
     >
       {children}
     </Link>
