@@ -107,9 +107,7 @@ export function Button({
       href={href}
       /* Colour on hover, a small give on press. The press is the same gesture the send
          button in the showcase makes, so the whole page answers a tap the same way. */
-      /* rounded-full, matching the pills, avatars and cards that shape the rest of the
-         page -- rounded-lg made the buttons the one square thing on it. */
-      className={`inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-[background-color,border-color,color,box-shadow,scale] duration-200 ease-out active:scale-[0.97] ${sizes[size]} ${variants[variant]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-[background-color,border-color,color,box-shadow,scale] duration-200 ease-out active:scale-[0.97] ${sizes[size]} ${variants[variant]} ${className}`}
     >
       {children}
     </Link>
