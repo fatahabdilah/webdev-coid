@@ -48,7 +48,11 @@ export default function Cta() {
 }
 
 /* A finished site the way a client first meets it: the page itself, its address, and the
-   message that started it. Purely decorative -- aria-hidden, nothing focusable. */
+   message that started it. Purely decorative -- aria-hidden, nothing focusable.
+
+   #062A4F is Klinik Senyum's palette, the same value the Cara Kerja showcase uses for the
+   same client. Copied rather than shared because both are placeholders: when the real
+   client work lands, this whole preview is replaced anyway. */
 function Preview() {
   return (
     <div aria-hidden className="relative hidden select-none lg:block">
