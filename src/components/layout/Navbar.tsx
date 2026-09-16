@@ -131,13 +131,21 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Below md this gives way to the menu button: at 390px the two together left the
-            logo no room, and the sheet carries the same action inside. */}
+        {/* Styled as a menu item rather than a button, so the bar reads as one row of
+            links. It keeps the WhatsApp icon: it is the only item here that leaves the
+            page, and the icon says so before the click.
+
+            Below md it gives way to the menu button -- at 390px the two together left the
+            logo no room -- and the sheet carries the same action inside. */}
         <Link
           href={waLink("Halo, saya mau konsultasi soal website.")}
-          className={`border-gradient-accent relative hidden h-10 items-center gap-2 rounded-full px-4 text-[14px] leading-[1.55] font-medium text-white transition-colors duration-250 ease-out hover:bg-white/10 group-data-scrolled:text-ink group-data-scrolled:hover:bg-ink/5 md:inline-flex motion-reduce:transition-none`}
+          /* One transition naming both properties. INK_WHEN_SCROLLED brings its own
+             `transition-colors`, and a second declaration here would overwrite it, leaving
+             the colour to snap while the bar fades -- the same clash that once made these
+             links flicker. */
+          className={`relative hidden items-center gap-2 text-[14px] leading-[1.55] text-[#d9d9d9] opacity-100 [transition:color_.25s_ease-out,opacity_.2s_ease-out] group-data-scrolled:text-ink hover:opacity-75 md:inline-flex motion-reduce:transition-none`}
         >
-          <Whatsapp className="size-5" />
+          <Whatsapp className="size-4" />
           Konsultasi Gratis
         </Link>
 
