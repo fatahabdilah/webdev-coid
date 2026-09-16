@@ -84,7 +84,9 @@ function TierCard({ tier }: { tier: Tier }) {
   return (
     <div
       className={`flex flex-col rounded-2xl p-7 ${
-        dark ? "bg-surface text-white" : "border border-line bg-white text-ink"
+        dark
+          ? "bg-ambient-brand relative bg-surface text-white ring-1 ring-white/10"
+          : "border border-line bg-white text-ink"
       }`}
     >
       <div className="flex items-start justify-between gap-3">
