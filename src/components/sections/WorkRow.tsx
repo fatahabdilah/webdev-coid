@@ -126,10 +126,13 @@ function Card({
   wide: boolean;
   ariaHidden?: boolean;
 }) {
+  /* Live client sites open in a new tab; the placeholder anchors stay in this one. */
+  const external = work.href.startsWith("http");
   return (
     <Link
       href={work.href}
       tabIndex={ariaHidden ? -1 : undefined}
+      {...(external && { target: "_blank", rel: "noreferrer" })}
       /* One height for the whole strip; only the width changes between the two ratios. */
       className={`group/card relative block h-56 shrink-0 overflow-hidden rounded-2xl md:h-64 ${
         wide ? "w-[24.9rem] md:w-[28.4rem]" : "w-56 md:w-64"

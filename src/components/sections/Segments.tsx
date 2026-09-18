@@ -5,11 +5,20 @@ import WorkRow, { type Work } from "./WorkRow";
 
 /* Portfolio: an endless marquee of the work, with a row of client quotes beneath it.
 
-   TODO: these are example projects, consistent with the Cara Kerja showcase.
-   Replace names, copy and photos with real client work before launch. */
+   Arif Syauqi is real and live; the rest are still examples, consistent with the Cara
+   Kerja showcase.
 
+   TODO: replace the remaining placeholder names, copy and photos with real client work
+   before launch. Real entries link to the live site; placeholders point back at the
+   section so nothing leads somewhere that does not exist. */
 
 const works: Work[] = [
+  {
+    href: "https://arifsyauqi.com",
+    client: "Arif Syauqi",
+    photoWide: "/images/work/w169-arif.webp",
+    photoSquare: "/images/work/w11-arif.webp",
+  },
   {
     href: "#portfolio",
     client: "Klinik Senyum",
