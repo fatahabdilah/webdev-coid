@@ -5,47 +5,50 @@ import WorkRow, { type Work } from "./WorkRow";
 
 /* Portfolio: an endless marquee of the work, with a row of client quotes beneath it.
 
-   Arif Syauqi is real and live; the rest are still examples, consistent with the Cara
-   Kerja showcase.
+   Cards are labelled with the domain rather than the business name: it is the thing we
+   actually delivered, and it doubles as proof the site is live.
 
-   TODO: replace the remaining placeholder names, copy and photos with real client work
-   before launch. Real entries link to the live site; placeholders point back at the
-   section so nothing leads somewhere that does not exist. */
+   arifsyauqi.com is real. The rest are still examples, consistent with the Cara Kerja
+   showcase, so their domains are invented too and must not be linked anywhere.
+
+   TODO: replace the remaining placeholders with real client work before launch. Real
+   entries link to the live site; placeholders point back at the section so nothing leads
+   somewhere that does not exist. */
 
 const works: Work[] = [
   {
     href: "https://arifsyauqi.com",
-    client: "Arif Syauqi",
+    client: "arifsyauqi.com",
     photoWide: "/images/work/w169-arif.webp",
     photoSquare: "/images/work/w11-arif.webp",
   },
   {
     href: "#portfolio",
-    client: "Klinik Senyum",
+    client: "kliniksenyum.co.id",
     photoWide: "/images/work/w169-klinik.webp",
     photoSquare: "/images/work/w11-klinik.webp",
   },
   {
     href: "#portfolio",
-    client: "Kopi Sudut",
+    client: "kopisudut.com",
     photoWide: "/images/work/w169-kopi.webp",
     photoSquare: "/images/work/w11-kopi.webp",
   },
   {
     href: "#portfolio",
-    client: "Ruang Asana",
+    client: "ruangasana.com",
     photoWide: "/images/work/w169-yoga.webp",
     photoSquare: "/images/work/w11-yoga.webp",
   },
   {
     href: "#portfolio",
-    client: "Panen Tani",
+    client: "panentani.co.id",
     photoWide: "/images/work/w169-tani.webp",
     photoSquare: "/images/work/w11-tani.webp",
   },
   {
     href: "#portfolio",
-    client: "Rasa Nusantara",
+    client: "rasanusantara.com",
     photoWide: "/images/work/w169-resto.webp",
     photoSquare: "/images/work/w11-resto.webp",
   },
