@@ -98,15 +98,19 @@
    3. a hairline outline set inside the edge, which keeps the shape crisp against both the
       white sections and the navy ones
 
-   Colours are ours: the radial runs from a lifted primary-dark to primary-dark proper,
-   where the reference runs orange. Kept deeper than primary so the button does not
-   outshine the navy it sits on in the navbar and hero. */
+   Values come from the Figma frame (736:867): the radial's three stops, both insets, and
+   the 1px drop. Kept deeper than primary so the button does not outshine the navy it sits
+   on in the navbar and hero.
+
+   The outline is ours, not the design's -- Figma flattens the button to a single fill, so
+   it has no edge to export. Without it the shape loses definition against the white
+   sections. */
 @utility btn-raised {
-  background-image: radial-gradient(63% 56% at 22% -11%, #1d6fbf 0%, var(--color-primary-dark) 100%);
+  background-image: radial-gradient(63% 56% at 22% -11%, #1d6fbf 0%, #0f62b1 50%, #0054a3 100%);
   box-shadow:
     inset 0 4px 8px rgb(255 255 255 / 0.15),
     inset 0 -4px 6px rgb(0 20 45 / 0.18),
-    0 1px 2px rgb(0 20 45 / 0.25);
+    0 1px 1px rgb(0 20 45 / 0.25);
   outline: 1px solid rgb(255 255 255 / 0.12);
   outline-offset: -1px;
 }
