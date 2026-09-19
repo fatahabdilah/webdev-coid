@@ -21,12 +21,12 @@ type Tier = {
 const tiers: Tier[] = [
   {
     name: "Landing Page",
-    badge: "Diskon 30%",
+    badge: "Diskon 33%",
     desc: "Satu halaman fokus untuk promosi, produk, atau profil singkat.",
-    oldPrice: "Rp1.110.000",
-    price: "Rp750 rb",
+    oldPrice: "Rp2.990.000",
+    price: "Rp1.990.000",
     cta: "Mulai Sekarang",
-    note: "Perpanjangan domain & hosting: Rp350 rb/tahun mulai tahun ke-2",
+    note: "Perpanjangan domain & hosting: Rp750.000/tahun mulai tahun ke-2",
     features: [
       { text: "1 halaman desain custom", included: true },
       { text: "Responsif semua perangkat", included: true },
@@ -42,10 +42,10 @@ const tiers: Tier[] = [
     name: "Company Profile",
     badge: "Paling Populer",
     desc: "Website lengkap untuk bisnis yang mau tampil profesional dan kredibel.",
-    oldPrice: "Rp3.330.000",
-    price: "Rp1,9 jt",
+    oldPrice: "Rp4.490.000",
+    price: "Rp2.990.000",
     cta: "Mulai Sekarang",
-    note: "Perpanjangan domain & hosting: Rp500 rb/tahun mulai tahun ke-2",
+    note: "Perpanjangan domain & hosting: Rp1.500.000/tahun mulai tahun ke-2",
     featured: true,
     features: [
       { text: "Sampai 6 halaman custom", included: true },
@@ -63,9 +63,9 @@ const tiers: Tier[] = [
     name: "Web App / Custom",
     desc: "Untuk kebutuhan khusus: sistem, dashboard, toko online, atau fitur custom.",
     pricePrefix: "mulai dari",
-    price: "Rp4,5 jt",
+    price: "Rp4.990.000",
     cta: "Diskusikan Kebutuhan",
-    note: "Perpanjangan domain & hosting: mulai Rp950 rb/tahun, sesuai kebutuhan server",
+    note: "Perpanjangan domain & hosting: mulai Rp2.500.000/tahun, sesuai kebutuhan server",
     features: [
       { text: "Halaman & fitur sesuai kebutuhan", included: true },
       { text: "Responsif semua perangkat", included: true },
