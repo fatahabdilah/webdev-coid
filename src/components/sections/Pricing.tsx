@@ -6,7 +6,6 @@ type Feature = { text: string; included: boolean };
 
 type Tier = {
   name: string;
-  badge?: string;
   desc: string;
   oldPrice?: string;
   pricePrefix?: string;
@@ -20,7 +19,6 @@ type Tier = {
 const tiers: Tier[] = [
   {
     name: "Landing Page",
-    badge: "Diskon 33%",
     desc: "Satu halaman fokus untuk promosi, produk, atau profil singkat.",
     oldPrice: "Rp2.990.000",
     price: "Rp1.990.000",
@@ -39,7 +37,6 @@ const tiers: Tier[] = [
   },
   {
     name: "Company Profile",
-    badge: "Paling Populer",
     desc: "Website lengkap untuk bisnis yang mau tampil profesional dan kredibel.",
     oldPrice: "Rp4.490.000",
     price: "Rp2.990.000",
@@ -87,18 +84,7 @@ function TierCard({ tier }: { tier: Tier }) {
           : "border border-line bg-white text-ink"
       }`}
     >
-      <div className="flex items-start justify-between gap-3">
-        <p className="text-[18px] leading-[1.5] font-medium">{tier.name}</p>
-        {tier.badge && (
-          <span
-            className={`shrink-0 rounded-full px-3 py-1 text-[12px] leading-[1.45] font-medium ${
-              dark ? "bg-white/10 text-white" : "bg-primary/10 text-primary"
-            }`}
-          >
-            {tier.badge}
-          </span>
-        )}
-      </div>
+      <p className="text-[18px] leading-[1.5] font-medium">{tier.name}</p>
       <p className={`mt-2 text-[14px] leading-[1.55] ${dark ? "text-on-dark-body" : "text-body"}`}>{tier.desc}</p>
 
       {/* The qualifier sits on its own line above the figure rather than beside it: at
