@@ -1,10 +1,19 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui";
 import { EMAIL, INSTAGRAM, WHATSAPP } from "@/lib/contact";
 import { Instagram, Mail, Whatsapp } from "@/components/ui/icons";
 
-/* The same four destinations as the navbar, in the same order, so the two agree on what
-   the site is made of. Keep this list in step with `menu` in Navbar.tsx. */
+/* Every way to reach us in one list -- socials sit alongside email and WhatsApp rather
+   than in a column of their own, since both answer the same question. Labels carry the
+   real address or handle where there is one, so it can be read without clicking. */
+const contacts = [
+  { label: WHATSAPP || "WhatsApp", icon: Whatsapp, href: WHATSAPP ? `https://wa.me/${WHATSAPP}` : "" },
+  { label: EMAIL || "Email", icon: Mail, href: EMAIL ? `mailto:${EMAIL}` : "" },
+  { label: "Instagram", icon: Instagram, href: INSTAGRAM },
+];
+
+/* In-page destinations, matching the navbar. Keep in step with `menu` in Navbar.tsx. */
 const links: { label: string; href: string }[] = [
   { label: "Beranda", href: "#beranda" },
   { label: "Layanan", href: "#layanan" },
@@ -12,72 +21,63 @@ const links: { label: string; href: string }[] = [
   { label: "Harga", href: "#harga" },
 ];
 
-/* Contact rows: an icon, a label, and the real destination behind it. Shown as text
-   rather than bare icons so the number and address can be read without clicking. */
-const contacts = [
-  { label: "WhatsApp", icon: Whatsapp, href: WHATSAPP ? `https://wa.me/${WHATSAPP}` : "" },
-  { label: "Email", icon: Mail, href: EMAIL ? `mailto:${EMAIL}` : "" },
-  { label: "Instagram", icon: Instagram, href: INSTAGRAM },
-];
-
 export default function Footer() {
   return (
     <footer className="border-t border-line bg-white text-ink">
       <Container className="py-14">
-        {/* The columns and the copyright share one block, centred on the page as a group.
-            Gathered rather than spread to the edges: the footer holds very little, and
-            pushing the two groups apart would leave a lap of empty white between them. */}
-        <div className="mx-auto w-fit">
-          <div className="flex flex-col gap-10 sm:flex-row sm:gap-20 lg:gap-28">
-            <FooterColumn title="Jelajahi">
-            {links.map((link) => (
-              <li key={link.label}>
-                <FooterLink href={link.href}>{link.label}</FooterLink>
-              </li>
-            ))}
-            </FooterColumn>
-
-            <FooterColumn title="Hubungi">
-            {contacts.map(({ label, icon: Icon, href }) => (
-              <li key={label}>
-                {href ? (
-                  <FooterLink href={href}>
-                    <Icon className="size-4 shrink-0" />
-                    {label}
-                  </FooterLink>
-                ) : (
-                  /* No destination yet. Shown, but plainly inert, so the row does not
-                     silently vanish and it stays obvious what is still missing. */
-                  <span className="flex min-h-11 items-center gap-2 text-[14px] leading-[1.55] text-muted lg:min-h-0">
-                    <Icon className="size-4 shrink-0" />
-                    {label}
-                  </span>
-                )}
-              </li>
-            ))}
-            </FooterColumn>
+        {/* Brand on the left, then the page links, then every way to reach us in one
+            column -- socials and contacts read as one list, since both answer "how do I
+            get hold of them". */}
+        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1.2fr] md:gap-12">
+          <div className="max-w-[320px]">
+            <Link href="#beranda" aria-label="webdev.co.id" className="relative block h-7 w-34.25">
+              <Image src="/brand/logo-ink.svg" alt="webdev.co.id" fill className="object-contain object-left" />
+            </Link>
+            <p className="mt-5 text-[14px] leading-[1.55] text-body">
+              Agensi web development di Indonesia. Kami bantu bisnis tampil profesional secara online, dari desain
+              sampai tayang.
+            </p>
           </div>
 
-          {/* Left-aligned with the columns above rather than centred under them, so the
-              footer keeps one left edge. */}
-          <p className="mt-14 text-[14px] leading-[1.55] text-muted">© 2026 webdev.co.id. Semua hak dilindungi.</p>
+          <div>
+            <p className="text-[14px] leading-[1.55] font-medium">Jelajahi</p>
+            {/* Roomier rows on phones: as bare inline text these links were 18px tall and
+                stacked close together, which is a mis-tap waiting to happen. They tighten
+                back up from md, where there is a pointer. */}
+            <ul className="mt-2 flex flex-col md:mt-4 md:gap-3">
+              {links.map((link) => (
+                <li key={link.label}>
+                  <FooterLink href={link.href}>{link.label}</FooterLink>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-[14px] leading-[1.55] font-medium">Hubungi</p>
+            <ul className="mt-2 flex flex-col md:mt-4 md:gap-3">
+              {contacts.map(({ label, icon: Icon, href }) => (
+                <li key={label}>
+                  {href ? (
+                    <FooterLink href={href}>
+                      <Icon className="size-4 shrink-0" />
+                      {label}
+                    </FooterLink>
+                  ) : (
+                    /* No destination yet. Shown, but plainly inert, so the row does not
+                       silently vanish and it stays obvious what is still missing. */
+                    <span className="flex min-h-11 items-center gap-2 text-[14px] leading-[1.55] text-muted md:min-h-0">
+                      <Icon className="size-4 shrink-0" />
+                      {label}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </Container>
     </footer>
-  );
-}
-
-/* A titled column. The heading is muted and the rows are ink -- the reverse of the usual
-   weight, which keeps the label out of the way of the things you can actually click. */
-function FooterColumn({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <div>
-      <p className="text-[14px] leading-[1.55] text-muted">{title}</p>
-      {/* Roomier rows on phones: as bare inline text these links were 18px tall and stacked
-          close together, which is a mis-tap waiting to happen. They tighten back up from
-          lg, where there is a pointer. */}
-      <ul className="mt-1 flex flex-col lg:mt-3 lg:gap-2">{children}</ul>
-    </div>
   );
 }
 
