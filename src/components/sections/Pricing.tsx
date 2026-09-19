@@ -80,7 +80,7 @@ function TierCard({ tier }: { tier: Tier }) {
     <div
       className={`flex flex-col rounded-2xl p-7 ${
         dark
-          ? "bg-ambient-brand relative bg-[#010a16] text-white ring-1 ring-white/15"
+          ? "bg-ambient-brand relative bg-[#02142b] text-white ring-1 ring-white/15"
           : "border border-line bg-white text-ink"
       }`}
     >
