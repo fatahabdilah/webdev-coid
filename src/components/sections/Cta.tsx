@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { Button, Container, Section } from "@/components/ui";
-import { ChevronRight, Globe, Whatsapp } from "@/components/ui/icons";
+import { Whatsapp } from "@/components/ui/icons";
 import { waLink } from "@/lib/contact";
 
 export default function Cta() {
   return (
-    /* Two columns from lg: the ask on the left, a finished site on the right. Below lg the
-       visual is dropped rather than stacked -- it would only push the button off the first
-       screen, and the button is the point of the section.
+    /* Two columns from lg: the ask on the left, the photo on the right. Below lg the photo
+       is dropped rather than stacked -- it would only push the button off the first screen,
+       and the button is the point of the section.
 
        The art stays anchored bottom: anchored top it took the near-black end of the
        gradient and the section lost all its colour. */
@@ -24,7 +24,9 @@ export default function Cta() {
         className="pointer-events-none object-cover object-bottom"
       />
 
-      <Container className="relative grid items-center gap-14 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
+      <Portrait />
+
+      <Container className="relative lg:grid lg:grid-cols-[1fr_340px] lg:gap-16 xl:grid-cols-[1fr_400px]">
         <div className="text-center lg:text-left">
           <h2 className="text-[26px] font-medium leading-[1.25] tracking-[-0.03em] text-balance md:text-[30px]">
             Sudah kebayang websitenya?
@@ -40,72 +42,35 @@ export default function Cta() {
             Konsultasi Gratis
           </Button>
         </div>
-
-        <Preview />
       </Container>
     </Section>
   );
 }
 
-/* A finished site the way a client first meets it: the page itself, its address, and the
-   message that started it. Purely decorative -- aria-hidden, nothing focusable.
+/* Someone reading a message on their phone -- the moment the button leads to. Decorative,
+   so it carries an empty alt.
 
-   #062A4F is Klinik Senyum's palette, the same value the Cara Kerja showcase uses for the
-   same client. Copied rather than shared because both are placeholders: when the real
-   client work lands, this whole preview is replaced anyway. */
-function Preview() {
+   Pinned to the section's own bottom edge rather than placed in the grid, so the figure
+   stands on the panel instead of ending in a horizontal cut across the waist. The section
+   pads 96px below its content, and the photo ignores that padding -- which is the point:
+   in the grid it stopped short and the straight edge read as a pasted cutout.
+
+   The column it occupies is reserved in the grid beside it, so the copy never runs under
+   the figure. */
+function Portrait() {
   return (
-    <div aria-hidden className="relative hidden select-none lg:block">
-      {/* Tilted a degree and a half so it reads as an object sitting on the section rather
-          than a screenshot pasted flat into it. */}
-      <div className="relative rotate-[-1.5deg] overflow-hidden rounded-2xl bg-white shadow-[0_30px_60px_-25px_rgba(0,10,30,0.7)]">
-        {/* A thin strip of site nav, standing in for the real chrome */}
-        <div className="flex items-center justify-between px-5 pt-5 pb-3 text-[12px] leading-[1.45] text-ink/60">
-          <span className="text-[14px] font-medium tracking-[-0.02em] text-ink">Klinik Senyum</span>
-          <span className="flex gap-4">
-            <span>Layanan</span>
-            <span>Dokter</span>
-            <span>Kontak</span>
-          </span>
-        </div>
-
-        <div className="relative aspect-[16/10]">
-          <Image
-            src="/images/showcase/site-klinik.webp"
-            alt=""
-            fill
-            sizes="(max-width: 1024px) 0px, 620px"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-linear-to-t from-[#062A4F]/95 via-[#062A4F]/55 to-[#062A4F]/10" />
-
-          <div className="absolute inset-x-6 bottom-6">
-            <p className="text-[24px] font-medium leading-[1.3] tracking-[-0.02em] text-white">
-              Senyum sehat untuk
-              <br />
-              seluruh keluarga
-            </p>
-            <span className="mt-3 inline-block rounded-full bg-white px-3 py-1 text-[12px] leading-[1.45] font-medium text-[#062A4F]">
-              Booking sekarang
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Its address, lifted off the top-left corner */}
-      <span className="absolute -top-5 left-4 inline-flex items-center gap-2 rounded-full bg-white py-2 pr-4 pl-3 text-[14px] leading-[1.55] font-medium text-ink shadow-[0_12px_28px_-12px_rgba(0,10,30,0.55)]">
-        <Globe className="size-4 text-primary" />
-        kliniksenyum.co.id
-      </span>
-
-      {/* The brief that started it, on the bottom edge -- the same device the Cara Kerja
-          showcase uses, so the two sections tell one story. */}
-      <span className="absolute -right-5 -bottom-5 inline-flex items-center gap-3 rounded-xl bg-white py-2.5 pr-2.5 pl-4 text-[14px] leading-[1.55] text-ink shadow-[0_12px_28px_-12px_rgba(0,10,30,0.55)]">
-        Mau bikin website klinik gigi
-        <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-white">
-          <ChevronRight className="size-5" />
-        </span>
-      </span>
+    <div
+      aria-hidden
+      className="pointer-events-none absolute inset-x-0 bottom-0 mx-auto hidden w-full max-w-[1200px] px-6 lg:block lg:px-10"
+    >
+      <Image
+        src="/images/cta-orang.webp"
+        alt=""
+        width={684}
+        height={1024}
+        sizes="(max-width: 1024px) 0px, 400px"
+        className="ml-auto block h-[380px] w-auto xl:h-[440px]"
+      />
     </div>
   );
 }
