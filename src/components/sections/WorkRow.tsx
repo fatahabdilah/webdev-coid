@@ -144,6 +144,7 @@ function Card({
         fill
         sizes={wide ? "(max-width: 768px) 400px, 456px" : "(max-width: 768px) 224px, 256px"}
         className="object-cover transition-transform duration-700 ease-out group-hover/card:scale-[1.04]"
+        quality={100}
       />
 
       <span

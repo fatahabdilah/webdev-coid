@@ -41,6 +41,7 @@ export default function ReasonCards({ reasons }: { reasons: Reason[] }) {
                 fill
                 sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 40vw"
                 className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                quality={100}
               />
             </span>
 

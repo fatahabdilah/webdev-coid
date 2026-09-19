@@ -73,7 +73,9 @@ export default function Segments() {
         {/* `object-cover` keeps the art's proportions (object-fill would squash it). Anchored
             top-right, the darkest part of the image, so the heading sits on near-black while the
             blue glow stays down in the corner. */}
-        <Image src="/images/porto-bg.webp" alt="" fill className="object-cover object-top-right" />
+        <Image src="/images/porto-bg.webp" alt="" fill className="object-cover object-top-right"
+          quality={100}
+        />
       </span>
       <Container className="relative">
         <SectionHeader tone="dark" title="Karya yang sudah tayang" />

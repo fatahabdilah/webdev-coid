@@ -101,12 +101,14 @@ export default function Navbar() {
             fill
             priority
             className={`object-contain group-data-scrolled:opacity-0 ${LOGO_FADE}`}
+            quality={100}
           />
           <Image
             src="/brand/logo-ink.svg"
             alt="webdev.co.id"
             fill
             className={`object-contain opacity-0 group-data-scrolled:opacity-100 ${LOGO_FADE}`}
+            quality={100}
           />
         </Link>
 
@@ -178,7 +180,9 @@ function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) 
     >
       <Container className="flex h-18 items-center justify-between">
         <span className="relative block h-8 w-39">
-          <Image src="/brand/logo-white.svg" alt="webdev.co.id" fill className="object-contain" />
+          <Image src="/brand/logo-white.svg" alt="webdev.co.id" fill className="object-contain"
+            quality={100}
+          />
         </span>
         <button
           type="button"

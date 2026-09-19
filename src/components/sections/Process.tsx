@@ -204,7 +204,9 @@ function CallToAction({ sites }: { sites: Site[] }) {
         <div className="flex">
           {sites.map((s) => (
             <span key={s.sender} className="relative -mr-2.5 size-9 overflow-hidden rounded-full ring-2 ring-white">
-              <Image src={s.avatar} alt="" fill sizes="36px" className="object-cover" />
+              <Image src={s.avatar} alt="" fill sizes="36px" className="object-cover"
+                quality={100}
+              />
             </span>
           ))}
           {/* Sits on top of the avatars, so its number is never clipped */}

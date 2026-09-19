@@ -122,6 +122,7 @@ export default function ProcessShowcase({ sites, active, handoff, typed, sending
             fill
             sizes="40px"
             className={`object-cover transition-opacity duration-300 ${handingOff ? "opacity-0" : "opacity-100"}`}
+            quality={100}
           />
         </span>
 
@@ -154,7 +155,9 @@ export default function ProcessShowcase({ sites, active, handoff, typed, sending
 function SiteCard({ site }: { site: Site }) {
   return (
     <div className={`relative h-full w-full overflow-hidden ${SURFACE}`}>
-      <Image src={site.photo} alt="" fill sizes="(max-width: 1024px) 90vw, 560px" className="object-cover" />
+      <Image src={site.photo} alt="" fill sizes="(max-width: 1024px) 90vw, 560px" className="object-cover"
+        quality={100}
+      />
       <div className={`absolute inset-0 bg-linear-to-r ${site.wash}`} />
       <div className="absolute inset-0 bg-linear-to-t from-black/35 via-transparent to-transparent" />
 

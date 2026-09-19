@@ -26,7 +26,7 @@ export default function Cta() {
               alt=""
               fill
               sizes="100vw"
-              quality={95}
+              quality={100}
               className="object-cover object-bottom"
             />
           </span>
@@ -79,6 +79,7 @@ function Portrait() {
         height={329}
         sizes="(max-width: 1024px) 0px, 340px"
         className="block h-[360px] w-auto shrink-0 xl:h-[380px]"
+        quality={100}
       />
     </div>
   );

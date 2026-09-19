@@ -33,7 +33,9 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1.2fr] md:gap-12">
           <div className="max-w-[320px]">
             <Link href="#beranda" aria-label="webdev.co.id" className="relative block h-7 w-34.25">
-              <Image src="/brand/logo-ink.svg" alt="webdev.co.id" fill className="object-contain object-left" />
+              <Image src="/brand/logo-ink.svg" alt="webdev.co.id" fill className="object-contain object-left"
+                quality={100}
+              />
             </Link>
             <p className="mt-5 text-[14px] leading-[1.55] text-body">
               Agensi web development di Indonesia. Kami bantu bisnis tampil profesional secara online, dari desain

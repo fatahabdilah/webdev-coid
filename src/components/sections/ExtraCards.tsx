@@ -55,7 +55,9 @@ export default function ExtraCards() {
               }`}
             >
               <span className="block overflow-hidden rounded-lg shadow-lift">
-                <Image src={preview} alt="" width={520} height={325} className="block h-auto w-full object-cover" />
+                <Image src={preview} alt="" width={520} height={325} className="block h-auto w-full object-cover"
+                  quality={100}
+                />
               </span>
             </span>
           </span>

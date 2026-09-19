@@ -52,6 +52,7 @@ export default function HeroShowcase() {
                 className={`object-cover transition-transform duration-500 ease-out ${
                   isActive ? "" : "group-hover:scale-105"
                 } ${item.tint ? "img-brand-tint" : ""}`}
+                quality={100}
               />
               <span
                 /* Also shown on hover, not only when active: without it there is no way to
