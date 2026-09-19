@@ -15,7 +15,6 @@ type Tier = {
   note: string;
   features: Feature[];
   featured?: boolean;
-  why?: string;
 };
 
 const tiers: Tier[] = [
@@ -57,7 +56,6 @@ const tiers: Tier[] = [
       { text: "Halaman tambahan (add-on)", included: true },
       { text: "Admin panel / CMS", included: false },
     ],
-    why: "Paling seimbang: cukup lengkap untuk tampil meyakinkan, tanpa bayar fitur yang belum kamu butuhkan.",
   },
   {
     name: "Web App / Custom",
@@ -117,12 +115,6 @@ function TierCard({ tier }: { tier: Tier }) {
         )}
         <p className="text-[32px] font-medium leading-[1.1] tracking-[-0.03em]">{tier.price}</p>
       </div>
-      <p className={`mt-3 text-[14px] leading-[1.55] ${dark ? "text-on-dark-muted" : "text-muted"}`}>{tier.note}</p>
-
-      <Button href={waLink(`Halo, saya tertarik dengan ${tier.name}.`)} variant={dark ? "primary" : "secondary"} className="mt-6 w-full">
-        {tier.cta}
-      </Button>
-
       <div className={`my-6 border-t ${dark ? "border-white/10" : "border-line"}`} />
 
       <ul className="flex flex-col gap-3">
@@ -138,12 +130,23 @@ function TierCard({ tier }: { tier: Tier }) {
         ))}
       </ul>
 
-      {tier.why && (
-        <div className="mt-6 rounded-xl bg-white/5 p-4">
-          <p className="text-[14px] leading-[1.55] font-medium">Kenapa pilihan ini?</p>
-          <p className="mt-1 text-[14px] leading-[1.55] text-on-dark-body">{tier.why}</p>
-        </div>
-      )}
+      {/* Button and renewal note close the card. The wrapper takes mt-auto rather than the
+          button, so it can also carry a minimum gap: with mt-auto on the button itself, a
+          long feature list left no room and the button sat flush against the last item.
+
+          Bottom-aligning keeps the three buttons level despite different list lengths, and
+          the order matches how the card is read: price, what you get, then the action. The
+          renewal sits under the button, as the small print it is. */}
+      <div className="mt-auto pt-8">
+        <Button
+          href={waLink(`Halo, saya tertarik dengan ${tier.name}.`)}
+          variant={dark ? "primary" : "secondary"}
+          className="w-full"
+        >
+          {tier.cta}
+        </Button>
+        <p className={`mt-3 text-[14px] leading-[1.55] ${dark ? "text-on-dark-muted" : "text-muted"}`}>{tier.note}</p>
+      </div>
     </div>
   );
 }
