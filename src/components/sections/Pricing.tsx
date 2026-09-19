@@ -103,12 +103,19 @@ function TierCard({ tier }: { tier: Tier }) {
       </div>
       <p className={`mt-2 text-[14px] leading-[1.55] ${dark ? "text-on-dark-body" : "text-body"}`}>{tier.desc}</p>
 
-      <div className="mt-6 flex flex-wrap items-baseline gap-x-2">
+      {/* The qualifier sits on its own line above the figure rather than beside it: at
+          32px the price dwarfs a 14px neighbour, and a struck price on the same baseline
+          reads as part of the amount. */}
+      <div className="mt-6">
         {tier.oldPrice && (
-          <span className={`text-[14px] leading-[1.55] line-through ${dark ? "text-on-dark-muted" : "text-muted"}`}>{tier.oldPrice}</span>
+          <p className={`text-[14px] leading-[1.55] line-through ${dark ? "text-on-dark-muted" : "text-muted"}`}>
+            {tier.oldPrice}
+          </p>
         )}
-        {tier.pricePrefix && <span className={`text-[14px] leading-[1.55] ${dark ? "text-on-dark-body" : "text-body"}`}>{tier.pricePrefix}</span>}
-        <span className="text-[32px] font-medium leading-[1.1] tracking-[-0.03em]">{tier.price}</span>
+        {tier.pricePrefix && (
+          <p className={`text-[14px] leading-[1.55] ${dark ? "text-on-dark-body" : "text-body"}`}>{tier.pricePrefix}</p>
+        )}
+        <p className="text-[32px] font-medium leading-[1.1] tracking-[-0.03em]">{tier.price}</p>
       </div>
       <p className={`mt-3 text-[14px] leading-[1.55] ${dark ? "text-on-dark-muted" : "text-muted"}`}>{tier.note}</p>
 
