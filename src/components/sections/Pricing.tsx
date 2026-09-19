@@ -20,8 +20,8 @@ const tiers: Tier[] = [
   {
     name: "Landing Page",
     desc: "Satu halaman fokus untuk promosi, produk, atau profil singkat.",
-    oldPrice: "Rp2.990.000",
-    price: "Rp1.990.000",
+    oldPrice: "Rp2.190.000",
+    price: "Rp1.490.000",
     cta: "Mulai Sekarang",
     note: "Perpanjangan domain & hosting: Rp750.000/tahun mulai tahun ke-2",
     features: [
