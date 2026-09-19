@@ -60,6 +60,10 @@ export default function Cta() {
    edge the way it does in the design. The wrapper rounds off its bottom corners to match
    the card, so the figure's feet follow the card's curve instead of cutting across it.
 
+   Height is set from the overhang, not copied from the design: Figma's card is 211px to
+   ours at ~297px, since our copy runs longer. There the figure clears the top edge by 18%
+   of its own height, and 440px put ours at 33% -- towering rather than leaning in.
+
    The grid beside it reserves the column, so the copy never runs underneath. */
 function Portrait() {
   return (
@@ -70,7 +74,7 @@ function Portrait() {
         width={684}
         height={1024}
         sizes="(max-width: 1024px) 0px, 340px"
-        className="block h-[400px] w-auto xl:h-[440px]"
+        className="block h-[360px] w-auto xl:h-[380px]"
       />
     </div>
   );
