@@ -1,16 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui";
-import { EMAIL, INSTAGRAM, WHATSAPP } from "@/lib/contact";
-import { Instagram, Mail, Whatsapp } from "@/components/ui/icons";
+import { INSTAGRAM, WHATSAPP } from "@/lib/contact";
+import { Instagram, Whatsapp } from "@/components/ui/icons";
 
-/* Every way to reach us in one list -- socials sit alongside email and WhatsApp rather
-   than in a column of their own, since both answer the same question. Labels carry the
-   real address or handle where there is one, so it can be read without clicking. */
+/* Every way to reach us in one list -- the social profile sits alongside WhatsApp rather
+   than in a column of its own, since both answer the same question. Labels carry the real
+   number or handle, so they can be read without clicking.
+
+   The number is shown in local form: 6282... is what wa.me needs, but 0822... is what an
+   Indonesian reader recognises as a phone number. */
 const contacts = [
-  { label: WHATSAPP || "WhatsApp", icon: Whatsapp, href: WHATSAPP ? `https://wa.me/${WHATSAPP}` : "" },
-  { label: EMAIL || "Email", icon: Mail, href: EMAIL ? `mailto:${EMAIL}` : "" },
-  { label: "Instagram", icon: Instagram, href: INSTAGRAM },
+  { label: "0822 5809 6886", icon: Whatsapp, href: `https://wa.me/${WHATSAPP}` },
+  { label: "@webdev.co.id", icon: Instagram, href: INSTAGRAM },
 ];
 
 /* In-page destinations, matching the navbar. Keep in step with `menu` in Navbar.tsx. */

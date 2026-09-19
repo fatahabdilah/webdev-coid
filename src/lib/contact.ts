@@ -1,21 +1,19 @@
 /* Off-site destinations in one place, so a change lands everywhere at once.
 
-   TODO: fill these in before launch. They are deliberately left empty rather than guessed:
-   a made-up handle, number or address renders as a working link and would ship unnoticed,
-   while an empty one is visibly unfinished. Every caller checks before rendering, so
-   nothing pretends to be clickable.
+   WHATSAPP is the number in international form, no "+" and no spaces: the local 0 is
+   replaced by 62, which is what wa.me expects.
 
-   WHATSAPP is the number in international form, no "+" and no spaces, e.g. 6281234567890. */
-export const WHATSAPP = "";
+   EMAIL is deliberately empty -- there is no address to publish yet. Every caller checks
+   before rendering, so an empty value drops the row rather than shipping a dead link. */
+export const WHATSAPP = "6282258096886";
 export const EMAIL = "";
-export const INSTAGRAM = "";
+export const INSTAGRAM = "https://instagram.com/webdev.co.id";
 
-/* Where a "Konsultasi Gratis" button should send someone.
+/* Where a "Konsultasi Gratis" button should send someone: a WhatsApp chat, opened with a
+   message suited to wherever it was clicked.
 
-   Until the number exists this falls back to #konsultasi, the CTA section, which is a
-   dead end: it offers the same button again. That is the honest placeholder -- better a
-   visible loop than a wa.me link to a number nobody answers. Fill in WHATSAPP and every
-   CTA on the page starts opening a real chat instead. */
+   Falls back to #konsultasi if the number is ever emptied -- a visible loop back to the
+   CTA section beats a wa.me link to a number nobody answers. */
 export const waLink = (message?: string) =>
   WHATSAPP
     ? `https://wa.me/${WHATSAPP}${message ? `?text=${encodeURIComponent(message)}` : ""}`
