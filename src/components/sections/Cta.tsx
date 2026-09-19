@@ -5,42 +5,48 @@ import { waLink } from "@/lib/contact";
 
 export default function Cta() {
   return (
-    /* Two columns from lg: the ask on the left, the photo on the right. Below lg the photo
-       is dropped rather than stacked -- it would only push the button off the first screen,
-       and the button is the point of the section.
+    /* A card on the page rather than a full-bleed band: rounded, inset by the container's
+       own gutter, with the figure breaking out over its top edge. The section itself does
+       not clip, which is what lets the photo overhang.
 
-       The art stays anchored bottom: anchored top it took the near-black end of the
-       gradient and the section lost all its colour. */
-    <Section id="konsultasi" className="relative overflow-hidden bg-navy text-white">
-      {/* The art is a smooth gradient, which is exactly what shows banding when stretched.
-          It is stored at 1600px with fine dither baked in; `sizes` keeps the browser from
-          picking a small variant and re-introducing the steps. */}
-      <Image
-        src="/images/cta-bg.webp"
-        alt=""
-        fill
-        sizes="100vw"
-        quality={95}
-        className="pointer-events-none object-cover object-bottom"
-      />
+       bg-offwhite matches the pricing section above it, so the two read as one stretch of
+       page with a card sitting on it rather than as two different grounds. */
+    <Section id="konsultasi" className="bg-offwhite">
+      <Container>
+        <div className="relative rounded-3xl bg-navy text-white">
+          {/* The art is a smooth gradient, which is exactly what shows banding when
+              stretched. It is stored at 1600px with fine dither baked in; `sizes` keeps the
+              browser from picking a small variant and re-introducing the steps.
 
-      <Portrait />
+              Clipped by its own rounded wrapper rather than by the card, so the corners
+              stay round while the photo above remains free to overhang. */}
+          <span className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl">
+            <Image
+              src="/images/cta-bg.webp"
+              alt=""
+              fill
+              sizes="100vw"
+              quality={95}
+              className="object-cover object-bottom"
+            />
+          </span>
 
-      <Container className="relative lg:grid lg:grid-cols-[1fr_340px] lg:gap-16 xl:grid-cols-[1fr_400px]">
-        <div className="text-center lg:text-left">
-          <h2 className="text-[26px] font-medium leading-[1.25] tracking-[-0.03em] text-balance md:text-[30px]">
-            Sudah kebayang websitenya?
-            <br />
-            Yuk, wujudkan sekarang.
-          </h2>
-          <p className="mx-auto mt-4 max-w-[600px] text-base leading-[1.6] text-on-dark-body lg:mx-0">
-            Konsultasi gratis dulu. Kami bantu tentukan jenis website yang paling pas untuk bisnis kamu, tanpa
-            komitmen.
-          </p>
-          <Button href={waLink("Halo, saya mau konsultasi soal website.")} variant="white" className="mt-8">
-            <Whatsapp className="size-5" />
-            Konsultasi Gratis
-          </Button>
+          <Portrait />
+
+          <div className="relative px-8 py-12 text-center md:px-12 md:py-14 lg:grid lg:grid-cols-[1fr_300px] lg:gap-10 lg:text-left xl:grid-cols-[1fr_340px]">
+            <div>
+              <h2 className="text-[26px] font-medium leading-[1.25] tracking-[-0.03em] text-balance md:text-[30px]">
+                Website sesuai kebutuhan bisnis
+              </h2>
+              <p className="mx-auto mt-4 max-w-[480px] text-base leading-[1.6] text-on-dark-body lg:mx-0">
+                Dari company profile, landing page, sampai web app. Dirancang khusus untuk tujuan bisnis kamu.
+              </p>
+              <Button href={waLink("Halo, saya mau konsultasi soal website.")} variant="white" className="mt-8">
+                <Whatsapp className="size-5" />
+                Chat via WhatsApp
+              </Button>
+            </div>
+          </div>
         </div>
       </Container>
     </Section>
@@ -50,26 +56,21 @@ export default function Cta() {
 /* Someone reading a message on their phone -- the moment the button leads to. Decorative,
    so it carries an empty alt.
 
-   Pinned to the section's own bottom edge rather than placed in the grid, so the figure
-   stands on the panel instead of ending in a horizontal cut across the waist. The section
-   pads 96px below its content, and the photo ignores that padding -- which is the point:
-   in the grid it stopped short and the straight edge read as a pasted cutout.
+   Flush to the card's right edge and taller than the card, so the head rises past the top
+   edge the way it does in the design. The wrapper rounds off its bottom corners to match
+   the card, so the figure's feet follow the card's curve instead of cutting across it.
 
-   The column it occupies is reserved in the grid beside it, so the copy never runs under
-   the figure. */
+   The grid beside it reserves the column, so the copy never runs underneath. */
 function Portrait() {
   return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute inset-x-0 bottom-0 mx-auto hidden w-full max-w-[1200px] px-6 lg:block lg:px-10"
-    >
+    <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 hidden justify-end overflow-hidden rounded-b-3xl lg:flex">
       <Image
         src="/images/cta-orang.webp"
         alt=""
         width={684}
         height={1024}
-        sizes="(max-width: 1024px) 0px, 400px"
-        className="ml-auto block h-[380px] w-auto xl:h-[440px]"
+        sizes="(max-width: 1024px) 0px, 340px"
+        className="block h-[400px] w-auto xl:h-[440px]"
       />
     </div>
   );
