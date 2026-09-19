@@ -64,6 +64,10 @@ export default function Cta() {
    ours at ~297px, since our copy runs longer. There the figure clears the top edge by 18%
    of its own height, and 440px put ours at 33% -- towering rather than leaning in.
 
+   shrink-0 matters: the wrapper is a flex row, and without it the image is stretched to
+   the row's cross size, which distorted the figure the moment the source's aspect ratio
+   changed.
+
    The grid beside it reserves the column, so the copy never runs underneath. */
 function Portrait() {
   return (
@@ -71,10 +75,10 @@ function Portrait() {
       <Image
         src="/images/cta-orang.webp"
         alt=""
-        width={684}
-        height={1024}
+        width={281}
+        height={329}
         sizes="(max-width: 1024px) 0px, 340px"
-        className="block h-[360px] w-auto xl:h-[380px]"
+        className="block h-[360px] w-auto shrink-0 xl:h-[380px]"
       />
     </div>
   );
