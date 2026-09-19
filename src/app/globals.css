@@ -87,30 +87,36 @@
   box-shadow: 0 18px 40px -20px rgb(0 52 102 / 0.38);
 }
 
-/* Buttons sit slightly proud of the page. Three layers, all in the brand's hue rather
-   than neutral black, matching shadow-lift:
+/* Buttons are moulded rather than merely shadowed, following the treatment in the
+   div-development frontend. Three things do the work:
 
-   1. a tight contact shadow, so the button meets the page instead of floating
-   2. a softer drop below it, which is what reads as height
-   3. an inset highlight along the top edge -- the light in the room catching the face of
-      the button. It is what makes the shape feel moulded rather than merely shadowed.
+   1. a radial whose source sits just outside the top-left corner, so the face is lit
+      unevenly the way a real surface would be -- a flat fill or a linear gradient both
+      read as paint instead of light
+   2. paired insets: white along the top edge where the light lands, dark along the bottom
+      where the face turns away. This pair is what gives the button its thickness.
+   3. a hairline outline set inside the edge, which keeps the shape crisp against both the
+      white sections and the navy ones
 
-   Kept shallow on purpose: the page is flat everywhere else, and a button that stands too
-   far off it looks borrowed from another design. */
+   Colours are ours: the radial runs from a lifted primary to primary proper, where the
+   reference runs orange. */
 @utility btn-raised {
+  background-image: radial-gradient(63% 56% at 22% -11%, #3d94e8 0%, var(--color-primary) 100%);
   box-shadow:
-    0 1px 2px rgb(0 20 45 / 0.28),
-    0 4px 10px -2px rgb(0 20 45 / 0.22),
-    inset 0 1px 0 rgb(255 255 255 / 0.22);
+    inset 0 4px 8px rgb(255 255 255 / 0.15),
+    inset 0 -4px 6px rgb(0 20 45 / 0.18),
+    0 1px 2px rgb(0 20 45 / 0.25);
+  outline: 1px solid rgb(255 255 255 / 0.12);
+  outline-offset: -1px;
 }
 
-/* The pressed state: the button settles into the page. The drop collapses and the
-   highlight moves to the bottom, as if the light now catches the far edge. Paired with
-   the 0.97 scale, the whole thing reads as one gesture. */
+/* The pressed state: the insets swap over, so the light now catches the bottom edge and
+   the top falls into shade -- the face has tipped away. Paired with the 0.97 scale, the
+   whole thing reads as one gesture. */
 @utility btn-pressed {
   box-shadow:
-    0 1px 1px rgb(0 20 45 / 0.3),
-    inset 0 1px 2px rgb(0 20 45 / 0.22);
+    inset 0 -3px 6px rgb(255 255 255 / 0.1),
+    inset 0 4px 8px rgb(0 20 45 / 0.3);
 }
 
 /* Ambient glow for the featured pricing card: two pools of light entering at opposite
@@ -131,13 +137,17 @@
     radial-gradient(150% 110% at 50% 50%, rgb(0 14 32 / 0.82), transparent 78%);
 }
 
-/* Light buttons need a darker highlight to read at all -- white on white is invisible --
-   and a shadow that does not muddy them. */
+/* The same moulding on a white face. The radial barely lifts -- white has nowhere
+   brighter to go -- so the shape is carried by the lower inset and the outline, both
+   darker here since a white highlight would be invisible. */
 @utility btn-raised-light {
+  background-image: radial-gradient(63% 56% at 22% -11%, #ffffff 0%, #eef2f8 100%);
   box-shadow:
-    0 1px 2px rgb(0 20 45 / 0.16),
-    0 4px 10px -2px rgb(0 20 45 / 0.14),
-    inset 0 -1px 0 rgb(0 20 45 / 0.08);
+    inset 0 3px 6px rgb(255 255 255 / 0.9),
+    inset 0 -3px 5px rgb(0 20 45 / 0.1),
+    0 1px 2px rgb(0 20 45 / 0.16);
+  outline: 1px solid rgb(0 20 45 / 0.08);
+  outline-offset: -1px;
 }
 
 /* Placeholder images from the design file lean purple; shift them toward brand blue. */
