@@ -113,16 +113,25 @@
     inset 0 1px 2px rgb(0 20 45 / 0.22);
 }
 
-/* Ambient glow for the featured pricing card: a pool of brand blue bleeding down from the
-   top, so the card looks lit rather than merely filled. Two stops -- a tight bright core
-   and a wide soft falloff -- because a single radial reads as a flat disc.
+/* Ambient glow for the featured pricing card: light falling in from the top-left corner
+   across a navy ground, so the card reads as lit rather than merely filled. Three layers,
+   because one radial alone looks like a flat disc:
 
-   Sits on the card's own background, under the content. The card keeps bg-surface, so the
-   bottom stays near-black and the glow is clearly a light source, not a gradient fill. */
+   1. a bright core at the corner, the light source itself
+   2. a wide falloff carrying it across the upper half
+   3. a deep navy wash anchoring the far corner, so the card has somewhere to fall off to
+
+   Paired with bg-navy, not bg-surface: a neutral-black ground made the blue read as a
+   stain on something grey rather than as one lit surface.
+
+   The core is held back from its brightest: at full strength the corner reached
+   rgb(0,95,184), where on-dark-body fell to 3.7:1 and the description under the heading
+   stopped clearing the small-text threshold. */
 @utility bg-ambient-brand {
   background-image:
-    radial-gradient(75% 50% at 50% -5%, rgb(0 102 203 / 0.75), transparent 72%),
-    radial-gradient(130% 80% at 50% -15%, rgb(0 52 102 / 0.8), transparent 78%);
+    radial-gradient(55% 40% at 10% 0%, rgb(0 108 205 / 0.42), transparent 70%),
+    radial-gradient(110% 70% at 0% 5%, rgb(0 82 163 / 0.38), transparent 74%),
+    radial-gradient(120% 100% at 100% 100%, rgb(0 24 50 / 0.9), transparent 72%);
 }
 
 /* Light buttons need a darker highlight to read at all -- white on white is invisible --
