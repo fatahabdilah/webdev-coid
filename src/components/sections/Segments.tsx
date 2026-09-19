@@ -8,8 +8,9 @@ import WorkRow, { type Work } from "./WorkRow";
    Cards are labelled with the domain rather than the business name: it is the thing we
    actually delivered, and it doubles as proof the site is live.
 
-   arifsyauqi.com is real. The rest are still examples, consistent with the Cara Kerja
-   showcase, so their domains are invented too and must not be linked anywhere.
+   arifsyauqi.com and sekartama-upvc.com are real. The rest are still examples, consistent
+   with the Cara Kerja showcase, so their domains are invented too and must not be linked
+   anywhere.
 
    TODO: replace the remaining placeholders with real client work before launch. Real
    entries link to the live site; placeholders point back at the section so nothing leads
@@ -21,6 +22,12 @@ const works: Work[] = [
     client: "arifsyauqi.com",
     photoWide: "/images/work/w169-arif.webp",
     photoSquare: "/images/work/w11-arif.webp",
+  },
+  {
+    href: "https://sekartama-upvc.com",
+    client: "sekartama-upvc.com",
+    photoWide: "/images/work/w169-sekartama.webp",
+    photoSquare: "/images/work/w11-sekartama.webp",
   },
   {
     href: "#portfolio",
