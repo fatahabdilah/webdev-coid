@@ -99,7 +99,7 @@ function TierCard({ tier }: { tier: Tier }) {
         {tier.pricePrefix && (
           <p className={`text-[14px] leading-[1.55] ${dark ? "text-on-dark-body" : "text-body"}`}>{tier.pricePrefix}</p>
         )}
-        <p className="text-[32px] font-medium leading-[1.1] tracking-[-0.03em]">{tier.price}</p>
+        <Price value={tier.price} />
       </div>
       <div className={`my-6 border-t ${dark ? "border-white/10" : "border-line"}`} />
 
@@ -134,6 +134,23 @@ function TierCard({ tier }: { tier: Tier }) {
         <p className={`mt-3 text-[14px] leading-[1.55] ${dark ? "text-on-dark-muted" : "text-muted"}`}>{tier.note}</p>
       </div>
     </div>
+  );
+}
+
+/* The trailing thousands set smaller than the rest. "Rp1.990.000" at one size gives the
+   last three zeroes the same weight as the figure that actually varies between tiers;
+   shrinking them lets the eye land on 1,99 / 2,99 / 4,99, which is the comparison being
+   made. Aligned to the baseline rather than the top, so the tail sits on the same line
+   the big digits stand on. */
+function Price({ value }: { value: string }) {
+  const cut = value.lastIndexOf(".");
+  const head = cut === -1 ? value : value.slice(0, cut);
+  const tail = cut === -1 ? "" : value.slice(cut);
+  return (
+    <p className="text-[32px] font-medium leading-[1.1] tracking-[-0.03em]">
+      {head}
+      {tail && <span className="text-[20px]">{tail}</span>}
+    </p>
   );
 }
 
