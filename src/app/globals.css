@@ -132,9 +132,9 @@
    stopped clearing the small-text threshold. */
 @utility bg-ambient-brand {
   background-image:
-    radial-gradient(48% 34% at 8% 0%, rgb(0 92 180 / 0.5), transparent 70%),
-    radial-gradient(52% 32% at 96% 100%, rgb(0 86 170 / 0.45), transparent 70%),
-    radial-gradient(150% 110% at 50% 50%, rgb(0 14 32 / 0.82), transparent 78%);
+    radial-gradient(48% 34% at 8% 0%, rgb(0 64 128 / 0.5), transparent 70%),
+    radial-gradient(52% 32% at 96% 100%, rgb(0 58 118 / 0.45), transparent 70%),
+    radial-gradient(150% 110% at 50% 50%, rgb(0 10 24 / 0.86), transparent 78%);
 }
 
 /* The same moulding on a white face. The radial barely lifts -- white has nowhere
