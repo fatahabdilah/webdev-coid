@@ -113,25 +113,22 @@
     inset 0 1px 2px rgb(0 20 45 / 0.22);
 }
 
-/* Ambient glow for the featured pricing card: light falling in from the top-left corner
-   across a navy ground, so the card reads as lit rather than merely filled. Three layers,
-   because one radial alone looks like a flat disc:
+/* Ambient glow for the featured pricing card: two pools of light entering at opposite
+   corners -- top-left and bottom-right -- across a deep navy ground, with the middle left
+   dark. Lighting both corners rather than one gives the card a diagonal, and keeps the
+   darkest band running through the centre where most of the text sits.
 
-   1. a bright core at the corner, the light source itself
-   2. a wide falloff carrying it across the upper half
-   3. a deep navy wash anchoring the far corner, so the card has somewhere to fall off to
+   Paired with a near-black navy wash, not bg-surface: a neutral-black ground made the blue
+   read as a stain on something grey rather than as one lit surface.
 
-   Paired with bg-navy, not bg-surface: a neutral-black ground made the blue read as a
-   stain on something grey rather than as one lit surface.
-
-   The core is held back from its brightest: at full strength the corner reached
+   Both cores are held back from their brightest. At full strength the top corner reached
    rgb(0,95,184), where on-dark-body fell to 3.7:1 and the description under the heading
    stopped clearing the small-text threshold. */
 @utility bg-ambient-brand {
   background-image:
-    radial-gradient(55% 40% at 10% 0%, rgb(0 108 205 / 0.42), transparent 70%),
-    radial-gradient(110% 70% at 0% 5%, rgb(0 82 163 / 0.38), transparent 74%),
-    radial-gradient(120% 100% at 100% 100%, rgb(0 24 50 / 0.9), transparent 72%);
+    radial-gradient(48% 34% at 8% 0%, rgb(0 92 180 / 0.5), transparent 70%),
+    radial-gradient(52% 32% at 96% 100%, rgb(0 86 170 / 0.45), transparent 70%),
+    radial-gradient(150% 110% at 50% 50%, rgb(0 14 32 / 0.82), transparent 78%);
 }
 
 /* Light buttons need a darker highlight to read at all -- white on white is invisible --
