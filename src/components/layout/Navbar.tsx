@@ -53,16 +53,26 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
-  /* Escape closes it. The page is no longer locked while the menu is open: the panel
-     hangs off the bar rather than covering the page, so freezing what is visible behind
-     it would be stopping something the menu is not in the way of. */
+  /* Escape closes it, and so does growing past md: the panel is md:hidden, but `open`
+     would stay true and keep the bar white with nothing to show for it.
+
+     The page is no longer locked while the menu is open: the panel hangs off the bar
+     rather than covering the page, so freezing what is visible behind it would be
+     stopping something the menu is not in the way of. */
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
+    const wide = window.matchMedia("(min-width: 48rem)");
+    const onWide = () => wide.matches && setOpen(false);
+    onWide();
+    wide.addEventListener("change", onWide);
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => {
+      wide.removeEventListener("change", onWide);
+      window.removeEventListener("keydown", onKey);
+    };
   }, [open]);
 
   useEffect(() => {
@@ -87,7 +97,10 @@ export default function Navbar() {
        logo and text switch to their dark versions. */
     <header
       className={`group fixed inset-x-0 top-0 z-50 text-white ${BAR}`}
-      data-scrolled={scrolled ? "" : undefined}
+      /* The open menu turns the bar over too, so the panel hanging off it is not a white
+         sheet clipped to a transparent bar. The menu only exists below md, and `open`
+         cannot be true above it -- the button that sets it is md:hidden. */
+      data-scrolled={scrolled || open ? "" : undefined}
     >
       <Container className="relative flex h-18 items-center justify-between">
         <Link href="/" aria-label="webdev.co.id" className="relative block h-8 w-39">
@@ -194,32 +207,28 @@ function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) 
         }`}
         aria-hidden={!open}
       >
-        {/* One ground, not two: glass-panel lays white 10% over whatever is behind it,
-            and a dark fill stacked under that left the panel milky -- neither glass nor
-            a solid. Here the dark IS the ground, with the blur and hairline that make it
-            glass. Neutral rather than navy, which read as a blue card. */}
-        <div className="overflow-hidden rounded-[22px] border border-white/15 bg-surface/90 p-2 backdrop-blur-xl">
+        {/* White, like the bar it hangs from, which turns white as it opens: the two read
+            as one surface rather than a dark card clipped to a light bar. The shadow does
+            the separating, the same one the scrolled bar casts. */}
+        <div className="overflow-hidden rounded-[22px] border border-line bg-white p-2 shadow-[0_8px_24px_rgba(10,10,10,0.14)]">
           <nav className="flex flex-col">
             {menu.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
                 onClick={onClose}
-                className="flex h-12 items-center rounded-2xl px-4 text-[16px] leading-[1.5] text-white transition-colors duration-200 active:bg-white/10"
+                className="flex h-12 items-center rounded-2xl px-4 text-[16px] leading-[1.5] text-ink transition-colors duration-200 active:bg-offwhite"
               >
                 {item.label}
               </Link>
             ))}
           </nav>
 
-          <Link
-            href={waLink("Halo, saya mau konsultasi soal website.")}
-            onClick={onClose}
-            className="mt-2 inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-white text-[16px] leading-[1.6] font-semibold text-navy transition-[scale] duration-200 ease-out active:scale-[0.97]"
-          >
+          {/* The page's own button, so the one action looks the same here as everywhere. */}
+          <Button href={waLink("Halo, saya mau konsultasi soal website.")} onClick={onClose} className="mt-2 w-full">
             <Whatsapp className="size-5" />
             Konsultasi Gratis
-          </Link>
+          </Button>
         </div>
       </div>
     </>

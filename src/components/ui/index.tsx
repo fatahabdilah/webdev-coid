@@ -86,12 +86,16 @@ export function Button({
   variant = "primary",
   size = "md",
   className = "",
+  onClick,
   children,
 }: {
   href: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
   className?: string;
+  /* For callers that need to do something as well as navigate -- the phone menu closes
+     itself, since WhatsApp opens elsewhere and the panel would still be up on return. */
+  onClick?: () => void;
   children: ReactNode;
 }) {
   /* Filled buttons sit slightly proud of the page (btn-raised: navy-tinted shadow plus a
@@ -108,6 +112,7 @@ export function Button({
   return (
     <Link
       href={href}
+      onClick={onClick}
       /* Colour on hover, a small give on press. The press is the same gesture the send
          button in the showcase makes, so the whole page answers a tap the same way. */
       className={`inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-[background-color,border-color,color,box-shadow,scale] duration-200 ease-out active:scale-[0.97] ${sizes[size]} ${variants[variant]} ${className}`}
