@@ -63,23 +63,23 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
-  /* Escape closes it, and so does growing past md: the panel is md:hidden, but `open`
-     would stay true and keep the bar white with nothing to show for it.
-
-     The page is no longer locked while the menu is open: the panel hangs off the bar
-     rather than covering the page, so freezing what is visible behind it would be
-     stopping something the menu is not in the way of. */
+  /* Escape closes it, and so does growing past md: the panel is md:hidden, so past that
+     width `open` would stay true with nothing on screen and the page still locked. */
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
+    /* The panel covers the bar, so the page behind it should hold still: scrolling it
+       would slide the hero out from under something that is not moving. */
+    document.body.style.overflow = "hidden";
     const wide = window.matchMedia("(min-width: 48rem)");
     const onWide = () => wide.matches && setOpen(false);
     onWide();
     wide.addEventListener("change", onWide);
     window.addEventListener("keydown", onKey);
     return () => {
+      document.body.style.overflow = "";
       wide.removeEventListener("change", onWide);
       window.removeEventListener("keydown", onKey);
     };
@@ -106,11 +106,8 @@ export default function Navbar() {
     /* Transparent over the hero; once the page scrolls the bar itself turns white and the
        logo and text switch to their dark versions. */
     <header
-      className={`group fixed inset-x-0 top-0 z-50 text-white ${BAR} ${scrolled && !open ? BAR_SHADOW : ""}`}
-      /* The open menu turns the bar over too, so the panel hanging off it is not a white
-         sheet clipped to a transparent bar. The menu only exists below md, and `open`
-         cannot be true above it -- the button that sets it is md:hidden. */
-      data-scrolled={scrolled || open ? "" : undefined}
+      className={`group fixed inset-x-0 top-0 z-50 text-white ${BAR} ${scrolled ? BAR_SHADOW : ""}`}
+      data-scrolled={scrolled ? "" : undefined}
     >
       <Container className="relative flex h-18 items-center justify-between">
         <Link href="/" aria-label="webdev.co.id" className="relative block h-8 w-39">
@@ -170,73 +167,85 @@ export default function Navbar() {
           </Button>
         </span>
 
-        {/* One button both ways now the panel hangs off the bar: there is no sheet
-            header to carry a close of its own. */}
+        {/* Opens only: the panel lies over this bar and carries its own close in the
+            same spot, so this one is never the button being tapped to shut it. */}
         <button
           type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Tutup menu" : "Buka menu"}
+          onClick={() => setOpen(true)}
+          aria-label="Buka menu"
           aria-expanded={open}
           className={`relative -mr-2 inline-flex size-11 items-center justify-center rounded-full transition-[scale] duration-150 ease-out active:scale-90 md:hidden ${INK_WHEN_SCROLLED}`}
         >
-          {open ? <Close className="size-6" /> : <Menu className="size-6" />}
+          <Menu className="size-6" />
         </button>
       </Container>
 
-      <MobileSheet open={open} onClose={() => setOpen(false)} />
+      <MobileSheet open={open} onClose={() => setOpen(false)} onToggle={() => setOpen((v) => !v)} />
     </header>
   );
 }
 
-/* A panel that drops out of the bar rather than a screen that swallows the page: the
-   hero stays visible behind it, so the menu reads as part of the site rather than a
-   place you have been taken to. Glass, because that is what every other floating
-   surface here is.
+/* One panel carrying its own bar, laid over the real one rather than hung beneath it.
+
+   The bar underneath is left alone: it does not turn white, and nothing has to be timed
+   against it, because while this is up it is not the thing being looked at. That is what
+   the earlier versions kept getting wrong -- a white sheet arriving under a bar that was
+   still going white read as two surfaces however closely the clocks were matched.
 
    Links are 48px tall -- the bare text in the footer measured 18px, which is a miss
    waiting to happen on a touch screen. */
-function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
+function MobileSheet({
+  open,
+  onClose,
+  onToggle,
+}: {
+  open: boolean;
+  onClose: () => void;
+  onToggle: () => void;
+}) {
   return (
     <>
-      {/* Catches the tap that closes it, and takes the page back a little so the panel
-          is clearly the thing in front. */}
+      {/* Takes the page back so the panel is clearly what is in front, and closes on a tap */}
       <div
         onClick={onClose}
         aria-hidden
-        className={`fixed inset-0 top-18 z-40 bg-ink/40 transition-opacity duration-300 ease-out md:hidden motion-reduce:transition-none ${
+        className={`fixed inset-0 z-40 bg-ink/40 transition-opacity duration-300 ease-out md:hidden motion-reduce:transition-none ${
           open ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       />
 
-      {/* Kept mounted so it can animate both ways; inert to pointer and keyboard when
-          shut.
+      {/* Kept mounted so it can animate both ways; inert to pointer and keyboard when shut */}
+      <div
+        className={`fixed inset-x-0 top-0 z-50 bg-white shadow-[0_2px_8px_rgba(10,10,10,0.10)] transition-opacity duration-300 ease-out md:hidden motion-reduce:transition-none ${
+          open ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+        aria-hidden={!open}
+      >
+        {/* Its own bar, matching the real one's height so the logo and the button land
+            where they already were and nothing appears to jump on open. */}
+        <Container className="flex h-18 items-center justify-between">
+          <Link href="/" onClick={onClose} aria-label="webdev.co.id" className="relative block h-8 w-39">
+            <Image src="/brand/logo-ink.svg" alt="webdev.co.id" fill className="object-contain" quality={100} />
+          </Link>
+          <button
+            type="button"
+            onClick={onToggle}
+            aria-label="Tutup menu"
+            aria-expanded={open}
+            className="-mr-2 inline-flex size-11 items-center justify-center rounded-full text-ink transition-[scale] duration-150 ease-out active:scale-90"
+          >
+            <Close className="size-6" />
+          </button>
+        </Container>
 
-          It slides rather than fades, and the wrapper clips it, so the panel comes out
-          from behind the bar and goes back the same way. Fading it left a half-opaque
-          white sheet over the dark scrim for the length of the transition, which is the
-          line that read as a shadow along the join -- and fading on its own clock while
-          the bar changed colour on another is what made the two look separate. */}
-      {/* The clip keeps its full height whether the panel is up or not, so it stays
-          transparent to the pointer and the panel inside takes the taps back. */}
-      <div className="pointer-events-none absolute inset-x-0 top-18 z-50 overflow-hidden md:hidden">
-        <div
-          className={`origin-top transition-[translate] duration-300 ease-out motion-reduce:transition-none ${
-            open ? "pointer-events-auto translate-y-0" : "-translate-y-full"
-          }`}
-          aria-hidden={!open}
-        >
-        {/* The bar, carried on downwards: same white, no corners, and the side borders
-            gone with them -- the bar has none either, so they were the last thing making
-            this a separate shape. One shadow along the bottom edge, the bar's own, since
-            the bar suppresses its while this is open. */}
-        <div className="bg-white px-4 pb-4 pt-2 shadow-[0_2px_8px_rgba(10,10,10,0.10)]">
+        <Container className="pb-4">
           <nav className="flex flex-col">
             {menu.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
                 onClick={onClose}
-                className="flex h-12 items-center rounded-2xl px-4 text-[16px] leading-[1.5] text-ink transition-colors duration-200 active:bg-offwhite"
+                className="flex h-12 items-center rounded-2xl text-[16px] leading-[1.5] text-ink transition-colors duration-200 active:bg-offwhite"
               >
                 {item.label}
               </Link>
@@ -248,8 +257,7 @@ function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) 
             <Whatsapp className="size-5" />
             Konsultasi Gratis
           </Button>
-          </div>
-        </div>
+        </Container>
       </div>
     </>
   );
