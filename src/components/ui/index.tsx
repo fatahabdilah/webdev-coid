@@ -4,7 +4,10 @@ import type { ReactNode } from "react";
 /* Layout primitives. Every section uses the same container width and vertical rhythm. */
 
 export function Container({ className = "", children }: { className?: string; children: ReactNode }) {
-  return <div className={`mx-auto w-full max-w-[1200px] px-6 lg:px-10 ${className}`}>{children}</div>;
+  /* 16px of gutter on phones, matching the Hostinger mobile frame (757:2), where a
+     390.4px screen carries a 358.4px column. px-6 left 342px and the cards inside were
+     noticeably tighter for it. From sm up there is room for the wider margin. */
+  return <div className={`mx-auto w-full max-w-[1200px] px-4 sm:px-6 lg:px-10 ${className}`}>{children}</div>;
 }
 
 export function Section({

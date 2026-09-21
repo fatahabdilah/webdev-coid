@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { PenLineOutline, ShieldCheckOutline } from "@/components/ui/icons";
+import { ArrowUpRight, PenLineOutline, ShieldCheckOutline } from "@/components/ui/icons";
 import { waLink } from "@/lib/contact";
 
 /* The two secondary cards. Exactly one preview is up at a time: the first card's
@@ -62,8 +62,12 @@ export default function ExtraCards() {
             </span>
           </span>
 
-          <span className="relative flex items-start">
+          {/* Icon left, arrow right on one row, as the Hostinger mobile frame (757:165)
+              lays these out. The arrow marks the card as somewhere to go, which the icon
+              alone never said. */}
+          <span className="relative flex items-start justify-between">
             <Icon className="size-6 text-ink" />
+            <ArrowUpRight className="size-5 text-muted transition-colors duration-200 group-hover:text-ink" />
           </span>
           {/* The 62% clearance is for the preview screen, which only exists from sm up;
               below that the text has the card to itself. */}
