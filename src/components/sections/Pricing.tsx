@@ -160,7 +160,7 @@ export default function Pricing() {
       <Container>
         <SectionHeader
           title="Website untuk segala bisnis"
-          description="Semua paket didesain custom dari nol — bukan template. Harga sudah termasuk domain dan hosting tahun pertama."
+          description="Semua didesain custom dari nol, bukan template. Harga sudah termasuk domain dan hosting tahun pertama."
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {tiers.map((tier) => (
