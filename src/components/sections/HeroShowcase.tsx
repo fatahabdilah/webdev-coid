@@ -71,7 +71,10 @@ export default function HeroShowcase() {
       </div>
 
       {/* From md the row of four, which is where it earns its keep. */}
-      <div className="hidden w-full gap-4 md:flex">
+      {/* gap-3 rather than gap-4: now that a resting card fills its button, the cards
+          sit closer than the flex gap alone suggests -- and next to the open card the
+          glass adds its own 10px, so 16px was reading as 26px there. */}
+      <div className="hidden w-full gap-3 md:flex">
         {items.map((item, i) => {
           const isActive = i === active;
           return (
