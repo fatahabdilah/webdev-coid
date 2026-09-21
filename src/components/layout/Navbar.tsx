@@ -37,6 +37,9 @@ const BAR =
      the separating on its own, with no bottom border, so the edge stays soft rather than
      drawing a hard line across the page. */
   "data-scrolled:bg-white data-scrolled:shadow-[0_2px_8px_rgba(10,10,10,0.10)] " +
+  /* The bar drops its shadow while the menu is open: it falls 2px onto the panel
+     joined below and draws a seam across the very join the shape removes. */
+  "data-menu-open:shadow-none " +
   "motion-reduce:transition-none";
 
 /* White ground needs dark text. The softer resting tone is baked into the start colour
@@ -101,6 +104,9 @@ export default function Navbar() {
          sheet clipped to a transparent bar. The menu only exists below md, and `open`
          cannot be true above it -- the button that sets it is md:hidden. */
       data-scrolled={scrolled || open ? "" : undefined}
+      /* Separate from data-scrolled, which the open menu also sets: this one is only for
+         what must change because the panel is hanging below. */
+      data-menu-open={open ? "" : undefined}
     >
       <Container className="relative flex h-18 items-center justify-between">
         <Link href="/" aria-label="webdev.co.id" className="relative block h-8 w-39">
@@ -202,15 +208,16 @@ function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) 
           shut. It slides up by a quarter of its own height on the way out, which reads
           as the panel retreating into the bar it came from. */}
       <div
-        className={`absolute inset-x-4 top-18 z-50 origin-top transition-[opacity,translate] duration-300 ease-out md:hidden motion-reduce:transition-none ${
+        className={`absolute inset-x-0 top-18 z-50 origin-top transition-[opacity,translate] duration-300 ease-out md:hidden motion-reduce:transition-none ${
           open ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0"
         }`}
         aria-hidden={!open}
       >
-        {/* White, like the bar it hangs from, which turns white as it opens: the two read
-            as one surface rather than a dark card clipped to a light bar. The shadow does
-            the separating, the same one the scrolled bar casts. */}
-        <div className="overflow-hidden rounded-[22px] border border-line bg-white p-2 shadow-[0_8px_24px_rgba(10,10,10,0.14)]">
+        {/* A continuation of the bar rather than a card under it: full width, square
+            across the top where the two meet, and only the bottom corners rounded. The
+            bar turns white as this opens, so there is no seam between them -- no top
+            border either, which would draw the line the shape is trying to avoid. */}
+        <div className="overflow-hidden rounded-b-[22px] border-x border-b border-line bg-white px-4 pb-4 pt-2 shadow-[0_8px_24px_rgba(10,10,10,0.14)]">
           <nav className="flex flex-col">
             {menu.map((item) => (
               <Link
