@@ -63,12 +63,17 @@ export default function ExtraCards() {
           </span>
 
           {/* Icon left, arrow right on one row, as the Hostinger mobile frame (757:165)
-              lays these out. The arrow only appears below sm, where the preview screen
-              does not: from sm up the screen rising out of the card already says this
-              goes somewhere, and two such signals on one card is one too many. */}
+              lays these out. The arrow stands in for the preview: whichever card is not
+              showing its screen carries one instead, so neither card is ever left with
+              nothing saying it leads somewhere -- and the one that is showing its screen
+              does not say it twice. Below sm no card has a preview, so both keep it. */}
           <span className="relative flex items-start justify-between">
             <Icon className="size-6 text-ink" />
-            <ArrowUpRight className="size-5 text-muted sm:hidden" />
+            <ArrowUpRight
+              className={`size-5 text-muted transition-opacity duration-300 ease-out motion-reduce:transition-none ${
+                shown === i ? "opacity-100 sm:opacity-0" : "opacity-100"
+              }`}
+            />
           </span>
           {/* The 62% clearance is for the preview screen, which only exists from sm up;
               below that the text has the card to itself. */}
