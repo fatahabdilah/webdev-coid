@@ -68,16 +68,19 @@ export default function Navbar() {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
-    /* The panel covers the bar, so the page behind it should hold still: scrolling it
-       would slide the hero out from under something that is not moving. */
-    document.body.style.overflow = "hidden";
+    /* Scrolling closes it rather than being blocked. The panel only covers the top
+       third or so of a phone, so locking the page froze a screenful the menu was not
+       even over -- and a page that will not move is easy to read as broken. Dismissing
+       on scroll is what the gesture means here anyway: the reader has moved on. */
+    const onScrollAway = () => setOpen(false);
+    window.addEventListener("scroll", onScrollAway, { passive: true });
     const wide = window.matchMedia("(min-width: 48rem)");
     const onWide = () => wide.matches && setOpen(false);
     onWide();
     wide.addEventListener("change", onWide);
     window.addEventListener("keydown", onKey);
     return () => {
-      document.body.style.overflow = "";
+      window.removeEventListener("scroll", onScrollAway);
       wide.removeEventListener("change", onWide);
       window.removeEventListener("keydown", onKey);
     };
