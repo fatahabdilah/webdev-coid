@@ -20,51 +20,66 @@ export default function HeroShowcase() {
           three still on offer beneath. The row of four only works where there is width
           to spend -- at 390px it left the active card 161px and the other three 54px
           each, too narrow to show any of the website inside. */}
-      <div className="flex flex-col gap-2 md:hidden">
+      <div className="flex flex-col md:hidden">
         {items.map((item, i) => {
           const isActive = i === active;
           return (
             <div key={item.label}>
-              {/* The open one drops its row: the card already shows which it is, and the
-                  label underneath it was saying the same thing twice. What stays is the
-                  three still to choose from. */}
-              {!isActive && (
-                <button
-                  type="button"
-                  onClick={() => setActive(i)}
-                  className="flex h-12 w-full items-center gap-2.5 rounded-2xl bg-white/10 px-4 text-[15px] leading-[1.5] font-medium text-white transition-colors duration-200"
-                >
-                  <item.icon className="size-4 shrink-0" />
-                  {item.label}
-                </button>
-              )}
+              {/* Both halves animate on a grid row rather than mounting and unmounting:
+                  0fr to 1fr moves a height nobody has to measure, which is what lets the
+                  card grow from nothing and the row close behind it. 500ms is the guide's
+                  step for a panel changing size. */}
+              <div
+                className={`grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
+                  isActive ? "grid-rows-[0fr]" : "grid-rows-[1fr]"
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <button
+                    type="button"
+                    onClick={() => setActive(i)}
+                    tabIndex={isActive ? -1 : undefined}
+                    aria-hidden={isActive}
+                    className={`mb-2 flex h-12 w-full items-center gap-2.5 rounded-2xl bg-white/10 px-4 text-[15px] leading-[1.5] font-medium text-white transition-opacity duration-300 ease-out motion-reduce:transition-none ${
+                      isActive ? "pointer-events-none opacity-0" : "opacity-100"
+                    }`}
+                  >
+                    <item.icon className="size-4 shrink-0" />
+                    {item.label}
+                  </button>
+                </div>
+              </div>
 
-              {/* Only the open card is mounted: four stacked <Image fill> would each
-                  claim their own layer whether shown or not. */}
-              {isActive && (
-                /* The glass is the outer box and the card sits inside it, rather than the
-                   frame reaching 10px beyond the card: outset, its 378px overhung the
-                   358px column and came within 6px of the screen edge. */
-                <div className="glass-panel mb-2 rounded-[22px] p-2.5">
-                  <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl">
-                    <Image
-                      src={item.src}
-                      alt={item.label}
-                      fill
-                      priority={i === 0}
-                      sizes="100vw"
-                      className={`object-cover ${item.tint ? "img-brand-tint" : ""}`}
-                      quality={100}
-                    />
-                    {/* Carries the name the hidden row used to, in the same pill the
-                        desktop cards use, so nothing has to be inferred from the photo. */}
-                    <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/50 px-3 py-1 text-[12px] leading-[1.45] font-medium text-ink backdrop-blur-md">
-                      <item.icon className="size-3.5" />
-                      {item.label}
-                    </span>
+              <div
+                className={`grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
+                  isActive ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                }`}
+              >
+                <div className="overflow-hidden">
+                  {/* The glass is the outer box and the card sits inside it, rather than
+                      the frame reaching 10px beyond the card: outset, its 378px overhung
+                      the 358px column and came within 6px of the screen edge. */}
+                  <div className="glass-panel mb-2 rounded-[22px] p-2.5">
+                    <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl">
+                      <Image
+                        src={item.src}
+                        alt={item.label}
+                        fill
+                        priority={i === 0}
+                        sizes="100vw"
+                        className={`object-cover ${item.tint ? "img-brand-tint" : ""}`}
+                        quality={100}
+                      />
+                      {/* Carries the name the hidden row used to, in the same pill the
+                          desktop cards use, so nothing has to be inferred from the photo. */}
+                      <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/50 px-3 py-1 text-[12px] leading-[1.45] font-medium text-ink backdrop-blur-md">
+                        <item.icon className="size-3.5" />
+                        {item.label}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              )}
+              </div>
             </div>
           );
         })}
