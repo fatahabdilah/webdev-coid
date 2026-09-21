@@ -36,11 +36,16 @@ const BAR =
      transparent, and a shadow there would hang in mid-air with nothing above it. It does
      the separating on its own, with no bottom border, so the edge stays soft rather than
      drawing a hard line across the page. */
-  "data-scrolled:bg-white data-scrolled:shadow-[0_2px_8px_rgba(10,10,10,0.10)] " +
-  /* The bar drops its shadow while the menu is open: it falls 2px onto the panel
-     joined below and draws a seam across the very join the shape removes. */
-  "data-menu-open:shadow-none " +
+  "data-scrolled:bg-white " +
   "motion-reduce:transition-none";
+
+/* The bar's shadow, applied only when the menu is shut: with the panel joined below, a
+   shadow falling 2px from the bar lands on it and rules a seam across the join.
+
+   Kept off data-scrolled rather than cancelled by a data-menu-open:shadow-none, which
+   lost -- same specificity, and Tailwind emitted it before the data-scrolled rule, so
+   the shadow never actually went away. */
+const BAR_SHADOW = "shadow-[0_2px_8px_rgba(10,10,10,0.10)]";
 
 /* White ground needs dark text. The softer resting tone is baked into the start colour
    rather than applied through opacity: animating both at once made the text dip pale
@@ -99,14 +104,11 @@ export default function Navbar() {
     /* Transparent over the hero; once the page scrolls the bar itself turns white and the
        logo and text switch to their dark versions. */
     <header
-      className={`group fixed inset-x-0 top-0 z-50 text-white ${BAR}`}
+      className={`group fixed inset-x-0 top-0 z-50 text-white ${BAR} ${scrolled && !open ? BAR_SHADOW : ""}`}
       /* The open menu turns the bar over too, so the panel hanging off it is not a white
          sheet clipped to a transparent bar. The menu only exists below md, and `open`
          cannot be true above it -- the button that sets it is md:hidden. */
       data-scrolled={scrolled || open ? "" : undefined}
-      /* Separate from data-scrolled, which the open menu also sets: this one is only for
-         what must change because the panel is hanging below. */
-      data-menu-open={open ? "" : undefined}
     >
       <Container className="relative flex h-18 items-center justify-between">
         <Link href="/" aria-label="webdev.co.id" className="relative block h-8 w-39">
