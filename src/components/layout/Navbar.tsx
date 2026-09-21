@@ -53,18 +53,16 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
-  /* The sheet is the page's only scrollable thing while it is open, and Escape closes it. */
+  /* Escape closes it. The page is no longer locked while the menu is open: the panel
+     hangs off the bar rather than covering the page, so freezing what is visible behind
+     it would be stopping something the menu is not in the way of. */
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
-    document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKey);
-    };
+    return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
   useEffect(() => {
@@ -149,14 +147,16 @@ export default function Navbar() {
           </Button>
         </span>
 
+        {/* One button both ways now the panel hangs off the bar: there is no sheet
+            header to carry a close of its own. */}
         <button
           type="button"
-          onClick={() => setOpen(true)}
-          aria-label="Buka menu"
+          onClick={() => setOpen((v) => !v)}
+          aria-label={open ? "Tutup menu" : "Buka menu"}
           aria-expanded={open}
           className={`relative -mr-2 inline-flex size-11 items-center justify-center rounded-full transition-[scale] duration-150 ease-out active:scale-90 md:hidden ${INK_WHEN_SCROLLED}`}
         >
-          <Menu className="size-6" />
+          {open ? <Close className="size-6" /> : <Menu className="size-6" />}
         </button>
       </Container>
 
@@ -165,56 +165,59 @@ export default function Navbar() {
   );
 }
 
-/* Full-screen menu for phones. Navy rather than glass: it covers the page outright, so
-   there is nothing behind it worth blurring, and navy keeps it unmistakably ours.
-   Links are 48px tall — the bare text in the footer measured 18px, which is a miss
+/* A panel that drops out of the bar rather than a screen that swallows the page: the
+   hero stays visible behind it, so the menu reads as part of the site rather than a
+   place you have been taken to. Glass, because that is what every other floating
+   surface here is.
+
+   Links are 48px tall -- the bare text in the footer measured 18px, which is a miss
    waiting to happen on a touch screen. */
 function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
   return (
-    <div
-      /* Kept mounted so it can animate both ways; inert to pointer and keyboard when shut. */
-      className={`fixed inset-0 z-50 bg-navy transition-opacity duration-300 ease-out md:hidden motion-reduce:transition-none ${
-        open ? "opacity-100" : "pointer-events-none opacity-0"
-      }`}
-      aria-hidden={!open}
-    >
-      <Container className="flex h-18 items-center justify-between">
-        <span className="relative block h-8 w-39">
-          <Image src="/brand/logo-white.svg" alt="webdev.co.id" fill className="object-contain"
-            quality={100}
-          />
-        </span>
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Tutup menu"
-          className="-mr-2 inline-flex size-11 items-center justify-center rounded-full text-white transition-[scale] duration-150 ease-out active:scale-90"
-        >
-          <Close className="size-6" />
-        </button>
-      </Container>
+    <>
+      {/* Catches the tap that closes it, and takes the page back a little so the panel
+          is clearly the thing in front. */}
+      <div
+        onClick={onClose}
+        aria-hidden
+        className={`fixed inset-0 top-18 z-40 bg-navy/40 transition-opacity duration-300 ease-out md:hidden motion-reduce:transition-none ${
+          open ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+      />
 
-      <Container className="mt-4 flex flex-col">
-        {menu.map((item) => (
+      {/* Kept mounted so it can animate both ways; inert to pointer and keyboard when
+          shut. It slides up by a quarter of its own height on the way out, which reads
+          as the panel retreating into the bar it came from. */}
+      <div
+        className={`absolute inset-x-4 top-18 z-50 origin-top transition-[opacity,translate] duration-300 ease-out md:hidden motion-reduce:transition-none ${
+          open ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0"
+        }`}
+        aria-hidden={!open}
+      >
+        <div className="glass-panel overflow-hidden rounded-[22px] bg-navy/80 p-2">
+          <nav className="flex flex-col">
+            {menu.map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                onClick={onClose}
+                className="flex h-12 items-center rounded-2xl px-4 text-[16px] leading-[1.5] text-white transition-colors duration-200 active:bg-white/10"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
           <Link
-            key={item.label}
-            href={item.href}
+            href={waLink("Halo, saya mau konsultasi soal website.")}
             onClick={onClose}
-            className="flex h-12 items-center border-b border-white/10 text-[18px] leading-[1.5] text-white transition-colors duration-200 active:text-on-dark-body"
+            className="mt-2 inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-white text-[16px] leading-[1.6] font-semibold text-navy transition-[scale] duration-200 ease-out active:scale-[0.97]"
           >
-            {item.label}
+            <Whatsapp className="size-5" />
+            Konsultasi Gratis
           </Link>
-        ))}
-
-        <Link
-          href={waLink("Halo, saya mau konsultasi soal website.")}
-          onClick={onClose}
-          className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white text-[16px] leading-[1.6] font-semibold text-navy transition-[scale] duration-200 ease-out active:scale-[0.97]"
-        >
-          <Whatsapp className="size-5" />
-          Konsultasi Gratis
-        </Link>
-      </Container>
-    </div>
+        </div>
+      </div>
+    </>
   );
 }
