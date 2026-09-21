@@ -41,7 +41,7 @@ export default function Cta() {
               <p className="mx-auto mt-4 max-w-[480px] text-base leading-[1.6] text-on-dark-body lg:mx-0">
                 Dari company profile, landing page, sampai web app. Dirancang khusus untuk tujuan bisnis kamu.
               </p>
-              <Button href={waLink("Halo, saya mau konsultasi soal website.")} variant="white" className="mt-8">
+              <Button href={waLink("Halo, saya mau konsultasi soal website.")} className="mt-8">
                 <Whatsapp className="size-5" />
                 Chat via WhatsApp
               </Button>
