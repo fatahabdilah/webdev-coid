@@ -213,11 +213,11 @@ function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) 
         }`}
         aria-hidden={!open}
       >
-        {/* A continuation of the bar rather than a card under it: full width, square
-            across the top where the two meet, and only the bottom corners rounded. The
-            bar turns white as this opens, so there is no seam between them -- no top
-            border either, which would draw the line the shape is trying to avoid. */}
-        <div className="overflow-hidden rounded-b-[22px] border-x border-b border-line bg-white px-4 pb-4 pt-2 shadow-[0_8px_24px_rgba(10,10,10,0.14)]">
+        {/* The bar, carried on downwards: same white, no corners, and the side borders
+            gone with them -- the bar has none either, so they were the last thing making
+            this a separate shape. One shadow along the bottom edge, the bar's own, since
+            the bar suppresses its while this is open. */}
+        <div className="bg-white px-4 pb-4 pt-2 shadow-[0_2px_8px_rgba(10,10,10,0.10)]">
           <nav className="flex flex-col">
             {menu.map((item) => (
               <Link
