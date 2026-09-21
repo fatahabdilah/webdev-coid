@@ -31,7 +31,7 @@ const SCROLLED_AFTER = 24;
    element; the group-* variants only look at ancestors, so they never matched here. */
 const BAR =
   "bg-transparent shadow-none " +
-  "transition-[background-color,box-shadow] duration-250 ease-out " +
+  "transition-[background-color,box-shadow] duration-300 ease-out " +
   /* A shadow only once the bar has a white ground to cast it: over the hero the bar is
      transparent, and a shadow there would hang in mid-air with nothing above it. It does
      the separating on its own, with no bottom border, so the edge stays soft rather than
@@ -52,10 +52,12 @@ const BAR_SHADOW = "shadow-[0_2px_8px_rgba(10,10,10,0.10)]";
    mid-way, since the colour was already grey while the opacity was still climbing. Both
    ends are plain rgb so the interpolation stays in one colour space. */
 const INK_WHEN_SCROLLED =
-  "text-[#d9d9d9] transition-colors duration-250 ease-out group-data-scrolled:text-ink motion-reduce:transition-none";
+  "text-[#d9d9d9] transition-colors duration-300 ease-out group-data-scrolled:text-ink motion-reduce:transition-none";
 
 /* Same reasoning for the logo swap, which is a cross-fade rather than a colour change. */
-const LOGO_FADE = "transition-opacity duration-250 ease-out motion-reduce:transition-none";
+/* Same 300ms as the bar and the panel: the ground, the text, the logo and the panel
+   are one change, and three clocks made them look like separate events. */
+const LOGO_FADE = "transition-opacity duration-300 ease-out motion-reduce:transition-none";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -207,14 +209,22 @@ function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) 
       />
 
       {/* Kept mounted so it can animate both ways; inert to pointer and keyboard when
-          shut. It slides up by a quarter of its own height on the way out, which reads
-          as the panel retreating into the bar it came from. */}
-      <div
-        className={`absolute inset-x-0 top-18 z-50 origin-top transition-[opacity,translate] duration-300 ease-out md:hidden motion-reduce:transition-none ${
-          open ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0"
-        }`}
-        aria-hidden={!open}
-      >
+          shut.
+
+          It slides rather than fades, and the wrapper clips it, so the panel comes out
+          from behind the bar and goes back the same way. Fading it left a half-opaque
+          white sheet over the dark scrim for the length of the transition, which is the
+          line that read as a shadow along the join -- and fading on its own clock while
+          the bar changed colour on another is what made the two look separate. */}
+      {/* The clip keeps its full height whether the panel is up or not, so it stays
+          transparent to the pointer and the panel inside takes the taps back. */}
+      <div className="pointer-events-none absolute inset-x-0 top-18 z-50 overflow-hidden md:hidden">
+        <div
+          className={`origin-top transition-[translate] duration-300 ease-out motion-reduce:transition-none ${
+            open ? "pointer-events-auto translate-y-0" : "-translate-y-full"
+          }`}
+          aria-hidden={!open}
+        >
         {/* The bar, carried on downwards: same white, no corners, and the side borders
             gone with them -- the bar has none either, so they were the last thing making
             this a separate shape. One shadow along the bottom edge, the bar's own, since
@@ -238,6 +248,7 @@ function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) 
             <Whatsapp className="size-5" />
             Konsultasi Gratis
           </Button>
+          </div>
         </div>
       </div>
     </>
