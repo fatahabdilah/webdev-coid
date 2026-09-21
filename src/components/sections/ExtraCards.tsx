@@ -63,11 +63,12 @@ export default function ExtraCards() {
           </span>
 
           {/* Icon left, arrow right on one row, as the Hostinger mobile frame (757:165)
-              lays these out. The arrow marks the card as somewhere to go, which the icon
-              alone never said. */}
+              lays these out. The arrow only appears below sm, where the preview screen
+              does not: from sm up the screen rising out of the card already says this
+              goes somewhere, and two such signals on one card is one too many. */}
           <span className="relative flex items-start justify-between">
             <Icon className="size-6 text-ink" />
-            <ArrowUpRight className="size-5 text-muted transition-colors duration-200 group-hover:text-ink" />
+            <ArrowUpRight className="size-5 text-muted sm:hidden" />
           </span>
           {/* The 62% clearance is for the preview screen, which only exists from sm up;
               below that the text has the card to itself. */}
