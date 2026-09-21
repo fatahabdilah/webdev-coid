@@ -40,6 +40,10 @@ export default function Cta() {
                 <br />
                 Yuk, wujudkan sekarang.
               </h2>
+              <p className="mx-auto mt-4 max-w-[480px] text-base leading-[1.6] text-on-dark-body lg:mx-0">
+                Konsultasi gratis dulu. Kami bantu tentukan jenis website yang paling pas untuk bisnis kamu, tanpa
+                komitmen.
+              </p>
               <Button href={waLink("Halo, saya mau konsultasi soal website.")} variant="white" className="mt-8">
                 <Whatsapp className="size-5" />
                 Konsultasi Gratis
