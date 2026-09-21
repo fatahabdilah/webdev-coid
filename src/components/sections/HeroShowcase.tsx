@@ -41,10 +41,10 @@ export default function HeroShowcase() {
           </div>
         </div>
 
-        {/* The four names, wrapping rather than scrolling: all four fit in two rows at
-            390px, and a row that scrolls hides options behind a gesture nobody is told
-            about. */}
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
+        {/* Stacked full-width rows under the card, as the reference lays them out, rather
+            than pills floating in the gutter. Each is a 48px touch target with its name
+            left-aligned, so the four read as a list of choices. */}
+        <div className="mt-4 flex flex-col gap-2">
           {items.map((item, i) => {
             const isActive = i === active;
             return (
@@ -53,11 +53,11 @@ export default function HeroShowcase() {
                 type="button"
                 onClick={() => setActive(i)}
                 aria-pressed={isActive}
-                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-[13px] leading-[1.45] font-medium transition-colors duration-200 ${
+                className={`flex h-12 w-full items-center gap-2.5 rounded-2xl px-4 text-[15px] leading-[1.5] font-medium transition-colors duration-200 ${
                   isActive ? "bg-white text-ink" : "bg-white/10 text-white"
                 }`}
               >
-                <item.icon className="size-3.5" />
+                <item.icon className="size-4 shrink-0" />
                 {item.label}
               </button>
             );

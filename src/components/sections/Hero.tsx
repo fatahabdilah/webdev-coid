@@ -29,15 +29,18 @@ export default function Hero() {
           <br />
           Tanpa ribet.
         </h1>
+        {/* Shortened so it holds two lines at 390px: the old wording ran 89 characters,
+            which needs three at this measure. Second sentence drops to its own line from
+            md up, where there is room for the break to land cleanly. */}
         <p className="mt-5 max-w-[600px] text-base leading-[1.5] text-white md:text-[18px]">
-          {/* Second sentence drops to its own line from md up; below that the paragraph
-              wraps on its own, where a forced break would leave an odd short line */}
-          Dari desain sampai online, satu tim yang mengurus semuanya.
+          Dari desain sampai online, kami urus semuanya.
           <br className="max-md:hidden" />{" "}
-          Kamu tinggal fokus ke bisnis.
+          Kamu fokus ke bisnis.
         </p>
 
-        <Button href="#harga" variant="white" className="mt-8">
+        {/* Full width on phones, where a button that only spans its label leaves the
+            column looking unfinished; from sm it sizes to its text again. */}
+        <Button href="#harga" variant="white" className="mt-8 w-full sm:w-auto">
           Lihat Harga
         </Button>
 
