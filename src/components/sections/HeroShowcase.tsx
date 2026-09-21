@@ -16,33 +16,33 @@ export default function HeroShowcase() {
 
   return (
     <div className="mt-14 w-full md:mt-16">
-      {/* Phones: an accordion. The picked row opens and its card appears directly under
-          it, so the four names stay in view and the card belongs to the one above it.
-          The row of four only works where there is width to spend -- at 390px it left
-          the active card 161px and the other three 54px each, too narrow to show any of
-          the website inside. */}
+      {/* Phones: an accordion where the picked row gives way to its card, leaving the
+          three still on offer beneath. The row of four only works where there is width
+          to spend -- at 390px it left the active card 161px and the other three 54px
+          each, too narrow to show any of the website inside. */}
       <div className="flex flex-col gap-2 md:hidden">
         {items.map((item, i) => {
           const isActive = i === active;
           return (
             <div key={item.label}>
-              <button
-                type="button"
-                onClick={() => setActive(i)}
-                aria-pressed={isActive}
-                aria-controls={`hero-panel-${i}`}
-                className={`flex h-12 w-full items-center gap-2.5 rounded-2xl px-4 text-[15px] leading-[1.5] font-medium transition-colors duration-200 ${
-                  isActive ? "bg-white text-ink" : "bg-white/10 text-white"
-                }`}
-              >
-                <item.icon className="size-4 shrink-0" />
-                {item.label}
-              </button>
+              {/* The open one drops its row: the card already shows which it is, and the
+                  label underneath it was saying the same thing twice. What stays is the
+                  three still to choose from. */}
+              {!isActive && (
+                <button
+                  type="button"
+                  onClick={() => setActive(i)}
+                  className="flex h-12 w-full items-center gap-2.5 rounded-2xl bg-white/10 px-4 text-[15px] leading-[1.5] font-medium text-white transition-colors duration-200"
+                >
+                  <item.icon className="size-4 shrink-0" />
+                  {item.label}
+                </button>
+              )}
 
               {/* Only the open card is mounted: four stacked <Image fill> would each
                   claim their own layer whether shown or not. */}
               {isActive && (
-                <div id={`hero-panel-${i}`} className="relative mt-4 mb-2">
+                <div className="relative mb-2">
                   <span aria-hidden className="glass-panel pointer-events-none absolute -inset-2.5 rounded-[22px]" />
                   <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl">
                     <Image
@@ -54,6 +54,12 @@ export default function HeroShowcase() {
                       className={`object-cover ${item.tint ? "img-brand-tint" : ""}`}
                       quality={100}
                     />
+                    {/* Carries the name the hidden row used to, in the same pill the
+                        desktop cards use, so nothing has to be inferred from the photo. */}
+                    <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/50 px-3 py-1 text-[12px] leading-[1.45] font-medium text-ink backdrop-blur-md">
+                      <item.icon className="size-3.5" />
+                      {item.label}
+                    </span>
                   </div>
                 </div>
               )}
