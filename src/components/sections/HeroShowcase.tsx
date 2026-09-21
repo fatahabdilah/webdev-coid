@@ -42,8 +42,10 @@ export default function HeroShowcase() {
               {/* Only the open card is mounted: four stacked <Image fill> would each
                   claim their own layer whether shown or not. */}
               {isActive && (
-                <div className="relative mb-2">
-                  <span aria-hidden className="glass-panel pointer-events-none absolute -inset-2.5 rounded-[22px]" />
+                /* The glass is the outer box and the card sits inside it, rather than the
+                   frame reaching 10px beyond the card: outset, its 378px overhung the
+                   358px column and came within 6px of the screen edge. */
+                <div className="glass-panel mb-2 rounded-[22px] p-2.5">
                   <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl">
                     <Image
                       src={item.src}
@@ -82,15 +84,18 @@ export default function HeroShowcase() {
                 isActive ? "grow-[2.2]" : "grow hover:grow-[1.25]"
               }`}
             >
-              {/* Glass frame sits outside the card, 10px on every side */}
+              {/* Glass fills the button and the card sits 10px inside it, so the frame
+                  never reaches past the column the way an outset -inset-2.5 did on the
+                  first and last card. Every card carries the same padding whether its
+                  glass is showing or not, so widths do not shift as the pick moves. */}
               <span
                 aria-hidden
-                className={`glass-panel pointer-events-none absolute -inset-2.5 rounded-[22px] transition-opacity duration-500 ${
+                className={`glass-panel pointer-events-none absolute inset-0 rounded-[22px] transition-opacity duration-500 ${
                   isActive ? "opacity-100" : "opacity-0"
                 }`}
               />
               <div
-                className={`relative h-full w-full overflow-hidden rounded-2xl transition-shadow duration-300 ${
+                className={`absolute inset-2.5 overflow-hidden rounded-2xl transition-shadow duration-300 ${
                   isActive ? "" : "ring-1 ring-white/15 group-hover:ring-white/60"
                 }`}
               >
