@@ -180,7 +180,7 @@ function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) 
       <div
         onClick={onClose}
         aria-hidden
-        className={`fixed inset-0 top-18 z-40 bg-navy/40 transition-opacity duration-300 ease-out md:hidden motion-reduce:transition-none ${
+        className={`fixed inset-0 top-18 z-40 bg-ink/40 transition-opacity duration-300 ease-out md:hidden motion-reduce:transition-none ${
           open ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       />
@@ -194,7 +194,11 @@ function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) 
         }`}
         aria-hidden={!open}
       >
-        <div className="glass-panel overflow-hidden rounded-[22px] bg-navy/80 p-2">
+        {/* One ground, not two: glass-panel lays white 10% over whatever is behind it,
+            and a dark fill stacked under that left the panel milky -- neither glass nor
+            a solid. Here the dark IS the ground, with the blur and hairline that make it
+            glass. Neutral rather than navy, which read as a blue card. */}
+        <div className="overflow-hidden rounded-[22px] border border-white/15 bg-surface/90 p-2 backdrop-blur-xl">
           <nav className="flex flex-col">
             {menu.map((item) => (
               <Link
