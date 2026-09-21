@@ -8,12 +8,17 @@ export default function Hero() {
     /* id so the navbar's "Beranda" can scroll here like every other menu item, rather
        than navigating to "/" and reloading the page. */
     <section id="beranda" className="relative overflow-hidden bg-navy text-white">
+      {/* Through the optimiser like every other image: at 656KB and 1918px wide this was
+          the heaviest thing on the page and the first thing anyone sees, sent whole to a
+          390px phone. quality={100} keeps it pixel-faithful, so the saving comes from
+          resizing and WebP alone, not from discarding detail. */}
       <Image
         src="/images/hero-bg.jpg"
         alt=""
         fill
         priority
-        unoptimized
+        quality={100}
+        sizes="100vw"
         className="pointer-events-none object-cover"
       />
       <Container className="relative flex flex-col items-center pb-16 pt-[136px] text-center md:pb-24 md:pt-[168px]">
