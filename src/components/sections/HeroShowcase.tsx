@@ -34,7 +34,7 @@ export default function HeroShowcase() {
             {/* Glass frame sits outside the card, 10px on every side */}
             <span
               aria-hidden
-              className={`pointer-events-none absolute -inset-2.5 rounded-[22px] border border-white/25 bg-white/10 backdrop-blur-md transition-opacity duration-500 ${
+              className={`glass-panel pointer-events-none absolute -inset-2.5 rounded-[22px] transition-opacity duration-500 ${
                 isActive ? "opacity-100" : "opacity-0"
               }`}
             />

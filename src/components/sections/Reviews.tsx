@@ -35,7 +35,7 @@ export default function Reviews() {
       {reviews.map(({ name, business, quote }) => (
         <figure
           key={business}
-          className="rounded-2xl border border-white/10 bg-white/5 p-5"
+          className="glass-panel rounded-2xl p-5"
         >
           <figcaption>
             <span className="block text-[14px] leading-[1.55] font-medium text-white">{name}</span>
