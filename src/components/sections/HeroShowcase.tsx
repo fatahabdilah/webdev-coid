@@ -16,43 +16,21 @@ export default function HeroShowcase() {
 
   return (
     <div className="mt-14 w-full md:mt-16">
-      {/* Phones: one card at full width, the way the reference hero shows a single
-          screen. The row of four only works where there is width to spend -- at 390px
-          it left the active card 161px and the other three 54px each, too narrow to
-          show anything of the website inside. The labels move below as a picker. */}
-      <div className="md:hidden">
-        <div className="relative">
-          <span aria-hidden className="glass-panel pointer-events-none absolute -inset-2.5 rounded-[22px]" />
-          <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl">
-            {items.map((item, i) => (
-              <Image
-                key={item.label}
-                src={item.src}
-                alt={item.label}
-                fill
-                priority={i === 0}
-                sizes="100vw"
-                className={`object-cover transition-opacity duration-500 ease-out ${
-                  i === active ? "opacity-100" : "opacity-0"
-                } ${item.tint ? "img-brand-tint" : ""}`}
-                quality={100}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Stacked full-width rows under the card, as the reference lays them out, rather
-            than pills floating in the gutter. Each is a 48px touch target with its name
-            left-aligned, so the four read as a list of choices. */}
-        <div className="mt-4 flex flex-col gap-2">
-          {items.map((item, i) => {
-            const isActive = i === active;
-            return (
+      {/* Phones: an accordion. The picked row opens and its card appears directly under
+          it, so the four names stay in view and the card belongs to the one above it.
+          The row of four only works where there is width to spend -- at 390px it left
+          the active card 161px and the other three 54px each, too narrow to show any of
+          the website inside. */}
+      <div className="flex flex-col gap-2 md:hidden">
+        {items.map((item, i) => {
+          const isActive = i === active;
+          return (
+            <div key={item.label}>
               <button
-                key={item.label}
                 type="button"
                 onClick={() => setActive(i)}
                 aria-pressed={isActive}
+                aria-controls={`hero-panel-${i}`}
                 className={`flex h-12 w-full items-center gap-2.5 rounded-2xl px-4 text-[15px] leading-[1.5] font-medium transition-colors duration-200 ${
                   isActive ? "bg-white text-ink" : "bg-white/10 text-white"
                 }`}
@@ -60,9 +38,28 @@ export default function HeroShowcase() {
                 <item.icon className="size-4 shrink-0" />
                 {item.label}
               </button>
-            );
-          })}
-        </div>
+
+              {/* Only the open card is mounted: four stacked <Image fill> would each
+                  claim their own layer whether shown or not. */}
+              {isActive && (
+                <div id={`hero-panel-${i}`} className="relative mt-4 mb-2">
+                  <span aria-hidden className="glass-panel pointer-events-none absolute -inset-2.5 rounded-[22px]" />
+                  <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl">
+                    <Image
+                      src={item.src}
+                      alt={item.label}
+                      fill
+                      priority={i === 0}
+                      sizes="100vw"
+                      className={`object-cover ${item.tint ? "img-brand-tint" : ""}`}
+                      quality={100}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
 
       {/* From md the row of four, which is where it earns its keep. */}
