@@ -30,21 +30,19 @@ const SCROLLED_AFTER = 24;
 /* data-scrolled:, not group-data-scrolled:, because the attribute sits on this very
    element; the group-* variants only look at ancestors, so they never matched here. */
 const BAR =
-  "bg-transparent shadow-none " +
+  "bg-transparent " +
   "transition-[background-color,box-shadow] duration-300 ease-out " +
-  /* A shadow only once the bar has a white ground to cast it: over the hero the bar is
-     transparent, and a shadow there would hang in mid-air with nothing above it. It does
-     the separating on its own, with no bottom border, so the edge stays soft rather than
-     drawing a hard line across the page. */
   "data-scrolled:bg-white " +
   "motion-reduce:transition-none";
 
-/* The bar's shadow, applied only when the menu is shut: with the panel joined below, a
-   shadow falling 2px from the bar lands on it and rules a seam across the join.
+/* A shadow only once the bar has a white ground to cast it: over the hero the bar is
+   transparent, and a shadow there would hang in mid-air with nothing above it. It does
+   the separating on its own, with no bottom border, so the edge stays soft rather than
+   drawing a hard line across the page.
 
-   Kept off data-scrolled rather than cancelled by a data-menu-open:shadow-none, which
-   lost -- same specificity, and Tailwind emitted it before the data-scrolled rule, so
-   the shadow never actually went away. */
+   The two states are exclusive rather than one cancelling the other: `shadow-none` and
+   this sat in the class list together and the winner came down to which Tailwind had
+   written first -- shadow-none, as it turned out, so the shadow never appeared at all. */
 const BAR_SHADOW = "shadow-[0_2px_8px_rgba(10,10,10,0.10)]";
 
 /* White ground needs dark text. The softer resting tone is baked into the start colour
@@ -106,7 +104,7 @@ export default function Navbar() {
     /* Transparent over the hero; once the page scrolls the bar itself turns white and the
        logo and text switch to their dark versions. */
     <header
-      className={`group fixed inset-x-0 top-0 z-50 text-white ${BAR} ${scrolled ? BAR_SHADOW : ""}`}
+      className={`group fixed inset-x-0 top-0 z-50 text-white ${BAR} ${scrolled ? BAR_SHADOW : "shadow-none"}`}
       data-scrolled={scrolled ? "" : undefined}
     >
       <Container className="relative flex h-18 items-center justify-between">
