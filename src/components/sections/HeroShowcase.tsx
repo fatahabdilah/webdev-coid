@@ -84,19 +84,21 @@ export default function HeroShowcase() {
                 isActive ? "grow-[2.2]" : "grow hover:grow-[1.25]"
               }`}
             >
-              {/* Glass fills the button and the card sits 10px inside it, so the frame
-                  never reaches past the column the way an outset -inset-2.5 did on the
-                  first and last card. Every card carries the same padding whether its
-                  glass is showing or not, so widths do not shift as the pick moves. */}
+              {/* Glass fills the button, so it never reaches past the column the way an
+                  outset -inset-2.5 did on the first and last card. */}
               <span
                 aria-hidden
                 className={`glass-panel pointer-events-none absolute inset-0 rounded-[22px] transition-opacity duration-500 ${
                   isActive ? "opacity-100" : "opacity-0"
                 }`}
               />
+              {/* The card only draws back inside the glass when there is glass to sit in.
+                  Held at inset-2.5 throughout, a resting card stopped 10px short of the
+                  column while the open one's glass ran to the edge, so whichever end was
+                  not the pick looked mis-aligned. */}
               <div
-                className={`absolute inset-2.5 overflow-hidden rounded-2xl transition-shadow duration-300 ${
-                  isActive ? "" : "ring-1 ring-white/15 group-hover:ring-white/60"
+                className={`absolute overflow-hidden rounded-2xl transition-[inset,box-shadow] duration-500 ease-out ${
+                  isActive ? "inset-2.5" : "inset-0 ring-1 ring-white/15 group-hover:ring-white/60"
                 }`}
               >
                 <Image
