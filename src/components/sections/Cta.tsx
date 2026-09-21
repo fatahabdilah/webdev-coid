@@ -36,14 +36,17 @@ export default function Cta() {
           <div className="relative px-8 py-12 text-center md:px-12 md:py-14 lg:grid lg:grid-cols-[1fr_300px] lg:gap-10 lg:text-left xl:grid-cols-[1fr_340px]">
             <div>
               <h2 className="text-[26px] font-medium leading-[1.25] tracking-[-0.03em] text-balance md:text-[30px]">
-                Website sesuai kebutuhan bisnis
+                Sudah kebayang websitenya?
+                <br />
+                Yuk, wujudkan sekarang.
               </h2>
               <p className="mx-auto mt-4 max-w-[480px] text-base leading-[1.6] text-on-dark-body lg:mx-0">
-                Dari company profile, landing page, sampai web app. Dirancang khusus untuk tujuan bisnis kamu.
+                Konsultasi gratis dulu. Kami bantu tentukan jenis website yang paling pas untuk bisnis kamu, tanpa
+                komitmen.
               </p>
               <Button href={waLink("Halo, saya mau konsultasi soal website.")} className="mt-8">
                 <Whatsapp className="size-5" />
-                Chat via WhatsApp
+                Konsultasi Gratis
               </Button>
             </div>
           </div>
