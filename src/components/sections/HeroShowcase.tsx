@@ -40,7 +40,7 @@ export default function HeroShowcase() {
                     onClick={() => setActive(i)}
                     tabIndex={isActive ? -1 : undefined}
                     aria-hidden={isActive}
-                    className={`mb-2 flex h-12 w-full items-center gap-2.5 rounded-2xl bg-white/10 px-4 text-[15px] leading-[1.5] font-medium text-white transition-opacity duration-300 ease-out motion-reduce:transition-none ${
+                    className={`glass-panel mb-2 flex h-12 w-full items-center gap-2.5 rounded-[22px] px-4 text-[15px] leading-[1.5] font-medium text-white transition-opacity duration-300 ease-out motion-reduce:transition-none ${
                       isActive ? "pointer-events-none opacity-0" : "opacity-100"
                     }`}
                   >
