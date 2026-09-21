@@ -30,6 +30,9 @@ const tiers: Tier[] = [
       { text: "Form terhubung WhatsApp", included: true },
       { text: "SEO dasar", included: true },
       { text: "Domain & hosting 1 tahun", included: true },
+      { text: "Sertifikat SSL (gembok hijau)", included: true },
+      { text: "Google Analytics & Search Console", included: true },
+      { text: "Panduan edit konten saat serah terima", included: true },
       { text: "Revisi 2x", included: true },
       { text: "Halaman tambahan", included: false },
       { text: "Admin panel / CMS", included: false },
@@ -49,6 +52,10 @@ const tiers: Tier[] = [
       { text: "Form WhatsApp + email", included: true },
       { text: "SEO", included: true },
       { text: "Domain & hosting 1 tahun", included: true },
+      { text: "Sertifikat SSL (gembok hijau)", included: true },
+      { text: "Google Analytics & Search Console", included: true },
+      { text: "Terhubung Google Maps & sosial media", included: true },
+      { text: "Panduan edit konten saat serah terima", included: true },
       { text: "Revisi 3x", included: true },
       { text: "Halaman tambahan (add-on)", included: true },
       { text: "Admin panel / CMS", included: false },
@@ -67,6 +74,9 @@ const tiers: Tier[] = [
       { text: "Form & integrasi lengkap", included: true },
       { text: "SEO", included: true },
       { text: "Domain & hosting 1 tahun", included: true },
+      { text: "Sertifikat SSL (gembok hijau)", included: true },
+      { text: "Google Analytics & Search Console", included: true },
+      { text: "Panduan edit konten saat serah terima", included: true },
       { text: "Revisi sesuai kesepakatan", included: true },
       { text: "Admin panel / CMS", included: true },
       { text: "Integrasi pembayaran", included: true },
@@ -160,7 +170,7 @@ export default function Pricing() {
       <Container>
         <SectionHeader
           title="Website untuk segala bisnis"
-          description="Pilih yang paling dekat dengan kebutuhanmu. Semua harga sudah termasuk domain dan hosting tahun pertama."
+          description="Semua paket didesain custom dari nol — bukan template. Harga sudah termasuk domain dan hosting tahun pertama."
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
           {tiers.map((tier) => (
