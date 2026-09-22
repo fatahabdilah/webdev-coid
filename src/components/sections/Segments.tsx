@@ -87,7 +87,7 @@ export default function Segments() {
         <WorkRow works={works} />
       </div>
 
-      <Container className="relative mt-16 md:mt-20">
+      <Container className="relative mt-20">
         <Reviews />
       </Container>
     </Section>

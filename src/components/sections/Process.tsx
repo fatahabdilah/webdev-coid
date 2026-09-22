@@ -146,7 +146,7 @@ export default function Process() {
       {/* Mobile: the copy and its call to action, then the showcase. Desktop: showcase
           left, copy right, the copy centred as one block against the height of the
           visual. */}
-      <Container className="mt-14 grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-x-16">
+      <Container className="mt-12 grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-x-16">
         {/* Heading sits in the right column but is pulled out of the flex flow on desktop,
             so the copy below it can sit directly underneath rather than a stretched row apart. */}
         <div className="lg:order-2 lg:col-start-2">
