@@ -170,6 +170,17 @@
   backdrop-filter: blur(12px);
 }
 
+/* A row the finger drags. The bar itself is hidden: on a phone the scroll is the
+   gesture, not a control to aim at, and the card peeking past the edge already says
+   there is more to the right. Desktop keeps its own bars wherever this is not used. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* Placeholder images from the design file lean purple; shift them toward brand blue. */
 @utility img-brand-tint {
   filter: hue-rotate(-40deg) saturate(0.9);
