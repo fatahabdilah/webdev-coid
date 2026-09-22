@@ -44,8 +44,15 @@ export default function ExtraCards() {
           onMouseLeave={() => setShown(0)}
           onFocus={() => setShown(i)}
           onBlur={() => setShown(0)}
-          className="group relative flex min-h-37.5 flex-col justify-between rounded-2xl bg-offwhite p-6 transition-colors duration-200 hover:bg-primary/5"
+          className="group relative flex min-h-37.5 flex-col overflow-hidden rounded-2xl bg-offwhite transition-colors duration-200 hover:bg-primary/5 max-sm:pb-6 sm:justify-between sm:p-6"
         >
+          {/* Below sm the preview never rises, so the card leads with the picture
+              instead: same screen, sitting still at the top where there is width for it
+              to be worth showing. From sm up it goes back to being the thing that slides
+              out of the card on hover. */}
+          <span className="relative block aspect-16/10 w-full overflow-hidden sm:hidden">
+            <Image src={preview} alt="" fill sizes="100vw" className="object-cover" quality={100} />
+          </span>
           {/* Clipping frame: the screen never leaves the card, it just rises inside it */}
           <span aria-hidden className="pointer-events-none absolute inset-0 hidden overflow-hidden rounded-2xl sm:block">
             {/* Parked below the card, sliding up when this card is the one shown */}
@@ -67,7 +74,7 @@ export default function ExtraCards() {
               showing its screen carries one instead, so neither card is ever left with
               nothing saying it leads somewhere -- and the one that is showing its screen
               does not say it twice. Below sm no card has a preview, so both keep it. */}
-          <span className="relative flex items-start justify-between">
+          <span className="relative flex items-start justify-between max-sm:mt-6 max-sm:px-6">
             <Icon className="size-6 text-ink" />
             <ArrowUpRight
               className={`size-5 text-muted transition-opacity duration-300 ease-out motion-reduce:transition-none ${
@@ -77,7 +84,7 @@ export default function ExtraCards() {
           </span>
           {/* The 62% clearance is for the preview screen, which only exists from sm up;
               below that the text has the card to itself. */}
-          <span className="relative mt-6 block sm:max-w-[62%]">
+          <span className="relative mt-6 block max-sm:px-6 sm:max-w-[62%]">
             <span className="block text-[18px] leading-[1.5] font-medium text-ink">{title}</span>
             <span className="mt-1 block text-[14px] leading-[1.55] text-body">{desc}</span>
           </span>
