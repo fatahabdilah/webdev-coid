@@ -62,7 +62,10 @@ export default function Reviews() {
       {reviews.map(({ name, business, quote }) => (
         <figure
           key={business}
-          className="glass-panel w-4/5 shrink-0 snap-start rounded-2xl p-5 md:w-auto md:shrink"
+          /* Full column width rather than the 80% the reason cards use: a quote is read
+             right through, and a card cut off mid-sentence is harder to ignore than a
+             cropped photo. The dots carry the "there is more" on their own here. */
+          className="glass-panel w-full shrink-0 snap-start rounded-2xl p-5 md:w-auto md:shrink"
         >
           <figcaption>
             <span className="block text-[14px] leading-[1.55] font-medium text-white">{name}</span>
