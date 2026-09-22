@@ -143,8 +143,9 @@ export default function Process() {
         />
       </Container>
 
-      {/* Mobile: heading, showcase, then the call to action. Desktop: showcase left, copy right,
-          the copy centred as one block against the height of the visual. */}
+      {/* Mobile: the copy and its call to action, then the showcase. Desktop: showcase
+          left, copy right, the copy centred as one block against the height of the
+          visual. */}
       <Container className="mt-14 grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-x-16">
         {/* Heading sits in the right column but is pulled out of the flex flow on desktop,
             so the copy below it can sit directly underneath rather than a stretched row apart. */}
@@ -156,7 +157,10 @@ export default function Process() {
             Cukup ceritakan bisnismu lewat WhatsApp. Struktur, desain, dan kontennya kami yang susun.
           </p>
 
-          <div className="max-lg:hidden lg:mt-8">
+          {/* One copy now, directly under the copy it belongs to. It used to be rendered
+              twice so the mobile one could follow the showcase, which put the proof and
+              the button a screen away from the sentence that earns them. */}
+          <div className="mt-8">
             <CallToAction sites={sites} />
           </div>
         </div>
@@ -176,10 +180,6 @@ export default function Process() {
           />
         </div>
 
-        {/* Same block again for mobile, where it belongs after the visual */}
-        <div className="lg:hidden">
-          <CallToAction sites={sites} />
-        </div>
       </Container>
     </Section>
   );
