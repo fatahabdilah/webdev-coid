@@ -81,10 +81,9 @@ function TierCard({ tier }: { tier: Tier }) {
       className={`flex flex-col rounded-2xl p-7 ${
         dark
           ? "bg-ambient-brand relative bg-[#02142b] text-white"
-          /* Offwhite on a white section, the reverse of what it was: with the border gone
-             a white card on offwhite measured 1.05:1 and had no edge at all. Swapping the
-             two keeps the same pair of colours and gives the card its shape back. */
-          : "bg-offwhite text-ink"
+          /* White on a sunken section: with the border gone the card needs the ground to
+             step back from it, and offwhite at 1.05:1 was too close to read as an edge. */
+          : "bg-white text-ink"
       }`}
     >
       <p className="text-[18px] leading-[1.5] font-medium">{tier.name}</p>
@@ -159,7 +158,7 @@ function Price({ value }: { value: string }) {
 
 export default function Pricing() {
   return (
-    <Section id="harga">
+    <Section id="harga" className="bg-sunken">
       <Container>
         <SectionHeader
           title="Website untuk segala bisnis"

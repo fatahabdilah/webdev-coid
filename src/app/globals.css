@@ -10,6 +10,10 @@
   --color-muted: #8a94a6;
   --color-line: #d9e1ec;
   --color-offwhite: #f7f9fc;
+  /* A step below offwhite, for a section that has to hold white cards: white on offwhite
+     is 1.05:1, too close for a card to have an edge without a border round it. Already
+     in the file as btn-raised-light's lower stop. */
+  --color-sunken: #eef2f8;
   --color-surface: #101011;
   --color-elevated: #18181a;
   --color-success: #16a34a;
