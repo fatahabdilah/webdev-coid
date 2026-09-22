@@ -56,7 +56,9 @@ const DEPTH = [
   { y: "-19%", s: 0.9, o: 0.75, z: 10 },
 ];
 
-const SURFACE = "rounded-xl border border-line bg-white shadow-lift md:rounded-2xl";
+/* No hairline: the card is filled edge to edge with a photo, so the shadow alone gives
+   it its edge -- the border was outlining something that already had one. */
+const SURFACE = "rounded-xl bg-white shadow-lift md:rounded-2xl";
 
 export default function ProcessShowcase({ sites, active, handoff, typed, sending }: Props) {
   const n = sites.length;

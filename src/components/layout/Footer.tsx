@@ -25,7 +25,7 @@ const links: { label: string; href: string }[] = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-line bg-white text-ink">
+    <footer className="bg-white text-ink">
       <Container className="py-14">
         {/* Brand on the left, then the page links, then every way to reach us in one
             column -- socials and contacts read as one list, since both answer "how do I

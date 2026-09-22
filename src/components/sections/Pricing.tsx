@@ -80,8 +80,11 @@ function TierCard({ tier }: { tier: Tier }) {
     <div
       className={`flex flex-col rounded-2xl p-7 ${
         dark
-          ? "bg-ambient-brand relative border border-white/25 bg-[#02142b] text-white"
-          : "border border-line bg-white text-ink"
+          ? "bg-ambient-brand relative bg-[#02142b] text-white"
+          /* Offwhite on a white section, the reverse of what it was: with the border gone
+             a white card on offwhite measured 1.05:1 and had no edge at all. Swapping the
+             two keeps the same pair of colours and gives the card its shape back. */
+          : "bg-offwhite text-ink"
       }`}
     >
       <p className="text-[18px] leading-[1.5] font-medium">{tier.name}</p>
@@ -101,7 +104,7 @@ function TierCard({ tier }: { tier: Tier }) {
         )}
         <Price value={tier.price} />
       </div>
-      <div className={`my-6 border-t ${dark ? "border-white/10" : "border-line"}`} />
+      <div className="my-6" />
 
       <ul className="flex flex-col gap-3">
         {tier.features.map((f) => (
@@ -156,7 +159,7 @@ function Price({ value }: { value: string }) {
 
 export default function Pricing() {
   return (
-    <Section id="harga" className="bg-offwhite">
+    <Section id="harga">
       <Container>
         <SectionHeader
           title="Website untuk segala bisnis"
