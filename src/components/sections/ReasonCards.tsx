@@ -43,7 +43,7 @@ export default function ReasonCards({ reasons }: { reasons: Reason[] }) {
       <div
       ref={rowRef}
       onScroll={onScroll}
-      className="no-scrollbar mt-10 -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:flex"
+      className="no-scrollbar mt-10 -mx-4 flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto px-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:flex"
       onMouseLeave={() => setActive(null)}
     >
       {reasons.map(({ photo, title, desc }, i) => {
