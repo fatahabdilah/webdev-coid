@@ -190,17 +190,9 @@ export default function Process() {
 function CallToAction({ sites }: { sites: Site[] }) {
   return (
     <>
-      {/* The same button every other consultation CTA uses, rather than the full-width
-          ruled row this once was: one action should look the same everywhere it appears.
-          Opens the real chat once the number is filled in; until then it falls back to the
-          CTA section -- see src/lib/contact.ts. */}
-      <Button href={waLink("Halo, saya mau konsultasi soal website.")}>
-        <Whatsapp className="size-5" />
-        Konsultasi Gratis
-      </Button>
-
-      {/* Faces of clients whose sites are in the stack, then the proof line */}
-      <div className="mt-6 flex items-center gap-3">
+      {/* Faces of clients whose sites are in the stack, then the proof line. Above the
+          button rather than below it: the reason to act comes before the thing that acts. */}
+      <div className="mb-6 flex items-center gap-3">
         <div className="flex">
           {sites.map((s) => (
             <span key={s.sender} className="relative -mr-2.5 size-9 overflow-hidden rounded-full ring-2 ring-white">
@@ -220,6 +212,15 @@ function CallToAction({ sites }: { sites: Site[] }) {
           bersama webdev.co.id
         </p>
       </div>
+
+      {/* The same button every other consultation CTA uses, rather than the full-width
+          ruled row this once was: one action should look the same everywhere it appears.
+          Opens the real chat once the number is filled in; until then it falls back to the
+          CTA section -- see src/lib/contact.ts. */}
+      <Button href={waLink("Halo, saya mau konsultasi soal website.")}>
+        <Whatsapp className="size-5" />
+        Konsultasi Gratis
+      </Button>
     </>
   );
 }
